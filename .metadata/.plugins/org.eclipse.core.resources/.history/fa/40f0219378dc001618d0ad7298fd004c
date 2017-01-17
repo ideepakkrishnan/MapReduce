@@ -1,0 +1,16 @@
+package com.neu.pdp;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{	
+    public static void main( String[] args )
+    {
+    	String path = "/home/ideepakkrishnan/Downloads";
+    	String[] weatherData = Util.readCSVFile(path);    	
+    	while ()
+        System.out.println( "Hello World!" );
+    }
+}

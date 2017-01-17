@@ -1,0 +1,38 @@
+/**
+ * 
+ */
+package com.neu.pdp;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.zip.GZIPInputStream;
+
+/**
+ * @author ideepakkrishnan
+ *
+ */
+public class Util {
+	public static String[] readFile(String path) {
+		String[] saWeatherData = null;
+		
+		try {
+			// Read the data from the input file
+			GZIPInputStream gisInput = new GZIPInputStream(
+					new FileInputStream(path));
+			
+			// Initialize the local variable with the input data
+			BufferedReader br = new BufferedReader(new InputStreamReader(gisInput));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return saWeatherData;
+	}
+}

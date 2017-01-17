@@ -1,0 +1,18 @@
+/**
+ * 
+ */
+package com.neu.pdp;
+
+/**
+ * @author ideepakkrishnan
+ *
+ */
+public class Util {
+	public static String[] readFile(String path) {
+		String[] saWeatherData = null;
+		
+		
+		
+		return saWeatherData;
+	}
+}
