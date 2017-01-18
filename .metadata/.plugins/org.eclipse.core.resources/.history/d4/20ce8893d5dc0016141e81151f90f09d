@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG">
+  <Properties>
+    <Property name="log-path">C:/Users/712054/Desktop/Source</Property>
+  </Properties>
+  <Appenders>
+    <RollingFile name="info" fileName="${log-path}/info.log"
+                 filePattern="${log-path}/myexample-%d{yyyy-MM-dd}-%i.log">
+         <Filters>
+            <ThresholdFilter level="warn"  onMatch="ACCEPT"   onMismatch="NEUTRAL"/>
+            <ThresholdFilter level="error" onMatch="ACCEPT"   onMismatch="NEUTRAL"/>
+            <ThresholdFilter level="fatal" onMatch="ACCEPT"   onMismatch="NEUTRAL"/>
+            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+        </Filters>
+      <PatternLayout>
+        <pattern>%d{dd/MMM/yyyy HH:mm:ss,SSS}- %c{1}: %m%n</pattern>
+      </PatternLayout>
+      <Policies>
+        <TimeBasedTriggeringPolicy size="1"/>
+      </Policies>
+    </RollingFile>
+  </Appenders>
+  <Loggers>
+
+    <Root level="all" >
+      <AppenderRef ref="info"/>
+      <AppenderRef ref="trace"/>
+    </Root>
+  </Loggers>
+</Configuration>

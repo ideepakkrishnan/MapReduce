@@ -16,7 +16,12 @@
 	</section>
 	<section name="quick_assist_proposal_size">
 	</section>
+	<section name="BuildPathsPropertyPage">
+		<item value="3" key="pageIndex"/>
+	</section>
 	<section name="completion_proposal_size">
+		<item value="325" key="size.y"/>
+		<item value="483" key="size.x"/>
 	</section>
 	<section name="JavaElementSearchActions">
 	</section>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;log4j2.xml&apos; to &apos;resources&apos;&#x0A;- Original project: &apos;weatherData&apos;&#x0A;- Destination element: &apos;resources&apos;&#x0A;- Original element: &apos;log4j2.xml&apos;&#x0A;- Update references to refactored element" description="Move file" element1="log4j2.xml" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1484693482172" target="src/main/resources" units="0" version="1.0"/>
+</session>

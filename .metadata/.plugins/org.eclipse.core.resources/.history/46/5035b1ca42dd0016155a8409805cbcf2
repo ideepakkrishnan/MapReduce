@@ -1,0 +1,27 @@
+/**
+ * 
+ */
+package com.neu.pdp;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+/**
+ * @author ideepakkrishnan
+ *
+ */
+public class AverageCalculator {
+	
+	private static final Logger logger = LogManager.getLogger(
+			Util.class.getName());
+	
+	public static HashMap<String, Float> sequential(
+			List<String> lstWeatherData) {
+		logger.info("Entering sequential method");
+		
+		logger.info("Returning from sequential method");
+	}
+}

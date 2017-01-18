@@ -1,0 +1,16 @@
+/**
+ * 
+ */
+package com.neu.pdp;
+
+import java.util.HashMap;
+
+/**
+ * @author ideepakkrishnan
+ *
+ */
+public class AverageCalculator {
+	public static HashMap<String, Float> sequential() {
+		
+	}
+}

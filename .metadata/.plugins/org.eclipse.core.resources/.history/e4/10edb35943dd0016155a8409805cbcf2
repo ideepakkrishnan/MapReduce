@@ -1,0 +1,40 @@
+/**
+ * 
+ */
+package com.neu.pdp;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+/**
+ * @author ideepakkrishnan
+ *
+ */
+public class AverageCalculator {
+	
+	private static final Logger logger = LogManager.getLogger(
+			Util.class.getName());
+	
+	public static HashMap<String, Float> sequential(
+			List<String> lstWeatherData) {
+		logger.info("Entering sequential method");
+		
+		// Filter out the required entries from the data passed
+		// in as argument and group the TMAX readings by station
+		// id 
+		HashMap<String, List<Integer>> hmFilteredData = 
+				Util.getTMaxReadingsByStation(lstWeatherData);
+		
+		// 
+		HashMap<String, Float> hmAvgReadingByStation =
+				Util.getAverageTMaxByStation(hmFilteredData);
+		
+		// Calculate the average for each station and return it
+		// to the caller		
+		logger.info("Returning from sequential method");
+		return Util.getAverageTMaxByStation(hmReadingsByStation)
+	}
+}
