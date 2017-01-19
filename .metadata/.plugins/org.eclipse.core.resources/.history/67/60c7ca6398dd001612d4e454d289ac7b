@@ -1,0 +1,45 @@
+/**
+ * 
+ */
+package com.neu.pdp.calculators;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.neu.pdp.Util;
+
+/**
+ * @author ideepakkrishnan
+ *
+ */
+public class NoLockCalculator implements Runnable {
+	
+	private static final Logger logger = LogManager.getLogger(
+			Util.class.getName());
+	
+	private Thread t;
+	private String threadName;
+	private static HashMap<String, List<Integer>> hmTmaxByStationId;
+	
+	NoLockCalculator(String name) {
+		threadName = name;
+		logger.info("Creating thread: " + name);
+	}
+
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void start() {
+		logger.info("Starting thread: " + threadName);
+		if (t == null) {
+			t = new Thread(this, threadName);
+			t.start();
+		}
+	}
+
+}

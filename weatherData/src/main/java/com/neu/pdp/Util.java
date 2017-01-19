@@ -21,9 +21,7 @@ import org.apache.logging.log4j.Logger;
 /**
  * Utility class for the project which contains all helper
  * functions
- * 
  * @author ideepakkrishnan
- * 
  */
 public class Util {
 	
@@ -174,5 +172,21 @@ public class Util {
 		
 		logger.info("Returning from getAverageTMaxByStation method");
 		return hmAvgReadingByStation;
+	}
+	
+	public static void printAverageTMaxByStation(
+			HashMap<String, Float> hmAvgReadingByStation) {
+		logger.info("Entering printAverageTMaxByStation method");
+		
+		for (Map.Entry<String, Float> entry: 
+			hmAvgReadingByStation.entrySet()) {
+			System.out.println(
+					String.format(
+							"Station Id: %s, Average TMAX: %.2f",
+							entry.getKey(),
+							entry.getValue()));
+		}
+		
+		logger.info("Returning from printAverageTMaxByStation method");
 	}
 }

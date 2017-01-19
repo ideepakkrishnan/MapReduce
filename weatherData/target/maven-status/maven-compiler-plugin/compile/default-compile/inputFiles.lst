@@ -1,3 +1,4 @@
-/home/ideepakkrishnan/workspace/weatherData/src/main/java/com/neu/pdp/AverageCalculator.java
+/home/ideepakkrishnan/workspace/weatherData/src/main/java/com/neu/pdp/calculators/SequentialCalculator.java
 /home/ideepakkrishnan/workspace/weatherData/src/main/java/com/neu/pdp/Util.java
+/home/ideepakkrishnan/workspace/weatherData/src/main/java/com/neu/pdp/calculators/NoLockCalculator.java
 /home/ideepakkrishnan/workspace/weatherData/src/main/java/com/neu/pdp/App.java

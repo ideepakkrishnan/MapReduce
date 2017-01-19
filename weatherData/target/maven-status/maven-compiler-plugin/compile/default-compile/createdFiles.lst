@@ -1,3 +1,4 @@
-com/neu/pdp/AverageCalculator.class
+com/neu/pdp/calculators/NoLockCalculator.class
 com/neu/pdp/Util.class
+com/neu/pdp/calculators/SequentialCalculator.class
 com/neu/pdp/App.class
