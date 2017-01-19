@@ -1,0 +1,26 @@
+/**
+ * 
+ */
+package com.neu.pdp.calculators;
+
+import java.util.HashMap;
+import java.util.List;
+
+/**
+ * @author ideepakkrishnan
+ *
+ */
+public class NoSharingCalculator implements Runnable {
+	
+	private Thread t;
+	private String threadName;
+	private List<String> lstWeatherData;
+	private HashMap<String, List<Integer>> hmTmaxByStationId;
+	private HashMap<String, Float> hmAvgReadingByStation;
+
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,0 +1,17 @@
+/**
+ * 
+ */
+package com.neu.pdp.calculators;
+
+/**
+ * @author ideepakkrishnan
+ *
+ */
+public class NoSharingCalculator implements Runnable {
+
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

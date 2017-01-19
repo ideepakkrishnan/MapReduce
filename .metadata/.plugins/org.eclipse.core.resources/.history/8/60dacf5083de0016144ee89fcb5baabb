@@ -1,0 +1,134 @@
+/**
+ * 
+ */
+package com.neu.pdp.calculators;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+/**
+ * @author ideepakkrishnan
+ *
+ */
+public class NoSharingCalculator implements Runnable {
+	
+	private static final Logger logger = LogManager.getLogger(
+			NoSharingCalculator.class.getName());
+	
+	private Thread t;
+	private String threadName;
+	private List<String> lstWeatherData;
+	private HashMap<String, List<Integer>> hmTmaxByStationId;
+	
+	public NoSharingCalculator(
+			String threadName, 
+			List<String> lstWeatherData) {
+		this.threadName = threadName;
+		this.lstWeatherData = lstWeatherData;
+		this.hmTmaxByStationId = new HashMap<String, List<Integer>>();
+		logger.info("Creating thread: " + threadName);
+	}
+	
+	/**
+	 * Returns a pointer to the Thread object in this class
+	 * @return A Thread object
+	 */
+	public Thread getThreadObject() {
+		return t;
+	}
+	
+	/**
+	 * Returns the object storing TMAX readings grouped by their
+	 * station id 
+	 * @return
+	 */
+	public HashMap<String, List<Integer>> getTMaxReadingsByStation() {
+		return hmTmaxByStationId;
+	}
+	
+	private void combineGroupedData(
+			HashMap<String, List<Integer>> hmReadingsByStationId) {
+		logger.info(threadName + ": Entering combineGroupedData method");
+		
+		// Iterate through each entry and append it to the data structure
+		// in this object
+		for (Map.Entry<String, List<Integer>> entry: 
+			hmReadingsByStationId.entrySet()) {
+			if (hmTmaxByStationId.containsKey(entry.getKey())) {
+				hmTmaxByStationId.get(entry.getKey()).addAll(entry.getValue());
+			}
+		}
+		
+		logger.info(threadName + ": Entering combineGroupedData method");
+	}
+	
+	/**
+	 * Filters out the TMAX readings, groups them by station id and
+	 * returns this data as a HashMap
+	 */
+	private void groupTMaxReadingsByStation() {
+		logger.info(
+				threadName + 
+				": Entering groupTMaxReadingsByStation method");
+		
+		// Local variables
+		String[] strArrData;
+		
+		// Iterate through the list of Strings and process each one
+		for (String strCurrReading: lstWeatherData) {
+			strArrData = strCurrReading.split(",");
+			
+			// The array follows the format:
+			// [station id, date, observation type, observation
+			//  value, observation time]
+			
+			if (strArrData[2].equals("TMAX") && 
+					!strArrData[3].isEmpty()) {
+				// Check if the station id already exists in the
+				// HashMap
+				if (hmTmaxByStationId.containsKey(strArrData[0])) {
+					// Add the current TMAX reading into the list
+					hmTmaxByStationId.get(strArrData[0]).add(
+							Integer.parseInt(strArrData[3]));
+				} else {
+					// We need to initialize a new key-value pair
+					// for this new station
+					hmTmaxByStationId.put(
+							strArrData[0], 
+							new ArrayList<Integer>(Arrays.asList(
+									Integer.parseInt(strArrData[3]))));
+				}
+			}
+		}
+		
+		strArrData = null;
+		
+		logger.info(
+				threadName + 
+				": Exiting groupTMaxReadingsByStation method");
+	}
+
+	public void run() {
+		logger.info(threadName + ": Entering run method");
+		
+		// Group readings by station		
+		groupTMaxReadingsByStation();
+		
+		logger.info(threadName + ": Exiting run method");
+	}
+	
+	public void start() {
+		logger.info("Starting thread: " + threadName);
+		if (t == null) {
+			t = new Thread(this, threadName);
+			t.start();
+		}
+	}
+
+}

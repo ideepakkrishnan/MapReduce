@@ -1,5 +1,6 @@
 package com.neu.pdp;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
@@ -7,7 +8,9 @@ import org.apache.logging.log4j.Logger;
 
 import com.neu.pdp.calculators.SequentialCalculator;
 import com.neu.pdp.calculators.CoarseLockCalculator;
+import com.neu.pdp.calculators.FineLockCalculator;
 import com.neu.pdp.calculators.NoLockCalculator;
+import com.neu.pdp.calculators.NoSharingCalculator;
 
 /**
  * Contains the calls to all versions of the program
@@ -30,8 +33,7 @@ public class App
     	String path = "/home/ideepakkrishnan/Downloads/1763.csv.gz";
     	List<String> lstWeatherData = Util.readCSVFile(path);
     	HashMap<String, Float> hmAvgReadingByStation;
-    	HashMap<String, List<Integer>> hmReadingsByStationId = 
-    			new HashMap<String, List<Integer>>();
+    	HashMap<String, List<Integer>> hmReadingsByStationId;
     	
     	if (!lstWeatherData.isEmpty() &&
     			lstWeatherData.size() > 0) {
@@ -47,7 +49,7 @@ public class App
     		hmAvgReadingByStation = null;*/
     		
     		// Step 2: No-lock execution
-    		/*logger.info("Calling no-lock average calculator");
+    		logger.info("Calling no-lock average calculator");
     		hmReadingsByStationId = 
         			new HashMap<String, List<Integer>>();
     		
@@ -69,22 +71,23 @@ public class App
     		try {
 				n1.getThreadObject().join();
 				n2.getThreadObject().join();
+				
+				// Calculate the average reading for each station
+	    		hmAvgReadingByStation = Util.getAverageTMaxByStation(
+	    				hmReadingsByStationId);
+	    		
+	    		Util.printAverageTMaxByStation(hmAvgReadingByStation);	    		
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-    		
-    		// Calculate the average reading for each station
-    		hmAvgReadingByStation = Util.getAverageTMaxByStation(
-    				hmReadingsByStationId);
-    		
-    		Util.printAverageTMaxByStation(hmAvgReadingByStation);
-    		logger.info("Completing no-lock average calculator");
-    		
+    		    		    		
     		// Explicitly marking for garbage collection
     		hmAvgReadingByStation = null;
     		hmReadingsByStationId = null;
     		n1 = null;
-    		n2 = null;*/
+    		n2 = null;
+    		
+    		logger.info("Completing no-lock average calculator");
     		
     		// Step 3: Coarse lock version
     		logger.info("Calling coarse-lock average calculator");
@@ -110,22 +113,106 @@ public class App
     		try {
 				c1.getThreadObject().join();
 				c2.getThreadObject().join();
+				
+				// Calculate the average reading for each station
+	    		hmAvgReadingByStation = Util.getAverageTMaxByStation(
+	    				hmReadingsByStationId);
+	    		
+	    		Util.printAverageTMaxByStation(hmAvgReadingByStation);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-    		
-    		// Calculate the average reading for each station
-    		hmAvgReadingByStation = Util.getAverageTMaxByStation(
-    				hmReadingsByStationId);
-    		
-    		Util.printAverageTMaxByStation(hmAvgReadingByStation);
-    		logger.info("Completing coarse-lock average calculator");
     		
     		// Explicitly marking for garbage collection
     		hmAvgReadingByStation = null;
     		hmReadingsByStationId = null;
     		c1 = null;
     		c2 = null;
+    		
+    		logger.info("Completing coarse-lock average calculator");
+    		
+    		// Step 4: Fine lock version
+    		logger.info("Calling fine-lock average calculator");
+    		
+    		hmReadingsByStationId = 
+        			new HashMap<String, List<Integer>>();
+    		
+    		FineLockCalculator f1 = new FineLockCalculator(
+    				"Thread 1", 
+    				lstWeatherData.subList(0, lstWeatherData.size() / 2),
+    				hmReadingsByStationId);
+    		f1.start();
+    		
+    		FineLockCalculator f2 = new FineLockCalculator(
+    				"Thread 2", 
+    				lstWeatherData.subList(
+    						(lstWeatherData.size() / 2) + 1, 
+    						lstWeatherData.size()), 
+    				hmReadingsByStationId);
+    		f2.start();
+    		
+    		// Wait for both the threads to complete execution
+    		try {
+				f1.getThreadObject().join();
+				f2.getThreadObject().join();
+				
+				// Calculate the average reading for each station
+	    		hmAvgReadingByStation = Util.getAverageTMaxByStation(
+	    				hmReadingsByStationId);
+	    		
+	    		Util.printAverageTMaxByStation(hmAvgReadingByStation);	    		
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+    		
+    		// Explicitly marking for garbage collection
+    		hmAvgReadingByStation = null;
+    		hmReadingsByStationId = null;
+    		f1 = null;
+    		f2 = null;
+    		
+    		logger.info("Completing fine-lock average calculator");
+    		
+    		// Step 5: No sharing version
+    		logger.info("Calling no-sharing average calculator");
+    		
+    		NoSharingCalculator ns1 = new NoSharingCalculator(
+    				"Thread 1", 
+    				lstWeatherData.subList(0, lstWeatherData.size() / 2));
+    		ns1.start();
+    		
+    		NoSharingCalculator ns2 = new NoSharingCalculator(
+    				"Thread 2", 
+    				lstWeatherData.subList(
+    						(lstWeatherData.size() / 2) + 1, 
+    						lstWeatherData.size()));
+    		ns2.start();
+    		
+    		// Wait for both the threads to complete execution
+    		try {
+				ns1.getThreadObject().join();
+				ns2.getThreadObject().join();
+				
+				// Combine the data from all threads into primary
+				// thread (ns1 in our case)
+				List<HashMap<String,List<Integer>>> lstData =
+						new ArrayList<HashMap<String,List<Integer>>>();
+				lstData.add(ns2.getTMaxReadingsByStation());
+				
+				hmAvgReadingByStation = 
+						ns1.getAverageReadingByStationId(lstData);
+	    		
+	    		Util.printAverageTMaxByStation(hmAvgReadingByStation);	    		
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+    		
+    		// Explicitly marking for garbage collection
+    		hmAvgReadingByStation = null;
+    		ns1 = null;
+    		ns2 = null;
+    		
+    		logger.info("Completing no-sharing average calculator");
     	}
     	
     	logger.info("Exiting the main method");

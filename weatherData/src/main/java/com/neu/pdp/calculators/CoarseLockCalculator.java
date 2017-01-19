@@ -53,7 +53,7 @@ public class CoarseLockCalculator implements Runnable {
 	 * comma separated in the format: station id, date, observation
 	 * type, observation value, observation time
 	 */
-	private void groupTMaxReadingsByStation() {
+	private synchronized void groupTMaxReadingsByStation() {
 		logger.info(
 				threadName + 
 				": Entering groupTMaxReadingsByStation method");
@@ -73,20 +73,18 @@ public class CoarseLockCalculator implements Runnable {
 					!strArrData[3].isEmpty()) {
 				// Check if the station id already exists in the
 				// HashMap
-				synchronized (hmTmaxByStationId) {
-					if (hmTmaxByStationId.containsKey(strArrData[0])) {
-						// Add the current TMAX reading into the list
-						hmTmaxByStationId.get(strArrData[0]).add(
-								Integer.parseInt(strArrData[3]));
-					} else {
-						// We need to initialize a new key-value pair
-						// for this new station
-						hmTmaxByStationId.put(
-								strArrData[0], 
-								new ArrayList<Integer>(Arrays.asList(
-										Integer.parseInt(strArrData[3]))));
-					}
-				}				
+				if (hmTmaxByStationId.containsKey(strArrData[0])) {
+					// Add the current TMAX reading into the list
+					hmTmaxByStationId.get(strArrData[0]).add(
+							Integer.parseInt(strArrData[3]));
+				} else {
+					// We need to initialize a new key-value pair
+					// for this new station
+					hmTmaxByStationId.put(
+							strArrData[0], 
+							new ArrayList<Integer>(Arrays.asList(
+									Integer.parseInt(strArrData[3]))));
+				}
 			}
 		}
 		

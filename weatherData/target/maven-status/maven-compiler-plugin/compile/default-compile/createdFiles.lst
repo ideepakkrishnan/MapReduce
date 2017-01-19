@@ -1,5 +1,7 @@
+com/neu/pdp/calculators/NoSharingCalculator.class
+com/neu/pdp/calculators/SequentialCalculator.class
+com/neu/pdp/calculators/FineLockCalculator.class
 com/neu/pdp/calculators/NoLockCalculator.class
 com/neu/pdp/calculators/CoarseLockCalculator.class
 com/neu/pdp/Util.class
-com/neu/pdp/calculators/SequentialCalculator.class
 com/neu/pdp/App.class

@@ -1,0 +1,52 @@
+/**
+ * 
+ */
+package com.neu.pdp.calculators;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+/**
+ * @author ideepakkrishnan
+ *
+ */
+public class NoSharingCalculator implements Runnable {
+	
+	private static final Logger logger = LogManager.getLogger(
+			NoSharingCalculator.class.getName());
+	
+	private Thread t;
+	private String threadName;
+	private List<String> lstWeatherData;
+	private HashMap<String, List<Integer>> hmTmaxByStationId;
+	
+	public NoSharingCalculator(
+			String threadName, 
+			List<String> lstWeatherData) {
+		this.threadName = threadName;
+		this.lstWeatherData = lstWeatherData;
+		this.hmTmaxByStationId = new HashMap<String, List<Integer>>();
+		logger.info("Creating thread: " + threadName);
+	}
+
+	public void run() {
+		logger.info(threadName + ": Entering run method");
+		
+		// Group readings by station		
+		groupTMaxReadingsByStation();
+		
+		logger.info(threadName + ": Exiting run method");
+	}
+	
+	public void start() {
+		logger.info("Starting thread: " + threadName);
+		if (t == null) {
+			t = new Thread(this, threadName);
+			t.start();
+		}
+	}
+
+}
