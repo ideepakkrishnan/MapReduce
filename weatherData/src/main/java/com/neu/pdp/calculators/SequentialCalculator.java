@@ -20,7 +20,7 @@ import com.neu.pdp.Util;
 public class SequentialCalculator {
 	
 	private static final Logger logger = LogManager.getLogger(
-			Util.class.getName());
+			SequentialCalculator.class.getName());
 	
 	/**
 	 * Calculates the average TMAX temperature for each station

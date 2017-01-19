@@ -11,18 +11,17 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.neu.pdp.Util;
-
 /**
  * Class containing methods to concurrently process the
  * temperature readings grouped by station id and calculate
- * their average
+ * their average without any synchronization on the updates
+ * to the data structure that stores the processed data.
  * @author ideepakkrishnan
  */
 public class NoLockCalculator implements Runnable {
 	
 	private static final Logger logger = LogManager.getLogger(
-			Util.class.getName());
+			NoLockCalculator.class.getName());
 	
 	private Thread t;
 	private String threadName;
@@ -89,8 +88,7 @@ public class NoLockCalculator implements Runnable {
 			}
 		}
 		
-		strArrData = null;
-		hmTmaxByStationId = null;
+		strArrData = null;		
 		
 		logger.info(
 				threadName + 

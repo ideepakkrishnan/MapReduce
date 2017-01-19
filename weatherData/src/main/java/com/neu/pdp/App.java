@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.neu.pdp.calculators.SequentialCalculator;
+import com.neu.pdp.calculators.CoarseLockCalculator;
 import com.neu.pdp.calculators.NoLockCalculator;
 
 /**
@@ -46,7 +47,10 @@ public class App
     		hmAvgReadingByStation = null;*/
     		
     		// Step 2: No-lock execution
-    		logger.info("Calling no-lock average calculator");
+    		/*logger.info("Calling no-lock average calculator");
+    		hmReadingsByStationId = 
+        			new HashMap<String, List<Integer>>();
+    		
     		NoLockCalculator n1 = new NoLockCalculator(
     				"Thread 1", 
     				lstWeatherData.subList(0, lstWeatherData.size() / 2),
@@ -78,8 +82,50 @@ public class App
     		
     		// Explicitly marking for garbage collection
     		hmAvgReadingByStation = null;
+    		hmReadingsByStationId = null;
     		n1 = null;
-    		n2 = null;
+    		n2 = null;*/
+    		
+    		// Step 3: Coarse lock version
+    		logger.info("Calling coarse-lock average calculator");
+    		
+    		hmReadingsByStationId = 
+        			new HashMap<String, List<Integer>>();
+    		
+    		CoarseLockCalculator c1 = new CoarseLockCalculator(
+    				"Thread 1", 
+    				lstWeatherData.subList(0, lstWeatherData.size() / 2),
+    				hmReadingsByStationId);
+    		c1.start();
+    		
+    		CoarseLockCalculator c2 = new CoarseLockCalculator(
+    				"Thread 2", 
+    				lstWeatherData.subList(
+    						(lstWeatherData.size() / 2) + 1, 
+    						lstWeatherData.size()), 
+    				hmReadingsByStationId);
+    		c2.start();
+    		
+    		// Wait for both the threads to complete execution
+    		try {
+				c1.getThreadObject().join();
+				c2.getThreadObject().join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+    		
+    		// Calculate the average reading for each station
+    		hmAvgReadingByStation = Util.getAverageTMaxByStation(
+    				hmReadingsByStationId);
+    		
+    		Util.printAverageTMaxByStation(hmAvgReadingByStation);
+    		logger.info("Completing coarse-lock average calculator");
+    		
+    		// Explicitly marking for garbage collection
+    		hmAvgReadingByStation = null;
+    		hmReadingsByStationId = null;
+    		c1 = null;
+    		c2 = null;
     	}
     	
     	logger.info("Exiting the main method");
