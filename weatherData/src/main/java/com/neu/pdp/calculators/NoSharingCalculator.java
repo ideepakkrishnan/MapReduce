@@ -12,7 +12,7 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.neu.pdp.Util;
+import com.neu.pdp.resources.Util;
 
 /**
  * Class containing methods to concurrently process the

@@ -1,0 +1,97 @@
+/**
+ * 
+ */
+package com.neu.pdp.resources;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Stores the execution timer readings 
+ * @author ideepakkrishnan
+ */
+public class Result {
+	private long minExecutionTime;
+	private long maxExecutionTime;
+	private long avgExecutionTime;
+	private List<Long> executionTimes;
+	
+	public Result() {
+		minExecutionTime = 0;
+		maxExecutionTime = 0;
+		avgExecutionTime = 0;
+		executionTimes = new ArrayList<Long>();
+	}
+	
+	// Exposed methods
+	
+	/**
+	 * Adds an execution time to the local list object
+	 * @param executionTime Execution time in milliseconds
+	 */
+	public void addExecutionTime(long executionTime) {
+		executionTimes.add(executionTime);
+	}
+	
+	// Getters and Setters
+
+	/**
+	 * @return the minExecutionTime
+	 */
+	public long getMinExecutionTime() {
+		return minExecutionTime;
+	}
+
+	/**
+	 * @param minExecutionTime the minExecutionTime to set
+	 */
+	public void setMinExecutionTime(long minExecutionTime) {
+		this.minExecutionTime = minExecutionTime;
+	}
+
+	/**
+	 * @return the maxExecutionTime
+	 */
+	public long getMaxExecutionTime() {
+		return maxExecutionTime;
+	}
+
+	/**
+	 * @param maxExecutionTime the maxExecutionTime to set
+	 */
+	public void setMaxExecutionTime(long maxExecutionTime) {
+		this.maxExecutionTime = maxExecutionTime;
+	}
+
+	/**
+	 * @return the avgExecutionTime
+	 */
+	public long getAvgExecutionTime() {
+		return avgExecutionTime;
+	}
+
+	/**
+	 * @param avgExecutionTime the avgExecutionTime to set
+	 */
+	public void setAvgExecutionTime(long avgExecutionTime) {
+		this.avgExecutionTime = avgExecutionTime;
+	}
+
+	/**
+	 * @return the executionTimes
+	 */
+	public List<Long> getExecutionTimes() {
+		return executionTimes;
+	}
+
+	/**
+	 * @param executionTimes the executionTimes to set
+	 */
+	public void setExecutionTimes(List<Long> executionTimes) {
+		this.executionTimes = executionTimes;
+	}
+	
+	public void updateExecutionTimes() {
+		setMinExecutionTime(Util.findMinimumExecutionTime(executionTimes));
+	}
+}

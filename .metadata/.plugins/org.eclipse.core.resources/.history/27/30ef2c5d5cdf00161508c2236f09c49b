@@ -1,0 +1,14 @@
+/**
+ * 
+ */
+package com.neu.pdp.resources;
+
+/**
+ * @author ideepakkrishnan
+ *
+ */
+public class Result {
+	private float minExecutionTime;
+	private float maxExecutionTime;
+	private float avgExecutionTime;
+}

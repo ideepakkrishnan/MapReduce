@@ -9,7 +9,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.neu.pdp.Util;
+import com.neu.pdp.resources.Util;
 
 /**
  * Class containing methods to sequentially process the TMAX

@@ -1,7 +1,8 @@
+/home/ideepakkrishnan/workspace/weatherData/src/main/java/com/neu/pdp/resources/Result.java
 /home/ideepakkrishnan/workspace/weatherData/src/main/java/com/neu/pdp/calculators/CoarseLockCalculator.java
+/home/ideepakkrishnan/workspace/weatherData/src/main/java/com/neu/pdp/resources/Util.java
 /home/ideepakkrishnan/workspace/weatherData/src/main/java/com/neu/pdp/calculators/FineLockCalculator.java
 /home/ideepakkrishnan/workspace/weatherData/src/main/java/com/neu/pdp/calculators/SequentialCalculator.java
-/home/ideepakkrishnan/workspace/weatherData/src/main/java/com/neu/pdp/Util.java
 /home/ideepakkrishnan/workspace/weatherData/src/main/java/com/neu/pdp/calculators/NoSharingCalculator.java
 /home/ideepakkrishnan/workspace/weatherData/src/main/java/com/neu/pdp/calculators/NoLockCalculator.java
 /home/ideepakkrishnan/workspace/weatherData/src/main/java/com/neu/pdp/App.java

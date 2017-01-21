@@ -6,6 +6,9 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.neu.pdp.resources.Result;
+import com.neu.pdp.resources.Util;
+
 import com.neu.pdp.calculators.SequentialCalculator;
 import com.neu.pdp.calculators.CoarseLockCalculator;
 import com.neu.pdp.calculators.FineLockCalculator;
@@ -21,45 +24,78 @@ public class App
 	private static final Logger logger = LogManager.getLogger(
 			App.class.getName());
 	
-	/**
-	 * Main method for this project
-	 * @param args
-	 */
-    public static void main( String[] args )
-    {
-    	logger.info("Entering the main method");
-    	
-    	// Local variables
-    	String path = "/home/ideepakkrishnan/Downloads/1763.csv.gz";
-    	List<String> lstWeatherData = Util.readCSVFile(path);
-    	HashMap<String, Float> hmAvgReadingByStation;
-    	HashMap<String, List<Integer>> hmReadingsByStationId;
-    	
-    	if (!lstWeatherData.isEmpty() &&
-    			lstWeatherData.size() > 0) {
-    		// Step 1: Sequential execution
-    		/*logger.info("Data read complete. Calling sequential method");
-    		hmAvgReadingByStation = SequentialCalculator.calculate(
+	private static void executeSequentialCalculator(
+			List<String> lstWeatherData) {
+		// Local variables
+		HashMap<String, Float> hmAvgReadingByStation;
+		Result sequentialCalculatorResult = new Result();
+		long lStartTime, lEndTime;
+		
+		System.out.println("---------------------");
+		System.out.println("Sequential Calculator");
+		System.out.println("---------------------");
+		
+		for (int i = 0; i < 10; i++) {
+			logger.info("Executing sequential calculator. Cycle: " + i);
+			
+			lStartTime = System.currentTimeMillis(); // Start Timer
+    		
+			hmAvgReadingByStation = SequentialCalculator.calculate(
     				lstWeatherData);
     		
+    		lEndTime = System.currentTimeMillis(); // End Timer
+    		
+    		System.out.println("**** Cycle " + i + " ****");
     		Util.printAverageTMaxByStation(hmAvgReadingByStation);
-    		logger.info("Completing sequential average calculator");
+    		sequentialCalculatorResult
+    			.addExecutionTime(lEndTime - lStartTime);
+    		
+    		logger.info("Completing sequential calculator. Cycle: " + i);
     		
     		// Explicitly marking for garbage collection
-    		hmAvgReadingByStation = null;*/
-    		
-    		// Step 2: No-lock execution
-    		logger.info("Calling no-lock average calculator");
+    		hmAvgReadingByStation = null;
+		}
+		
+		// Update the result object with min, max and average execution
+		// times
+		System.out.println("**** Result ****");
+		sequentialCalculatorResult.updateExecutionTimes();
+		System.out.println("Minimum execution time: " + 
+				sequentialCalculatorResult.getMinExecutionTime());
+		System.out.println("Maximum execution time: " +
+				sequentialCalculatorResult.getMaxExecutionTime());
+		System.out.println("Average execution time:" +
+				sequentialCalculatorResult.getAvgExecutionTime());
+	}
+	
+	private static void executeNoLockCalculator(
+			List<String> lstWeatherData) {
+		// Local variables
+		HashMap<String, Float> hmAvgReadingByStation;
+    	HashMap<String, List<Integer>> hmReadingsByStationId;
+		Result sequentialCalculatorResult = new Result();
+		long lStartTime, lEndTime;
+		NoLockCalculator n1, n2;
+		
+		System.out.println("------------------");
+		System.out.println("No Lock Calculator");
+		System.out.println("------------------");
+		
+		for (int i = 0; i < 10; i++) {
+			logger.info("Executing no-lock calculator. Cycle: " + i);
+			
+			lStartTime = System.currentTimeMillis(); // Start Timer
+			
     		hmReadingsByStationId = 
         			new HashMap<String, List<Integer>>();
     		
-    		NoLockCalculator n1 = new NoLockCalculator(
+    		n1 = new NoLockCalculator(
     				"Thread 1", 
     				lstWeatherData.subList(0, lstWeatherData.size() / 2),
     				hmReadingsByStationId);
     		n1.start();
     		
-    		NoLockCalculator n2 = new NoLockCalculator(
+    		n2 = new NoLockCalculator(
     				"Thread 2", 
     				lstWeatherData.subList(
     						(lstWeatherData.size() / 2) + 1, 
@@ -76,7 +112,12 @@ public class App
 	    		hmAvgReadingByStation = Util.getAverageTMaxByStation(
 	    				hmReadingsByStationId);
 	    		
-	    		Util.printAverageTMaxByStation(hmAvgReadingByStation);	    		
+	    		lEndTime = System.currentTimeMillis(); // End Timer
+	    		sequentialCalculatorResult
+	    			.addExecutionTime(lEndTime - lStartTime);
+	    		
+	    		System.out.println("**** Cycle " + i + " ****");
+	    		Util.printAverageTMaxByStation(hmAvgReadingByStation);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -87,21 +128,49 @@ public class App
     		n1 = null;
     		n2 = null;
     		
-    		logger.info("Completing no-lock average calculator");
-    		
-    		// Step 3: Coarse lock version
-    		logger.info("Calling coarse-lock average calculator");
+    		logger.info("Completing no-lock calculator. Cycle: " + i);
+		}
+		
+		// Update the result object with min, max and average execution
+		// times
+		System.out.println("**** Result ****");
+		sequentialCalculatorResult.updateExecutionTimes();
+		System.out.println("Minimum execution time: " + 
+				sequentialCalculatorResult.getMinExecutionTime());
+		System.out.println("Maximum execution time: " +
+				sequentialCalculatorResult.getMaxExecutionTime());
+		System.out.println("Average execution time:" +
+				sequentialCalculatorResult.getAvgExecutionTime());
+	}
+	
+	private static void executeCoarseLockCalculator(
+			List<String> lstWeatherData) {
+		// Local variables
+		HashMap<String, Float> hmAvgReadingByStation;
+    	HashMap<String, List<Integer>> hmReadingsByStationId;
+		Result sequentialCalculatorResult = new Result();
+		long lStartTime, lEndTime;
+		CoarseLockCalculator c1, c2;
+		
+		System.out.println("----------------------");
+		System.out.println("Coarse Lock Calculator");
+		System.out.println("----------------------");
+		
+		for (int i = 0; i < 10; i++) {
+			logger.info("Executing coarse-lock calculator. Cycle: " + i);
+			
+			lStartTime = System.currentTimeMillis(); // Start Timer
     		
     		hmReadingsByStationId = 
         			new HashMap<String, List<Integer>>();
     		
-    		CoarseLockCalculator c1 = new CoarseLockCalculator(
+    		c1 = new CoarseLockCalculator(
     				"Thread 1", 
     				lstWeatherData.subList(0, lstWeatherData.size() / 2),
     				hmReadingsByStationId);
     		c1.start();
     		
-    		CoarseLockCalculator c2 = new CoarseLockCalculator(
+    		c2 = new CoarseLockCalculator(
     				"Thread 2", 
     				lstWeatherData.subList(
     						(lstWeatherData.size() / 2) + 1, 
@@ -118,6 +187,11 @@ public class App
 	    		hmAvgReadingByStation = Util.getAverageTMaxByStation(
 	    				hmReadingsByStationId);
 	    		
+	    		lEndTime = System.currentTimeMillis(); // End Timer
+	    		sequentialCalculatorResult
+	    			.addExecutionTime(lEndTime - lStartTime);
+	    		
+	    		System.out.println("**** Cycle " + i + " ****");
 	    		Util.printAverageTMaxByStation(hmAvgReadingByStation);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -129,21 +203,49 @@ public class App
     		c1 = null;
     		c2 = null;
     		
-    		logger.info("Completing coarse-lock average calculator");
-    		
-    		// Step 4: Fine lock version
-    		logger.info("Calling fine-lock average calculator");
+    		logger.info("Completing coarse-lock calculator. Cycle: " + i);			
+		}
+		
+		// Update the result object with min, max and average execution
+		// times
+		System.out.println("**** Result ****");
+		sequentialCalculatorResult.updateExecutionTimes();
+		System.out.println("Minimum execution time: " + 
+				sequentialCalculatorResult.getMinExecutionTime());
+		System.out.println("Maximum execution time: " +
+				sequentialCalculatorResult.getMaxExecutionTime());
+		System.out.println("Average execution time:" +
+				sequentialCalculatorResult.getAvgExecutionTime());
+	}
+	
+	private static void executeFineLockCalculator(
+			List<String> lstWeatherData) {
+		// Local variables
+		HashMap<String, Float> hmAvgReadingByStation;
+    	HashMap<String, List<Integer>> hmReadingsByStationId;
+		Result sequentialCalculatorResult = new Result();
+		long lStartTime, lEndTime;
+		FineLockCalculator f1, f2;
+		
+		System.out.println("--------------------");
+		System.out.println("Fine Lock Calculator");
+		System.out.println("--------------------");
+		
+		for (int i = 0; i < 10; i++) {
+			logger.info("Calling fine-lock average calculator");
+			
+			lStartTime = System.currentTimeMillis(); // Start Timer
     		
     		hmReadingsByStationId = 
         			new HashMap<String, List<Integer>>();
     		
-    		FineLockCalculator f1 = new FineLockCalculator(
+    		f1 = new FineLockCalculator(
     				"Thread 1", 
     				lstWeatherData.subList(0, lstWeatherData.size() / 2),
     				hmReadingsByStationId);
     		f1.start();
     		
-    		FineLockCalculator f2 = new FineLockCalculator(
+    		f2 = new FineLockCalculator(
     				"Thread 2", 
     				lstWeatherData.subList(
     						(lstWeatherData.size() / 2) + 1, 
@@ -160,6 +262,11 @@ public class App
 	    		hmAvgReadingByStation = Util.getAverageTMaxByStation(
 	    				hmReadingsByStationId);
 	    		
+	    		lEndTime = System.currentTimeMillis(); // End Timer
+	    		sequentialCalculatorResult
+	    			.addExecutionTime(lEndTime - lStartTime);
+	    		
+	    		System.out.println("**** Cycle " + i + " ****");
 	    		Util.printAverageTMaxByStation(hmAvgReadingByStation);	    		
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -172,16 +279,43 @@ public class App
     		f2 = null;
     		
     		logger.info("Completing fine-lock average calculator");
+		}
+		
+		// Update the result object with min, max and average execution
+		// times
+		System.out.println("**** Result ****");
+		sequentialCalculatorResult.updateExecutionTimes();
+		System.out.println("Minimum execution time: " + 
+				sequentialCalculatorResult.getMinExecutionTime());
+		System.out.println("Maximum execution time: " +
+				sequentialCalculatorResult.getMaxExecutionTime());
+		System.out.println("Average execution time:" +
+				sequentialCalculatorResult.getAvgExecutionTime());
+	}
+	
+	private static void executeNoSharingCalculator(
+			List<String> lstWeatherData) {
+		// Local variables
+		HashMap<String, Float> hmAvgReadingByStation;
+		Result sequentialCalculatorResult = new Result();
+		long lStartTime, lEndTime;
+		NoSharingCalculator ns1, ns2;
+		
+		System.out.println("---------------------");
+		System.out.println("No Sharing Calculator");
+		System.out.println("---------------------");
+		
+		for (int i = 0; i < 10; i++) {
+			logger.info("Calling no-sharing calculator. Cycle: " + i);
+			
+			lStartTime = System.currentTimeMillis(); // Start Timer
     		
-    		// Step 5: No sharing version
-    		logger.info("Calling no-sharing average calculator");
-    		
-    		NoSharingCalculator ns1 = new NoSharingCalculator(
+    		ns1 = new NoSharingCalculator(
     				"Thread 1", 
     				lstWeatherData.subList(0, lstWeatherData.size() / 2));
     		ns1.start();
     		
-    		NoSharingCalculator ns2 = new NoSharingCalculator(
+    		ns2 = new NoSharingCalculator(
     				"Thread 2", 
     				lstWeatherData.subList(
     						(lstWeatherData.size() / 2) + 1, 
@@ -201,7 +335,12 @@ public class App
 				
 				hmAvgReadingByStation = 
 						ns1.getAverageReadingByStationId(lstData);
+				
+				lEndTime = System.currentTimeMillis(); // End Timer
+	    		sequentialCalculatorResult
+	    			.addExecutionTime(lEndTime - lStartTime);
 	    		
+				System.out.println("**** Cycle " + i + " ****");
 	    		Util.printAverageTMaxByStation(hmAvgReadingByStation);	    		
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -212,9 +351,51 @@ public class App
     		ns1 = null;
     		ns2 = null;
     		
-    		logger.info("Completing no-sharing average calculator");
+    		logger.info("Completing no-sharing calculator. Cycle: " + i);
+		}
+		
+		// Update the result object with min, max and average execution
+		// times
+		System.out.println("**** Result ****");
+		sequentialCalculatorResult.updateExecutionTimes();
+		System.out.println("Minimum execution time: " + 
+				sequentialCalculatorResult.getMinExecutionTime());
+		System.out.println("Maximum execution time: " +
+				sequentialCalculatorResult.getMaxExecutionTime());
+		System.out.println("Average execution time:" +
+				sequentialCalculatorResult.getAvgExecutionTime());
+	}
+	
+	/**
+	 * Main method for this project
+	 * @param args
+	 */
+    public static void main( String[] args )
+    {
+    	logger.info("Entering the main method");
+    	
+    	// Local variables
+    	String path = "/home/ideepakkrishnan/Downloads/1763.csv.gz";
+    	List<String> lstWeatherData = Util.readCSVFile(path);    	
+    	
+    	if (!lstWeatherData.isEmpty() &&
+    			lstWeatherData.size() > 0) {
+    		// Step 1: Sequential execution
+    		executeSequentialCalculator(lstWeatherData);
+    		
+    		// Step 2: No-lock execution
+    		executeNoLockCalculator(lstWeatherData);
+    		
+    		// Step 3: Coarse lock version
+    		executeCoarseLockCalculator(lstWeatherData);
+    		
+    		// Step 4: Fine lock version
+    		executeFineLockCalculator(lstWeatherData);
+    		
+    		// Step 5: No sharing version
+    		executeNoSharingCalculator(lstWeatherData);
     	}
     	
     	logger.info("Exiting the main method");
     }
-}
+} 
