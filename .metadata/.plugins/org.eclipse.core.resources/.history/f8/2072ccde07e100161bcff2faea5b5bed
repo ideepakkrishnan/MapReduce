@@ -1,0 +1,33 @@
+package com.neu.pdp;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+/**
+ * The NameNode / Master (driver class)
+ *
+ */
+public class App 
+{
+	private static final Logger logger = LogManager.getLogger(
+			App.class.getName());
+	
+    public static void main( String[] args )
+    {
+    	logger.info("Inside main method");
+        
+    	Configuration conf = new Configuration();
+        Job job = Job.getInstance(conf, "word count");
+        job.setJarByClass(WordCount.class);
+        job.setMapperClass(TokenizerMapper.class);
+        job.setCombinerClass(IntSumReducer.class);
+        job.setReducerClass(IntSumReducer.class);
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(IntWritable.class);
+        FileInputFormat.addInputPath(job, new Path(args[0]));
+        FileOutputFormat.setOutputPath(job, new Path(args[1]));
+        System.exit(job.waitForCompletion(true) ? 0 : 1);
+        
+        logger.info("Exiting main method");
+    }
+}

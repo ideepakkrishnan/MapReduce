@@ -3509,3 +3509,533 @@ Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp
 
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-20 18:44:41.943
 !MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+!SESSION 2017-01-22 16:23:54.258 -----------------------------------------------
+eclipse.buildId=4.6.2.M20161124-1400
+java.version=1.8.0_112
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 16:29:48.080
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 16:29:48.349
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 16:29:49.143
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 16:29:49.284
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 16:32:52.118
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 16:32:52.139
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 16:32:53.724
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 16:32:53.741
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 16:34:18.774
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 16:34:18.803
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 16:34:31.560
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 16:34:31.582
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 16:34:49.138
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 16:34:49.151
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 16:38:52.674
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 16:38:52.713
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 16:42:17.601
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 16:42:17.611
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 17:37:21.219
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 17:37:21.221
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 17:37:49.508
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 17:37:49.510
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 17:38:02.991
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 17:38:03.013
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:04:14.931
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:04:14.946
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2017-01-22 19:33:54.806
+!MESSAGE failed to load maven project for org.eclipse.ui.part.FileEditorInput(/wordCount/pom.xml)
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not read maven project
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.readProjectWithDependencies(ProjectRegistryManager.java:804)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager$6.call(ProjectRegistryManager.java:1010)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager$6.call(ProjectRegistryManager.java:1)
+	at com.google.common.cache.LocalCache$LocalManualCache$1.load(LocalCache.java:4724)
+	at com.google.common.cache.LocalCache$LoadingValueReference.loadFuture(LocalCache.java:3522)
+	at com.google.common.cache.LocalCache$Segment.loadSync(LocalCache.java:2315)
+	at com.google.common.cache.LocalCache$Segment.lockedGetOrLoad(LocalCache.java:2278)
+	at com.google.common.cache.LocalCache$Segment.get(LocalCache.java:2193)
+	at com.google.common.cache.LocalCache.get(LocalCache.java:3932)
+	at com.google.common.cache.LocalCache$LocalManualCache.get(LocalCache.java:4721)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.getMavenProject(ProjectRegistryManager.java:1008)
+	at org.eclipse.m2e.core.internal.project.registry.MavenProjectFacade.getMavenProject(MavenProjectFacade.java:242)
+	at org.eclipse.m2e.core.ui.internal.actions.SelectionUtil.getMavenProject(SelectionUtil.java:261)
+	at org.eclipse.m2e.editor.pom.MavenPomEditor.readMavenProject(MavenPomEditor.java:732)
+	at org.eclipse.m2e.editor.pom.MavenPomEditor$5.run(MavenPomEditor.java:1053)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Contains: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM /home/ideepakkrishnan/workspace/wordCount/pom.xml: end tag name </project> must match start tag name <dependencies> from line 37 (position: TEXT seen ...</dependency>\n</project>... @79:11)  @ line 79, column 11
+ for project  at /home/ideepakkrishnan/workspace/wordCount/pom.xml
+org.apache.maven.project.ProjectBuildingException: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM /home/ideepakkrishnan/workspace/wordCount/pom.xml: end tag name </project> must match start tag name <dependencies> from line 37 (position: TEXT seen ...</dependency>\n</project>... @79:11)  @ line 79, column 11
+ for project  at /home/ideepakkrishnan/workspace/wordCount/pom.xml
+	at org.apache.maven.project.DefaultProjectBuilder.build(DefaultProjectBuilder.java:168)
+	at org.apache.maven.project.DefaultProjectBuilder.build(DefaultProjectBuilder.java:119)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readMavenProject(MavenImpl.java:636)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager$5.call(ProjectRegistryManager.java:816)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager$5.call(ProjectRegistryManager.java:1)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:176)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:151)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:99)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.execute(ProjectRegistryManager.java:967)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.readProjectWithDependencies(ProjectRegistryManager.java:811)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.readProjectWithDependencies(ProjectRegistryManager.java:794)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager$6.call(ProjectRegistryManager.java:1010)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager$6.call(ProjectRegistryManager.java:1)
+	at com.google.common.cache.LocalCache$LocalManualCache$1.load(LocalCache.java:4724)
+	at com.google.common.cache.LocalCache$LoadingValueReference.loadFuture(LocalCache.java:3522)
+	at com.google.common.cache.LocalCache$Segment.loadSync(LocalCache.java:2315)
+	at com.google.common.cache.LocalCache$Segment.lockedGetOrLoad(LocalCache.java:2278)
+	at com.google.common.cache.LocalCache$Segment.get(LocalCache.java:2193)
+	at com.google.common.cache.LocalCache.get(LocalCache.java:3932)
+	at com.google.common.cache.LocalCache$LocalManualCache.get(LocalCache.java:4721)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.getMavenProject(ProjectRegistryManager.java:1008)
+	at org.eclipse.m2e.core.internal.project.registry.MavenProjectFacade.getMavenProject(MavenProjectFacade.java:242)
+	at org.eclipse.m2e.core.ui.internal.actions.SelectionUtil.getMavenProject(SelectionUtil.java:261)
+	at org.eclipse.m2e.editor.pom.MavenPomEditor.readMavenProject(MavenPomEditor.java:732)
+	at org.eclipse.m2e.editor.pom.MavenPomEditor$5.run(MavenPomEditor.java:1053)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: org.apache.maven.model.building.ModelBuildingException: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM /home/ideepakkrishnan/workspace/wordCount/pom.xml: end tag name </project> must match start tag name <dependencies> from line 37 (position: TEXT seen ...</dependency>\n</project>... @79:11)  @ line 79, column 11
+
+	at org.apache.maven.model.building.DefaultModelProblemCollector.newModelBuildingException(DefaultModelProblemCollector.java:197)
+	at org.apache.maven.model.building.DefaultModelBuilder.readModel(DefaultModelBuilder.java:579)
+	at org.apache.maven.model.building.DefaultModelBuilder.build(DefaultModelBuilder.java:273)
+	at org.apache.maven.project.DefaultProjectBuilder.build(DefaultProjectBuilder.java:161)
+	... 25 more
+!SUBENTRY 1 org.eclipse.m2e.core 4 0 2017-01-22 19:33:54.809
+!MESSAGE Could not read maven project
+!SUBENTRY 2 org.eclipse.m2e.core 4 0 2017-01-22 19:33:54.809
+!MESSAGE 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM /home/ideepakkrishnan/workspace/wordCount/pom.xml: end tag name </project> must match start tag name <dependencies> from line 37 (position: TEXT seen ...</dependency>\n</project>... @79:11)  @ line 79, column 11
+ for project  at /home/ideepakkrishnan/workspace/wordCount/pom.xml
+!STACK 0
+org.apache.maven.project.ProjectBuildingException: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM /home/ideepakkrishnan/workspace/wordCount/pom.xml: end tag name </project> must match start tag name <dependencies> from line 37 (position: TEXT seen ...</dependency>\n</project>... @79:11)  @ line 79, column 11
+ for project  at /home/ideepakkrishnan/workspace/wordCount/pom.xml
+	at org.apache.maven.project.DefaultProjectBuilder.build(DefaultProjectBuilder.java:168)
+	at org.apache.maven.project.DefaultProjectBuilder.build(DefaultProjectBuilder.java:119)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readMavenProject(MavenImpl.java:636)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager$5.call(ProjectRegistryManager.java:816)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager$5.call(ProjectRegistryManager.java:1)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:176)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:151)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:99)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.execute(ProjectRegistryManager.java:967)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.readProjectWithDependencies(ProjectRegistryManager.java:811)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.readProjectWithDependencies(ProjectRegistryManager.java:794)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager$6.call(ProjectRegistryManager.java:1010)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager$6.call(ProjectRegistryManager.java:1)
+	at com.google.common.cache.LocalCache$LocalManualCache$1.load(LocalCache.java:4724)
+	at com.google.common.cache.LocalCache$LoadingValueReference.loadFuture(LocalCache.java:3522)
+	at com.google.common.cache.LocalCache$Segment.loadSync(LocalCache.java:2315)
+	at com.google.common.cache.LocalCache$Segment.lockedGetOrLoad(LocalCache.java:2278)
+	at com.google.common.cache.LocalCache$Segment.get(LocalCache.java:2193)
+	at com.google.common.cache.LocalCache.get(LocalCache.java:3932)
+	at com.google.common.cache.LocalCache$LocalManualCache.get(LocalCache.java:4721)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.getMavenProject(ProjectRegistryManager.java:1008)
+	at org.eclipse.m2e.core.internal.project.registry.MavenProjectFacade.getMavenProject(MavenProjectFacade.java:242)
+	at org.eclipse.m2e.core.ui.internal.actions.SelectionUtil.getMavenProject(SelectionUtil.java:261)
+	at org.eclipse.m2e.editor.pom.MavenPomEditor.readMavenProject(MavenPomEditor.java:732)
+	at org.eclipse.m2e.editor.pom.MavenPomEditor$5.run(MavenPomEditor.java:1053)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: org.apache.maven.model.building.ModelBuildingException: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM /home/ideepakkrishnan/workspace/wordCount/pom.xml: end tag name </project> must match start tag name <dependencies> from line 37 (position: TEXT seen ...</dependency>\n</project>... @79:11)  @ line 79, column 11
+
+	at org.apache.maven.model.building.DefaultModelProblemCollector.newModelBuildingException(DefaultModelProblemCollector.java:197)
+	at org.apache.maven.model.building.DefaultModelBuilder.readModel(DefaultModelBuilder.java:579)
+	at org.apache.maven.model.building.DefaultModelBuilder.build(DefaultModelBuilder.java:273)
+	at org.apache.maven.project.DefaultProjectBuilder.build(DefaultProjectBuilder.java:161)
+	... 25 more
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2017-01-22 19:33:54.834
+!MESSAGE Could not read pom.xml
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not read pom.xml
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readModel(MavenImpl.java:565)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readModel(MavenImpl.java:574)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refreshPhase2(ProjectRegistryManager.java:542)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:498)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:351)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:298)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod.getProjectFacade(MavenBuilder.java:154)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod$1.call(MavenBuilder.java:89)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:176)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:151)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:99)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod.execute(MavenBuilder.java:86)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder.build(MavenBuilder.java:200)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:735)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:301)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:304)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:360)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:383)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: org.apache.maven.model.io.ModelParseException: end tag name </project> must match start tag name <dependencies> from line 37 (position: TEXT seen ...</dependency>\n</project>... @79:11) 
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:122)
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:86)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readModel(MavenImpl.java:563)
+	... 24 more
+Caused by: org.codehaus.plexus.util.xml.pull.XmlPullParserException: end tag name </project> must match start tag name <dependencies> from line 37 (position: TEXT seen ...</dependency>\n</project>... @79:11) 
+	at org.codehaus.plexus.util.xml.pull.MXParser.parseEndTag(MXParser.java:1727)
+	at org.codehaus.plexus.util.xml.pull.MXParser.nextImpl(MXParser.java:1169)
+	at org.codehaus.plexus.util.xml.pull.MXParser.next(MXParser.java:1131)
+	at org.codehaus.plexus.util.xml.pull.MXParser.nextTag(MXParser.java:1118)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.parseModel(MavenXpp3Reader.java:2231)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read(MavenXpp3Reader.java:3845)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read(MavenXpp3Reader.java:595)
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:117)
+	... 26 more
+!SUBENTRY 1 org.eclipse.m2e.core 4 -1 2017-01-22 19:33:54.834
+!MESSAGE Could not read pom.xml
+!STACK 0
+org.apache.maven.model.io.ModelParseException: end tag name </project> must match start tag name <dependencies> from line 37 (position: TEXT seen ...</dependency>\n</project>... @79:11) 
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:122)
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:86)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readModel(MavenImpl.java:563)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readModel(MavenImpl.java:574)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refreshPhase2(ProjectRegistryManager.java:542)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:498)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:351)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:298)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod.getProjectFacade(MavenBuilder.java:154)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod$1.call(MavenBuilder.java:89)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:176)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:151)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:99)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod.execute(MavenBuilder.java:86)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder.build(MavenBuilder.java:200)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:735)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:301)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:304)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:360)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:383)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: org.codehaus.plexus.util.xml.pull.XmlPullParserException: end tag name </project> must match start tag name <dependencies> from line 37 (position: TEXT seen ...</dependency>\n</project>... @79:11) 
+	at org.codehaus.plexus.util.xml.pull.MXParser.parseEndTag(MXParser.java:1727)
+	at org.codehaus.plexus.util.xml.pull.MXParser.nextImpl(MXParser.java:1169)
+	at org.codehaus.plexus.util.xml.pull.MXParser.next(MXParser.java:1131)
+	at org.codehaus.plexus.util.xml.pull.MXParser.nextTag(MXParser.java:1118)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.parseModel(MavenXpp3Reader.java:2231)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read(MavenXpp3Reader.java:3845)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read(MavenXpp3Reader.java:595)
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:117)
+	... 26 more
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2017-01-22 19:33:56.416
+!MESSAGE Could not read pom.xml
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not read pom.xml
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readModel(MavenImpl.java:565)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readModel(MavenImpl.java:574)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refreshPhase2(ProjectRegistryManager.java:542)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:498)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:351)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:298)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod.getProjectFacade(MavenBuilder.java:154)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod$1.call(MavenBuilder.java:89)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:176)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:151)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:99)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod.execute(MavenBuilder.java:86)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder.build(MavenBuilder.java:200)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:735)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:301)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:304)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:360)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:383)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: org.apache.maven.model.io.ModelParseException: end tag name </project> must match start tag name <dependencies> from line 37 (position: TEXT seen ...</dependency>\n</project>... @79:11) 
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:122)
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:86)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readModel(MavenImpl.java:563)
+	... 24 more
+Caused by: org.codehaus.plexus.util.xml.pull.XmlPullParserException: end tag name </project> must match start tag name <dependencies> from line 37 (position: TEXT seen ...</dependency>\n</project>... @79:11) 
+	at org.codehaus.plexus.util.xml.pull.MXParser.parseEndTag(MXParser.java:1727)
+	at org.codehaus.plexus.util.xml.pull.MXParser.nextImpl(MXParser.java:1169)
+	at org.codehaus.plexus.util.xml.pull.MXParser.next(MXParser.java:1131)
+	at org.codehaus.plexus.util.xml.pull.MXParser.nextTag(MXParser.java:1118)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.parseModel(MavenXpp3Reader.java:2231)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read(MavenXpp3Reader.java:3845)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read(MavenXpp3Reader.java:595)
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:117)
+	... 26 more
+!SUBENTRY 1 org.eclipse.m2e.core 4 -1 2017-01-22 19:33:56.416
+!MESSAGE Could not read pom.xml
+!STACK 0
+org.apache.maven.model.io.ModelParseException: end tag name </project> must match start tag name <dependencies> from line 37 (position: TEXT seen ...</dependency>\n</project>... @79:11) 
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:122)
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:86)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readModel(MavenImpl.java:563)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readModel(MavenImpl.java:574)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refreshPhase2(ProjectRegistryManager.java:542)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:498)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:351)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:298)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod.getProjectFacade(MavenBuilder.java:154)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod$1.call(MavenBuilder.java:89)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:176)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:151)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:99)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod.execute(MavenBuilder.java:86)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder.build(MavenBuilder.java:200)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:735)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:301)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:304)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:360)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:383)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: org.codehaus.plexus.util.xml.pull.XmlPullParserException: end tag name </project> must match start tag name <dependencies> from line 37 (position: TEXT seen ...</dependency>\n</project>... @79:11) 
+	at org.codehaus.plexus.util.xml.pull.MXParser.parseEndTag(MXParser.java:1727)
+	at org.codehaus.plexus.util.xml.pull.MXParser.nextImpl(MXParser.java:1169)
+	at org.codehaus.plexus.util.xml.pull.MXParser.next(MXParser.java:1131)
+	at org.codehaus.plexus.util.xml.pull.MXParser.nextTag(MXParser.java:1118)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.parseModel(MavenXpp3Reader.java:2231)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read(MavenXpp3Reader.java:3845)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read(MavenXpp3Reader.java:595)
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:117)
+	... 26 more
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:35:11.935
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:35:11.956
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:38:14.313
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:38:14.339
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:38:16.191
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:38:16.207
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:43:46.777
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:43:46.798
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:43:50.886
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:43:50.892
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:45:38.016
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:45:38.086
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:45:44.519
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:45:44.551
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:48:45.958
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:48:46.029
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:53:32.094
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:53:32.096
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:55:10.984
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:55:10.998
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:55:25.121
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:55:25.137
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:55:42.374
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:55:42.384
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:55:57.606
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:55:57.620
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:56:10.935
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:56:10.937
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:58:16.037
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:58:16.040
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:58:24.006
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:58:24.036
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:58:56.664
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:58:56.678
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:59:30.286
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 19:59:30.293
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 20:00:13.041
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 20:00:13.046
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 20:00:52.935
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 20:00:52.959
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 20:00:57.225
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 20:00:57.228
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 20:01:34.258
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 20:01:34.260
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 20:04:20.392
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 20:04:20.406
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 20:05:01.556
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 20:05:01.575
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 20:05:51.416
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 20:05:51.421
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 20:06:03.202
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 20:06:03.204
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 20:06:15.891
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 20:06:15.892
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 20:06:45.959
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-01-22 20:06:45.977
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
