@@ -60,7 +60,7 @@ public class App
 		
 		// Update the result object with min, max and average execution
 		// times
-		System.out.println("**** Sequential Result ****");
+		System.out.println("**** Result ****");
 		sequentialCalculatorResult.updateExecutionTimes();
 		System.out.println("Minimum execution time: " + 
 				sequentialCalculatorResult.getMinExecutionTime());
@@ -68,8 +68,6 @@ public class App
 				sequentialCalculatorResult.getMaxExecutionTime());
 		System.out.println("Average execution time:" +
 				sequentialCalculatorResult.getAvgExecutionTime());
-		
-		// Write result to log
 		logger.info("**** Sequential Calculator Result ****");
 		logger.info("Minimum execution time: " + 
 				sequentialCalculatorResult.getMinExecutionTime());
@@ -85,7 +83,7 @@ public class App
 		// Local variables
 		HashMap<String, Float> hmAvgReadingByStation;
     	HashMap<String, Accumulator> hmReadingsByStationId;
-		Result noLockCalculatorResult = new Result();
+		Result sequentialCalculatorResult = new Result();
 		long lStartTime, lEndTime;
 		NoLockCalculator n1, n2;
 		
@@ -127,11 +125,11 @@ public class App
 	    				hmReadingsByStationId);
 	    		
 	    		lEndTime = System.currentTimeMillis(); // End Timer
-	    		noLockCalculatorResult
+	    		sequentialCalculatorResult
 	    			.addExecutionTime(lEndTime - lStartTime);
 	    		
 	    		System.out.println("**** Cycle " + i + " ****");
-	    		//Util.printAverageTMaxByStation(hmAvgReadingByStation);
+	    		Util.printAverageTMaxByStation(hmAvgReadingByStation);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -147,23 +145,14 @@ public class App
 		
 		// Update the result object with min, max and average execution
 		// times
-		System.out.println("**** No Lock Result ****");
-		noLockCalculatorResult.updateExecutionTimes();
+		System.out.println("**** Result ****");
+		sequentialCalculatorResult.updateExecutionTimes();
 		System.out.println("Minimum execution time: " + 
-				noLockCalculatorResult.getMinExecutionTime());
+				sequentialCalculatorResult.getMinExecutionTime());
 		System.out.println("Maximum execution time: " +
-				noLockCalculatorResult.getMaxExecutionTime());
+				sequentialCalculatorResult.getMaxExecutionTime());
 		System.out.println("Average execution time:" +
-				noLockCalculatorResult.getAvgExecutionTime());
-		
-		// Write result to log
-		logger.info("**** No Lock Calculator Result ****");
-		logger.info("Minimum execution time: " + 
-				noLockCalculatorResult.getMinExecutionTime());
-		logger.info("Maximum execution time: " +
-				noLockCalculatorResult.getMaxExecutionTime());
-		logger.info("Average execution time:" +
-				noLockCalculatorResult.getAvgExecutionTime());
+				sequentialCalculatorResult.getAvgExecutionTime());
 	}
 	
 	private static void executeCoarseLockCalculator(
@@ -171,7 +160,7 @@ public class App
 		// Local variables
 		HashMap<String, Float> hmAvgReadingByStation;
     	HashMap<String, Accumulator> hmReadingsByStationId;
-		Result coarseLockCalculatorResult = new Result();
+		Result sequentialCalculatorResult = new Result();
 		long lStartTime, lEndTime;
 		CoarseLockCalculator c1, c2;
 		
@@ -213,11 +202,11 @@ public class App
 	    				hmReadingsByStationId);
 	    		
 	    		lEndTime = System.currentTimeMillis(); // End Timer
-	    		coarseLockCalculatorResult
+	    		sequentialCalculatorResult
 	    			.addExecutionTime(lEndTime - lStartTime);
 	    		
 	    		System.out.println("**** Cycle " + i + " ****");
-	    		//Util.printAverageTMaxByStation(hmAvgReadingByStation);
+	    		Util.printAverageTMaxByStation(hmAvgReadingByStation);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -233,23 +222,14 @@ public class App
 		
 		// Update the result object with min, max and average execution
 		// times
-		System.out.println("**** Coarse Lock Result ****");
-		coarseLockCalculatorResult.updateExecutionTimes();
+		System.out.println("**** Result ****");
+		sequentialCalculatorResult.updateExecutionTimes();
 		System.out.println("Minimum execution time: " + 
-				coarseLockCalculatorResult.getMinExecutionTime());
+				sequentialCalculatorResult.getMinExecutionTime());
 		System.out.println("Maximum execution time: " +
-				coarseLockCalculatorResult.getMaxExecutionTime());
+				sequentialCalculatorResult.getMaxExecutionTime());
 		System.out.println("Average execution time:" +
-				coarseLockCalculatorResult.getAvgExecutionTime());
-		
-		// Write result to log
-		logger.info("**** Coarse Lock Calculator Result ****");
-		logger.info("Minimum execution time: " + 
-				coarseLockCalculatorResult.getMinExecutionTime());
-		logger.info("Maximum execution time: " +
-				coarseLockCalculatorResult.getMaxExecutionTime());
-		logger.info("Average execution time:" +
-				coarseLockCalculatorResult.getAvgExecutionTime());
+				sequentialCalculatorResult.getAvgExecutionTime());
 	}
 	
 	private static void executeFineLockCalculator(
@@ -257,7 +237,7 @@ public class App
 		// Local variables
 		HashMap<String, Float> hmAvgReadingByStation;
     	HashMap<String, Accumulator> hmReadingsByStationId;
-		Result fineLockCalculatorResult = new Result();
+		Result sequentialCalculatorResult = new Result();
 		long lStartTime, lEndTime;
 		FineLockCalculator f1, f2;
 		
@@ -299,11 +279,11 @@ public class App
 	    				hmReadingsByStationId);
 	    		
 	    		lEndTime = System.currentTimeMillis(); // End Timer
-	    		fineLockCalculatorResult
+	    		sequentialCalculatorResult
 	    			.addExecutionTime(lEndTime - lStartTime);
 	    		
 	    		System.out.println("**** Cycle " + i + " ****");
-	    		//Util.printAverageTMaxByStation(hmAvgReadingByStation);	    		
+	    		Util.printAverageTMaxByStation(hmAvgReadingByStation);	    		
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -319,30 +299,21 @@ public class App
 		
 		// Update the result object with min, max and average execution
 		// times
-		System.out.println("**** Fine Lock Result ****");
-		fineLockCalculatorResult.updateExecutionTimes();
+		System.out.println("**** Result ****");
+		sequentialCalculatorResult.updateExecutionTimes();
 		System.out.println("Minimum execution time: " + 
-				fineLockCalculatorResult.getMinExecutionTime());
+				sequentialCalculatorResult.getMinExecutionTime());
 		System.out.println("Maximum execution time: " +
-				fineLockCalculatorResult.getMaxExecutionTime());
+				sequentialCalculatorResult.getMaxExecutionTime());
 		System.out.println("Average execution time:" +
-				fineLockCalculatorResult.getAvgExecutionTime());
-		
-		// Write result to log
-		logger.info("**** Fine Lock Calculator Result ****");
-		logger.info("Minimum execution time: " + 
-				fineLockCalculatorResult.getMinExecutionTime());
-		logger.info("Maximum execution time: " +
-				fineLockCalculatorResult.getMaxExecutionTime());
-		logger.info("Average execution time:" +
-				fineLockCalculatorResult.getAvgExecutionTime());
+				sequentialCalculatorResult.getAvgExecutionTime());
 	}
 	
 	private static void executeNoSharingCalculator(
 			List<String> lstWeatherData) {
 		// Local variables
 		HashMap<String, Float> hmAvgReadingByStation;
-		Result noSharingCalculatorResult = new Result();
+		Result sequentialCalculatorResult = new Result();
 		long lStartTime, lEndTime;
 		NoSharingCalculator ns1, ns2;
 		
@@ -384,11 +355,11 @@ public class App
 						ns1.getAverageReadingByStationId(lstData);
 				
 				lEndTime = System.currentTimeMillis(); // End Timer
-				noSharingCalculatorResult
+	    		sequentialCalculatorResult
 	    			.addExecutionTime(lEndTime - lStartTime);
 	    		
 				System.out.println("**** Cycle " + i + " ****");
-	    		//Util.printAverageTMaxByStation(hmAvgReadingByStation);	    		
+	    		Util.printAverageTMaxByStation(hmAvgReadingByStation);	    		
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -403,23 +374,14 @@ public class App
 		
 		// Update the result object with min, max and average execution
 		// times
-		System.out.println("**** No Sharing Result ****");
-		noSharingCalculatorResult.updateExecutionTimes();
+		System.out.println("**** Result ****");
+		sequentialCalculatorResult.updateExecutionTimes();
 		System.out.println("Minimum execution time: " + 
-				noSharingCalculatorResult.getMinExecutionTime());
+				sequentialCalculatorResult.getMinExecutionTime());
 		System.out.println("Maximum execution time: " +
-				noSharingCalculatorResult.getMaxExecutionTime());
+				sequentialCalculatorResult.getMaxExecutionTime());
 		System.out.println("Average execution time:" +
-				noSharingCalculatorResult.getAvgExecutionTime());
-		
-		// Write result to log
-		logger.info("**** No Sharing Calculator Result ****");
-		logger.info("Minimum execution time: " + 
-				noSharingCalculatorResult.getMinExecutionTime());
-		logger.info("Maximum execution time: " +
-				noSharingCalculatorResult.getMaxExecutionTime());
-		logger.info("Average execution time:" +
-				noSharingCalculatorResult.getAvgExecutionTime());
+				sequentialCalculatorResult.getAvgExecutionTime());
 	}
 	
 	/**

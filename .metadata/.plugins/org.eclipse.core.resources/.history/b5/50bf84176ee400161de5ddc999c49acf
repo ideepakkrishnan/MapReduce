@@ -69,7 +69,6 @@ public class App
 		System.out.println("Average execution time:" +
 				sequentialCalculatorResult.getAvgExecutionTime());
 		
-		// Write result to log
 		logger.info("**** Sequential Calculator Result ****");
 		logger.info("Minimum execution time: " + 
 				sequentialCalculatorResult.getMinExecutionTime());
@@ -156,7 +155,6 @@ public class App
 		System.out.println("Average execution time:" +
 				noLockCalculatorResult.getAvgExecutionTime());
 		
-		// Write result to log
 		logger.info("**** No Lock Calculator Result ****");
 		logger.info("Minimum execution time: " + 
 				noLockCalculatorResult.getMinExecutionTime());
@@ -241,15 +239,6 @@ public class App
 				coarseLockCalculatorResult.getMaxExecutionTime());
 		System.out.println("Average execution time:" +
 				coarseLockCalculatorResult.getAvgExecutionTime());
-		
-		// Write result to log
-		logger.info("**** Coarse Lock Calculator Result ****");
-		logger.info("Minimum execution time: " + 
-				coarseLockCalculatorResult.getMinExecutionTime());
-		logger.info("Maximum execution time: " +
-				coarseLockCalculatorResult.getMaxExecutionTime());
-		logger.info("Average execution time:" +
-				coarseLockCalculatorResult.getAvgExecutionTime());
 	}
 	
 	private static void executeFineLockCalculator(
@@ -327,15 +316,6 @@ public class App
 				fineLockCalculatorResult.getMaxExecutionTime());
 		System.out.println("Average execution time:" +
 				fineLockCalculatorResult.getAvgExecutionTime());
-		
-		// Write result to log
-		logger.info("**** Fine Lock Calculator Result ****");
-		logger.info("Minimum execution time: " + 
-				fineLockCalculatorResult.getMinExecutionTime());
-		logger.info("Maximum execution time: " +
-				fineLockCalculatorResult.getMaxExecutionTime());
-		logger.info("Average execution time:" +
-				fineLockCalculatorResult.getAvgExecutionTime());
 	}
 	
 	private static void executeNoSharingCalculator(
@@ -410,15 +390,6 @@ public class App
 		System.out.println("Maximum execution time: " +
 				noSharingCalculatorResult.getMaxExecutionTime());
 		System.out.println("Average execution time:" +
-				noSharingCalculatorResult.getAvgExecutionTime());
-		
-		// Write result to log
-		logger.info("**** No Sharing Calculator Result ****");
-		logger.info("Minimum execution time: " + 
-				noSharingCalculatorResult.getMinExecutionTime());
-		logger.info("Maximum execution time: " +
-				noSharingCalculatorResult.getMaxExecutionTime());
-		logger.info("Average execution time:" +
 				noSharingCalculatorResult.getAvgExecutionTime());
 	}
 	
