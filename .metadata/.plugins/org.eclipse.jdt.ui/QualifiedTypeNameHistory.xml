@@ -12,19 +12,21 @@
 <fullyQualifiedTypeName name="java.util.Arrays"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="java.util.Map.Entry"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="com.neu.pdp.AverageCalculator"/>
 <fullyQualifiedTypeName name="java.lang.Thread"/>
 <fullyQualifiedTypeName name="com.neu.pdp.calculators.NoLockCalculator"/>
-<fullyQualifiedTypeName name="com.neu.pdp.calculators.SequentialCalculator"/>
 <fullyQualifiedTypeName name="com.neu.pdp.calculators.CoarseLockCalculator"/>
 <fullyQualifiedTypeName name="com.neu.pdp.calculators.FineLockCalculator"/>
 <fullyQualifiedTypeName name="java.lang.Runnable"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="com.neu.pdp.Util"/>
 <fullyQualifiedTypeName name="com.neu.pdp.calculators.NoSharingCalculator"/>
 <fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="com.neu.pdp.resources.Result"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="com.neu.pdp.resources.Accumulator"/>
+<fullyQualifiedTypeName name="com.neu.pdp.calculators.SequentialCalculator"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="com.neu.pdp.resources.Util"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>

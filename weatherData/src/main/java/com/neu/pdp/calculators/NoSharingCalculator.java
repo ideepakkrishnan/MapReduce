@@ -3,8 +3,6 @@
  */
 package com.neu.pdp.calculators;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +10,7 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.neu.pdp.resources.Accumulator;
 import com.neu.pdp.resources.Util;
 
 /**
@@ -31,14 +30,17 @@ public class NoSharingCalculator implements Runnable {
 	private Thread t;
 	private String threadName;
 	private List<String> lstWeatherData;
-	private HashMap<String, List<Integer>> hmTmaxByStationId;
+	private HashMap<String, Accumulator> hmTmaxByStationId;
+	private boolean addDelay;
 	
 	public NoSharingCalculator(
 			String threadName, 
-			List<String> lstWeatherData) {
+			List<String> lstWeatherData,
+			boolean addDelay) {
 		this.threadName = threadName;
 		this.lstWeatherData = lstWeatherData;
-		this.hmTmaxByStationId = new HashMap<String, List<Integer>>();
+		this.hmTmaxByStationId = new HashMap<String, Accumulator>();
+		this.addDelay = addDelay;
 		logger.info("Creating thread: " + threadName);
 	}
 	
@@ -55,7 +57,7 @@ public class NoSharingCalculator implements Runnable {
 	 * station id 
 	 * @return
 	 */
-	public HashMap<String, List<Integer>> getTMaxReadingsByStation() {
+	public HashMap<String, Accumulator> getTMaxReadingsByStation() {
 		return hmTmaxByStationId;
 	}
 	
@@ -87,13 +89,13 @@ public class NoSharingCalculator implements Runnable {
 	 * value is calculated average TMAX
 	 */
 	public HashMap<String, Float> getAverageReadingByStationId(
-			List<HashMap<String, List<Integer>>> lstData) {
+			List<HashMap<String, Accumulator>> lstData) {
 		logger.info(
 				threadName + 
 				": Entering getAverageReadingByStationId method");
 		
 		// Combine all data into the local data structure
-		for (HashMap<String, List<Integer>> hmItem : lstData) {
+		for (HashMap<String, Accumulator> hmItem : lstData) {
 			combineGroupedData(hmItem);
 		}
 		
@@ -115,17 +117,19 @@ public class NoSharingCalculator implements Runnable {
 	 * readings as value
 	 */
 	private void combineGroupedData(
-			HashMap<String, List<Integer>> hmReadingsByStationId) {
+			HashMap<String, Accumulator> hmReadingsByStationId) {
 		logger.info(threadName + ": Entering combineGroupedData method");
 		
 		// Iterate through each entry and append it to the data structure
 		// in this object
-		for (Map.Entry<String, List<Integer>> entry: 
+		for (Map.Entry<String, Accumulator> entry: 
 			hmReadingsByStationId.entrySet()) {
 			if (hmTmaxByStationId.containsKey(entry.getKey())) {
 				hmTmaxByStationId
 					.get(entry.getKey())
-					.addAll(entry.getValue());
+					.combineValues(
+							entry.getValue().getSum(),
+							entry.getValue().getCount());
 			} else {
 				hmTmaxByStationId.put(entry.getKey(), entry.getValue());
 			}
@@ -160,15 +164,16 @@ public class NoSharingCalculator implements Runnable {
 				// HashMap
 				if (hmTmaxByStationId.containsKey(strArrData[0])) {
 					// Add the current TMAX reading into the list
-					hmTmaxByStationId.get(strArrData[0]).add(
-							Integer.parseInt(strArrData[3]));
+					hmTmaxByStationId.get(strArrData[0]).addValue(
+							Integer.parseInt(strArrData[3]),
+							addDelay);
 				} else {
 					// We need to initialize a new key-value pair
 					// for this new station
 					hmTmaxByStationId.put(
 							strArrData[0], 
-							new ArrayList<Integer>(Arrays.asList(
-									Integer.parseInt(strArrData[3]))));
+							new Accumulator(
+									Integer.parseInt(strArrData[3])));
 				}
 			}
 		}

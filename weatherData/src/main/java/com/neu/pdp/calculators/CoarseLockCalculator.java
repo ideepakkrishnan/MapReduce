@@ -3,13 +3,13 @@
  */
 package com.neu.pdp.calculators;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.neu.pdp.resources.Accumulator;
 
 /**
  * Class containing methods to concurrently process the
@@ -26,15 +26,18 @@ public class CoarseLockCalculator implements Runnable {
 	private Thread t;
 	private String threadName;
 	private List<String> lstWeatherData;
-	private HashMap<String, List<Integer>> hmTmaxByStationId;
+	private HashMap<String, Accumulator> hmTmaxByStationId;
+	private boolean addDelay;
 	
 	public CoarseLockCalculator(
 			String threadName, 
 			List<String> lstWeatherData,
-			HashMap<String, List<Integer>> hmTmaxByStationId) {
+			HashMap<String, Accumulator> hmTmaxByStationId,
+			boolean addDelay) {
 		this.threadName = threadName;
 		this.lstWeatherData = lstWeatherData;
 		this.hmTmaxByStationId = hmTmaxByStationId;
+		this.addDelay = addDelay;
 		logger.info("Creating thread: " + threadName);
 	}
 	
@@ -75,15 +78,16 @@ public class CoarseLockCalculator implements Runnable {
 				// HashMap
 				if (hmTmaxByStationId.containsKey(strArrData[0])) {
 					// Add the current TMAX reading into the list
-					hmTmaxByStationId.get(strArrData[0]).add(
-							Integer.parseInt(strArrData[3]));
+					hmTmaxByStationId.get(strArrData[0]).addValue(
+							Integer.parseInt(strArrData[3]),
+							addDelay);
 				} else {
 					// We need to initialize a new key-value pair
 					// for this new station
 					hmTmaxByStationId.put(
 							strArrData[0], 
-							new ArrayList<Integer>(Arrays.asList(
-									Integer.parseInt(strArrData[3]))));
+							new Accumulator(
+									Integer.parseInt(strArrData[3])));
 				}
 			}
 		}

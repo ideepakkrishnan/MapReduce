@@ -1,0 +1,20 @@
+/**
+ * 
+ */
+package com.neu.pdp.resources;
+
+/**
+ * @author ideepakkrishnan
+ *
+ */
+public class Accumulator {
+	
+	private int sum;
+	private int count;
+	
+	public Accumulator() {
+		sum = 0;
+		count = 0;
+	}
+
+}

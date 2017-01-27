@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.neu.pdp.resources.Accumulator;
 import com.neu.pdp.resources.Result;
 import com.neu.pdp.resources.Util;
 
@@ -24,11 +25,14 @@ public class App
 	private static final Logger logger = LogManager.getLogger(
 			App.class.getName());
 	
+	private static boolean addDelay = false;
+	
 	private static void executeSequentialCalculator(
 			List<String> lstWeatherData) {
 		// Local variables
 		HashMap<String, Float> hmAvgReadingByStation;
 		Result sequentialCalculatorResult = new Result();
+		SequentialCalculator sc;
 		long lStartTime, lEndTime;
 		
 		System.out.println("---------------------");
@@ -39,10 +43,8 @@ public class App
 			logger.info("Executing sequential calculator. Cycle: " + i);
 			
 			lStartTime = System.currentTimeMillis(); // Start Timer
-    		
-			hmAvgReadingByStation = SequentialCalculator.calculate(
-    				lstWeatherData);
-    		
+    		sc = new SequentialCalculator(addDelay);
+			hmAvgReadingByStation = sc.calculate(lstWeatherData);    		
     		lEndTime = System.currentTimeMillis(); // End Timer
     		
     		System.out.println("**** Cycle " + i + " ****");
@@ -72,7 +74,7 @@ public class App
 			List<String> lstWeatherData) {
 		// Local variables
 		HashMap<String, Float> hmAvgReadingByStation;
-    	HashMap<String, List<Integer>> hmReadingsByStationId;
+    	HashMap<String, Accumulator> hmReadingsByStationId;
 		Result sequentialCalculatorResult = new Result();
 		long lStartTime, lEndTime;
 		NoLockCalculator n1, n2;
@@ -87,12 +89,13 @@ public class App
 			lStartTime = System.currentTimeMillis(); // Start Timer
 			
     		hmReadingsByStationId = 
-        			new HashMap<String, List<Integer>>();
+        			new HashMap<String, Accumulator>();
     		
     		n1 = new NoLockCalculator(
     				"Thread 1", 
     				lstWeatherData.subList(0, lstWeatherData.size() / 2),
-    				hmReadingsByStationId);
+    				hmReadingsByStationId,
+    				addDelay);
     		n1.start();
     		
     		n2 = new NoLockCalculator(
@@ -100,7 +103,8 @@ public class App
     				lstWeatherData.subList(
     						(lstWeatherData.size() / 2) + 1, 
     						lstWeatherData.size()), 
-    				hmReadingsByStationId);
+    				hmReadingsByStationId,
+    				addDelay);
     		n2.start();
     		
     		// Wait for both the threads to complete execution
@@ -147,7 +151,7 @@ public class App
 			List<String> lstWeatherData) {
 		// Local variables
 		HashMap<String, Float> hmAvgReadingByStation;
-    	HashMap<String, List<Integer>> hmReadingsByStationId;
+    	HashMap<String, Accumulator> hmReadingsByStationId;
 		Result sequentialCalculatorResult = new Result();
 		long lStartTime, lEndTime;
 		CoarseLockCalculator c1, c2;
@@ -162,12 +166,13 @@ public class App
 			lStartTime = System.currentTimeMillis(); // Start Timer
     		
     		hmReadingsByStationId = 
-        			new HashMap<String, List<Integer>>();
+        			new HashMap<String, Accumulator>();
     		
     		c1 = new CoarseLockCalculator(
     				"Thread 1", 
     				lstWeatherData.subList(0, lstWeatherData.size() / 2),
-    				hmReadingsByStationId);
+    				hmReadingsByStationId,
+    				addDelay);
     		c1.start();
     		
     		c2 = new CoarseLockCalculator(
@@ -175,7 +180,8 @@ public class App
     				lstWeatherData.subList(
     						(lstWeatherData.size() / 2) + 1, 
     						lstWeatherData.size()), 
-    				hmReadingsByStationId);
+    				hmReadingsByStationId,
+    				addDelay);
     		c2.start();
     		
     		// Wait for both the threads to complete execution
@@ -222,7 +228,7 @@ public class App
 			List<String> lstWeatherData) {
 		// Local variables
 		HashMap<String, Float> hmAvgReadingByStation;
-    	HashMap<String, List<Integer>> hmReadingsByStationId;
+    	HashMap<String, Accumulator> hmReadingsByStationId;
 		Result sequentialCalculatorResult = new Result();
 		long lStartTime, lEndTime;
 		FineLockCalculator f1, f2;
@@ -237,12 +243,13 @@ public class App
 			lStartTime = System.currentTimeMillis(); // Start Timer
     		
     		hmReadingsByStationId = 
-        			new HashMap<String, List<Integer>>();
+        			new HashMap<String, Accumulator>();
     		
     		f1 = new FineLockCalculator(
     				"Thread 1", 
     				lstWeatherData.subList(0, lstWeatherData.size() / 2),
-    				hmReadingsByStationId);
+    				hmReadingsByStationId,
+    				addDelay);
     		f1.start();
     		
     		f2 = new FineLockCalculator(
@@ -250,7 +257,8 @@ public class App
     				lstWeatherData.subList(
     						(lstWeatherData.size() / 2) + 1, 
     						lstWeatherData.size()), 
-    				hmReadingsByStationId);
+    				hmReadingsByStationId,
+    				addDelay);
     		f2.start();
     		
     		// Wait for both the threads to complete execution
@@ -312,14 +320,16 @@ public class App
     		
     		ns1 = new NoSharingCalculator(
     				"Thread 1", 
-    				lstWeatherData.subList(0, lstWeatherData.size() / 2));
+    				lstWeatherData.subList(0, lstWeatherData.size() / 2),
+    				addDelay);
     		ns1.start();
     		
     		ns2 = new NoSharingCalculator(
     				"Thread 2", 
     				lstWeatherData.subList(
     						(lstWeatherData.size() / 2) + 1, 
-    						lstWeatherData.size()));
+    						lstWeatherData.size()),
+    				addDelay);
     		ns2.start();
     		
     		// Wait for both the threads to complete execution
@@ -329,8 +339,8 @@ public class App
 				
 				// Combine the data from all threads into primary
 				// thread (ns1 in our case)
-				List<HashMap<String,List<Integer>>> lstData =
-						new ArrayList<HashMap<String,List<Integer>>>();
+				List<HashMap<String,Accumulator>> lstData =
+						new ArrayList<HashMap<String,Accumulator>>();
 				lstData.add(ns2.getTMaxReadingsByStation());
 				
 				hmAvgReadingByStation = 
@@ -368,15 +378,29 @@ public class App
 	
 	/**
 	 * Main method for this project
-	 * @param args
+	 * @param args [0] - Path of the file containing weather data,
+	 * [1] - Boolean flag indicating whether the timer needs to be
+	 * extended with fibonacci calculator
 	 */
     public static void main( String[] args )
     {
     	logger.info("Entering the main method");
     	
     	// Local variables
-    	String path = "/home/ideepakkrishnan/Downloads/1763.csv.gz";
-    	List<String> lstWeatherData = Util.readCSVFile(path);    	
+    	if (args.length == 0 || args.length > 2) {
+    		logger.error("Invalid arguments");
+    		System.out.println("Your are missing a required argument. "
+    				+ "Expected format: java -jar <jar path> "
+    				+ "<weather data file path> "
+    				+ "<[optional] add delay flag (true/false)>");
+    		System.exit(-1);
+    	}
+    	else if (args.length == 2) {
+    		logger.info("Adding delay to the calculation");
+    		addDelay = Boolean.parseBoolean(args[1]);
+    	}
+    	
+    	List<String> lstWeatherData = Util.readCSVFile(args[0]);
     	
     	if (!lstWeatherData.isEmpty() &&
     			lstWeatherData.size() > 0) {
@@ -394,6 +418,8 @@ public class App
     		
     		// Step 5: No sharing version
     		executeNoSharingCalculator(lstWeatherData);
+    	} else {
+    		System.out.println("Empty file supplied");
     	}
     	
     	logger.info("Exiting the main method");

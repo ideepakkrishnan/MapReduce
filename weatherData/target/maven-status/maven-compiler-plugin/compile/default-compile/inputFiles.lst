@@ -5,4 +5,5 @@
 /home/ideepakkrishnan/workspace/weatherData/src/main/java/com/neu/pdp/calculators/SequentialCalculator.java
 /home/ideepakkrishnan/workspace/weatherData/src/main/java/com/neu/pdp/calculators/NoSharingCalculator.java
 /home/ideepakkrishnan/workspace/weatherData/src/main/java/com/neu/pdp/calculators/NoLockCalculator.java
+/home/ideepakkrishnan/workspace/weatherData/src/main/java/com/neu/pdp/resources/Accumulator.java
 /home/ideepakkrishnan/workspace/weatherData/src/main/java/com/neu/pdp/App.java

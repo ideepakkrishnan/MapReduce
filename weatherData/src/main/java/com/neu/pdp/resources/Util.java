@@ -9,7 +9,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,77 +72,13 @@ public class Util {
 	/**
 	 * Calculates the average of an array of integers and returns
 	 * it to the caller
-	 * @param values A list of Integer-s
+	 * @param accumulator A data structure containing the sum and 
+	 * count of temparature readings
 	 * @return Average value as a float
 	 */
-	public static float findAverage(List<Integer> values) {
-		logger.info("Entering findAverage method");
-		
-		// Local variables
-		float fAverageValue = 0;
-		
-		// Calculate the average
-		if (values.size() > 0) {			
-			for (int iCurrVal : values) {
-				fAverageValue += iCurrVal;
-			}
-			
-			fAverageValue /= values.size();
-		}
-		
-		// Returning the result
-		logger.info("Returning from findAverage method");
-		return fAverageValue;
-	}
-	
-	/**
-	 * Filters out the TMAX readings, groups them by station id and
-	 * returns this data as a HashMap
-	 * @param lstWeatherData List of String-s where each entry is
-	 * in the format: station id, date, observation type, observation
-	 * value, observation time
-	 * @return A HashMap with station id as the key and a List of
-	 * Integer-s that represent the TMAX readings for the station
-	 * as value
-	 */
-	public static HashMap<String, List<Integer>> getTMaxReadingsByStation(
-			List<String> lstWeatherData) {
-		logger.info("Entering getTMaxReadingsByStation method");
-		
-		// Local variables
-		String[] strArrData;
-		HashMap<String, List<Integer>> hmFilteredData = 
-				new HashMap<String, List<Integer>>();		
-		
-		// Iterate through the list of Strings and process each one
-		for (String strCurrReading: lstWeatherData) {
-			strArrData = strCurrReading.split(",");
-			
-			// The array follows the format:
-			// [station id, date, observation type, observation
-			//  value, observation time]
-			
-			if (strArrData[2].equals("TMAX") && 
-					!strArrData[3].isEmpty()) {
-				// Check if the station id already exists in the
-				// HashMap
-				if (hmFilteredData.containsKey(strArrData[0])) {
-					// Add the current TMAX reading into the list
-					hmFilteredData.get(strArrData[0]).add(
-							Integer.parseInt(strArrData[3]));
-				} else {
-					// We need to initialize a new key-value pair
-					// for this new station
-					hmFilteredData.put(
-							strArrData[0], 
-							new ArrayList<Integer>(Arrays.asList(
-									Integer.parseInt(strArrData[3]))));
-				}
-			}
-		}
-		
-		logger.info("Returning from getTMaxReadingsByStation method");
-		return hmFilteredData;
+	public static float findAverage(Accumulator accumulator) {
+		logger.info("Calculating average and returning from findAverage method");
+		return (float) accumulator.getSum() / accumulator.getCount();
 	}
 	
 	/**
@@ -155,7 +90,7 @@ public class Util {
 	 * value is calculated average TMAX value
 	 */
 	public static HashMap<String, Float> getAverageTMaxByStation(
-			HashMap<String, List<Integer>> hmReadingsByStation) {
+			HashMap<String, Accumulator> hmReadingsByStation) {
 		logger.info("Entering getAverageTMaxByStation method");
 		
 		// Local variables
@@ -163,7 +98,7 @@ public class Util {
 				new HashMap<String, Float>();
 		
 		// Process each station
-		for (Map.Entry<String, List<Integer>> entry: 
+		for (Map.Entry<String, Accumulator> entry: 
 			hmReadingsByStation.entrySet()) {
 			hmAvgReadingByStation.put(
 					entry.getKey(), 
@@ -270,5 +205,37 @@ public class Util {
 		
 		logger.info("Returning from findAverage method");
 		return (lSum == null) ? lSum : (lSum / data.size());
+	}
+	
+	/**
+	 * Generates a fibonacci series of specified length and
+	 * returns it as a list of integers to the caller
+	 * @param size Required length of the sequence
+	 * @return A list of integers storing values in the sequence
+	 */
+	public static List<Integer> generateFibonacciSequence(int size) {
+		logger.info("Entering generateFibonacciSequence method");
+		List<Integer> series = new ArrayList<Integer>();
+		int first = 0;
+		int second = 1;
+		if (size == 1) {
+			series.add(first);
+		} else if (size >= 1) {
+			fibonacci(series, first, second, size);
+		}
+		
+		logger.info("Returning from generateFibonacciSequence method");
+		return series;
+	}
+	
+	private static void fibonacci(
+			List<Integer> series, 
+			int first, 
+			int second, 
+			int count) {
+		if (count > 0) {
+			series.add(first + second);
+			fibonacci(series, second, first + second, count - 1);
+		}
 	}
 }

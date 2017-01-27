@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package com.neu.pdp.resources;
+
+/**
+ * @author ideepakkrishnan
+ *
+ */
+public class Accumulator {
+
+}
