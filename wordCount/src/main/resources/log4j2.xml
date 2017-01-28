@@ -3,7 +3,7 @@
 <Configuration status="DEBUG">
 
   <Properties>
-    <Property name="log-path">/home/ideepakkrishnan</Property>
+    <Property name="log-path">/home/ideepakkrishnan/Documents</Property>
   </Properties>
   
   <Appenders>
@@ -27,7 +27,7 @@
   <Loggers>
     <Root level="all" >
       <AppenderRef ref="info"/>
-      <AppenderRef ref="trace"/>
+      <!--AppenderRef ref="trace"/-->
     </Root>
   </Loggers>
   

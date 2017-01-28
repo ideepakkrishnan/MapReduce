@@ -15,8 +15,11 @@ import com.neu.pdp.mapReduce.IntSumReducer;
 import com.neu.pdp.mapReduce.TokenizerMapper;
 
 /**
+ * Course: CS6240 - Parallel Data Processing
+ * Homework 1 - Problem 2: Word Count
  * The NameNode / Master (driver class)
- * @author ideepakkrishnan
+ * @author Deepak Krishnan
+ * @email krishnan.d@husky.neu.edu
  */
 public class App 
 {
@@ -40,7 +43,7 @@ public class App
 	        FileOutputFormat.setOutputPath(job, new Path(args[1]));
 	        System.exit(job.waitForCompletion(true) ? 0 : 1);
     	} catch (Exception e) {
-    		e.printStackTrace();
+    		logger.error(e.getMessage());
     	}
         
         logger.info("Exiting main method");

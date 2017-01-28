@@ -77,7 +77,6 @@ public class Util {
 	 * @return Average value as a float
 	 */
 	public static float findAverage(Accumulator accumulator) {
-		logger.info("Calculating average and returning from findAverage method");
 		return (float) accumulator.getSum() / accumulator.getCount();
 	}
 	
@@ -211,31 +210,16 @@ public class Util {
 	 * Generates a fibonacci series of specified length and
 	 * returns it as a list of integers to the caller
 	 * @param size Required length of the sequence
-	 * @return A list of integers storing values in the sequence
+	 * @return The next number in the sequence
 	 */
-	public static List<Integer> generateFibonacciSequence(int size) {
-		logger.info("Entering generateFibonacciSequence method");
-		List<Integer> series = new ArrayList<Integer>();
-		int first = 0;
-		int second = 1;
-		if (size == 1) {
-			series.add(first);
-		} else if (size >= 1) {
-			fibonacci(series, first, second, size);
+	public static int fibonacci(int n) {
+		if (n == 0) {
+			return 0;
+		} else if (n == 1) {
+			return 1;
+		} else {
+			return fibonacci(n - 1) + fibonacci(n - 2);
 		}
-		
-		logger.info("Returning from generateFibonacciSequence method");
-		return series;
 	}
 	
-	private static void fibonacci(
-			List<Integer> series, 
-			int first, 
-			int second, 
-			int count) {
-		if (count > 0) {
-			series.add(first + second);
-			fibonacci(series, second, first + second, count - 1);
-		}
-	}
 }
