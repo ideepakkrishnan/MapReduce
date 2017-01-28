@@ -17,11 +17,8 @@ import com.neu.pdp.calculators.NoLockCalculator;
 import com.neu.pdp.calculators.NoSharingCalculator;
 
 /**
- * CS 6240 - Parallel Data Processing
- * Assignment 1 - Problem 1: Average TMAX calculator
  * Contains the calls to all versions of the program
- * @author Deepak Krishnan
- * @email krishnan.d@husky.neu.edu
+ * @author ideepakkrishnan
  */
 public class App 
 {
