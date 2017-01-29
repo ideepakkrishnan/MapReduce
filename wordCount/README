@@ -1,0 +1,57 @@
+-------------------------------------------------------
+CS 6240 - Parallel Data Processing
+Homework 1 > Problem 2: Hadoop Word Count Example
+Author: Deepak Krishnan
+-------------------------------------------------------
+
+Run Instructions
+----------------
+
+Local Machine: 
+(Pre-requisite: You have configured hadoop in your machine)
+
+1. Build the jar file by executing the command 'mvn clean package' in terminal. (You will need the name of this jar file in Step 6)
+2. Go to the root of your hadoop installation
+3. Run the following commands in order:
+   - hdfs namenode -format
+   - sbin/start-dfs.sh
+4. Now create the required directory structure inside HDFS through the following commands
+   - hdfs dfs -mkdir /user
+   - hdfs dfs -mkdir /user/john
+   - hdfs dfs -mkdir /user/john/wordCount
+   - hdfs dfs -mkdir /user/john/wordCount/input
+   - hdfs dfs -mkdir /user/john/wordCount/output
+5. Copy the input files into HDFS file system
+   - hdfs fs -put some-file-name /user/john/wordCount/input
+6. Execute the word count program by running the following command:
+   - hadoop jar generated-jar-name /user/john/wordCount/input /user/john/wordCount/output
+7. To see the generated files, run 'hdfs fs -ls /user/john/wordCount/output'
+8. To see the contents of a generated file, run 'hdfs fs -cat /user/john/wordCount/output/part-r-00000'
+
+AWS:
+1. Build the jar file by executing the command 'mvn clean package' in terminal
+2. Open AWS S3 web UI and create a bucket and the following folder structure:
+   - some-bucket-name/wordCount
+   - some-bucket-name/wordCount/input
+   - some-bucket-name/wordCount/output
+   - some-bucket-name/logs
+3. Assuming that you have configured AWS CLI in your machine, use the following steps to copy the packaged jar and input files over to s3:
+   - aws s3 cp my-jar.jar s3://some-bucket-name/wordCount/
+   - aws s3 cp file01 s3://some-bucket-name/wordCount/input/
+4. Go to EMR Console and create a cluster with the following parameters:
+   - Set Log location to: s3://some-bucket-name/logs
+   - Select 'Launch mode' of 'Step execution'
+   - Select 'Step type' to 'Custom JAR'
+   - Click configure button. Select the JAR. Also, set the Hadoop program command line arguments to include your: 
+      - s3://some-bucket-name/wordCount/input
+      - s3://some-bucket-name/wordCount/output
+5. Choose the latest release of emr stack.
+6. Select 'm4.large' for the Instance type and set the number of instances as 3.
+7. Click 'Create Cluster'.
+
+This should execute the program in EMR and give you the results. 
+
+After successfull termination, you may execute the following AWS CLI command to copy the output to your local machine:
+ - mkdir output
+ - aws s3 sync s3://some-bucket-name/wordCount/output output
+
