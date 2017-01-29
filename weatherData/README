@@ -1,42 +1,17 @@
-####################################
+-------------------------------------------------------
 CS 6240 - Parallel Data Processing
-
-Homework 1 > Problem 1
-Calculating average TMAX
-
+Homework 1 > Problem 1: Calculating average TMAX
 Author: Deepak Krishnan
-Email: krishnan.d@husky.neu.edu
-####################################
-Important information
+-------------------------------------------------------
 
-The AWS execution was done on two m4.large core servers.
+Note: If you want to generate the log files, update the log-path property in src/main/resources/log4j2.xml
 
-####################################
-Deliverables:
+-------------------------------------------------------
 
-Report location:
-Report/HW1_Report.pdf
+Run Instructions: 
 
-Wordcount source code:
-wordcount/wordcount/*
-
-Wordcount controller and syslog:
-wordcount/aws_log/*
-
-Wordcount result file:
-wordcount/output/*
-
-Source code for Sequential and parallel version:
-Programs/*
-
-#####################################
-Run Instructions:
-1. Copy the input file 1912.csv to the current directory.
-2. Run "make all" to run PART B program without the fibonacci function delay. 
-3. Run "make all_fibo" to compile and run PART C program with fibonacci function delay.
-4. Run "make clean" to clear the generated class files and log files.
-5. Each parallel/sequential program generates its log file in the directory where it resides.
-
-#####################################
-NOTE:
-Please note Makefile is not integrated to with the wordcount program.
+1. Open Makefile and edit the following entries:
+   - param.path : Enter the path to input file which is in gzip format
+   - param.use_fibonacci: Value must be 'true' (without quotes) if the Fibonacci delay function needs to be executed. If not, enter 'false'. 
+2. Open terminal and run the command 'make calculate' to execute all versions of temperature calculator 
+3. Run the 'make clean' to clear all the generated class and jar files.
