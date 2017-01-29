@@ -18,10 +18,10 @@ import com.neu.pdp.resources.Accumulator;
  * that stores the processed data.
  * @author ideepakkrishnan
  */
-public class FineLockCalculator implements Runnable {
+public class CoarseLockCalculator implements Runnable {
 	
 	private static final Logger logger = LogManager.getLogger(
-			FineLockCalculator.class.getName());
+			CoarseLockCalculator.class.getName());
 	
 	private Thread t;
 	private String threadName;
@@ -29,7 +29,7 @@ public class FineLockCalculator implements Runnable {
 	private HashMap<String, Accumulator> hmTmaxByStationId;
 	private boolean addDelay;
 	
-	public FineLockCalculator(
+	public CoarseLockCalculator(
 			String threadName, 
 			List<String> lstWeatherData,
 			HashMap<String, Accumulator> hmTmaxByStationId,
@@ -56,7 +56,7 @@ public class FineLockCalculator implements Runnable {
 	 * comma separated in the format: station id, date, observation
 	 * type, observation value, observation time
 	 */
-	private void groupTMaxReadingsByStation() {
+	private synchronized void groupTMaxReadingsByStation() {
 		logger.info(
 				threadName + 
 				": Entering groupTMaxReadingsByStation method");
@@ -78,9 +78,7 @@ public class FineLockCalculator implements Runnable {
 				// HashMap
 				if (hmTmaxByStationId.containsKey(strArrData[0])) {
 					// Add the current TMAX reading into the list
-					hmTmaxByStationId
-						.get(strArrData[0])
-						.addValueSynchronously(
+					hmTmaxByStationId.get(strArrData[0]).addValue(
 							Integer.parseInt(strArrData[3]),
 							addDelay);
 				} else {
@@ -90,7 +88,7 @@ public class FineLockCalculator implements Runnable {
 							strArrData[0], 
 							new Accumulator(
 									Integer.parseInt(strArrData[3])));
-				}				
+				}
 			}
 		}
 		

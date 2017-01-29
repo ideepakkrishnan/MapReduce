@@ -65,21 +65,6 @@ public class Accumulator {
 	}
 	
 	/**
-	 * Adds a new value to the running sum synchronously 
-	 * @param value
-	 * @param addFibonacci
-	 */
-	public synchronized void addValueSynchronously(
-			int value, boolean addFibonacci) {
-		this.sum += value;
-		this.count += 1;
-		
-		if (addFibonacci) {
-			Util.fibonacci(17);
-		}
-	}
-	
-	/**
 	 * Adds the values passed in as arguments to the
 	 * local sum and count fields
 	 * @param sum The value to be added to sum

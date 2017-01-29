@@ -76,19 +76,21 @@ public class CoarseLockCalculator implements Runnable {
 					!strArrData[3].isEmpty()) {
 				// Check if the station id already exists in the
 				// HashMap
-				if (hmTmaxByStationId.containsKey(strArrData[0])) {
-					// Add the current TMAX reading into the list
-					hmTmaxByStationId.get(strArrData[0]).addValue(
-							Integer.parseInt(strArrData[3]),
-							addDelay);
-				} else {
-					// We need to initialize a new key-value pair
-					// for this new station
-					hmTmaxByStationId.put(
-							strArrData[0], 
-							new Accumulator(
-									Integer.parseInt(strArrData[3])));
-				}
+				synchronized (hmTmaxByStationId) {
+					if (hmTmaxByStationId.containsKey(strArrData[0])) {
+						// Add the current TMAX reading into the list
+						hmTmaxByStationId.get(strArrData[0]).addValue(
+								Integer.parseInt(strArrData[3]),
+								addDelay);
+					} else {
+						// We need to initialize a new key-value pair
+						// for this new station
+						hmTmaxByStationId.put(
+								strArrData[0], 
+								new Accumulator(
+										Integer.parseInt(strArrData[3])));
+					}
+				}				
 			}
 		}
 		
