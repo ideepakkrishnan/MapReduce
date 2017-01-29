@@ -3,7 +3,7 @@
 <Configuration status="DEBUG">
 
   <Properties>
-    <Property name="log-path">/home/ideepakkrishnan</Property>
+    <Property name="log-path">/home/ideepakkrishnan/Documents</Property>
   </Properties>
   
   <Appenders>

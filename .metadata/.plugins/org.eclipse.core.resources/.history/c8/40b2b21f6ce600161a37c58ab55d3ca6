@@ -7,7 +7,7 @@
   </Properties>
   
   <Appenders>
-    <RollingFile name="info" fileName="${log-path}/wordCount.log"
+    <RollingFile name="info" fileName="${log-path}/weatherData.log"
                  filePattern="${log-path}/wordCount-%d{yyyy-MM-dd}-%i.log">
          <Filters>
             <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="NEUTRAL"/>
@@ -27,7 +27,7 @@
   <Loggers>
     <Root level="all" >
       <AppenderRef ref="info"/>
-      <AppenderRef ref="trace"/>
+      <!--AppenderRef ref="trace"/-->
     </Root>
   </Loggers>
   
