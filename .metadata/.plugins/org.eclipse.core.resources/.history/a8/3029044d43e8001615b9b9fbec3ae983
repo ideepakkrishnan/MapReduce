@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package com.neu.pdp.noCombinerAggregator;
+
+/**
+ * @author ideepakkrishnan
+ *
+ */
+public class IntPairSumReducer {
+
+}

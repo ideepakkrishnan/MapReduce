@@ -15,13 +15,8 @@ import org.apache.hadoop.io.Writable;
  * @author ideepakkrishnan
  */
 public class IntPair implements Writable {
-	private int first;
-	private int second;
-	
-	public IntPair() {
-		first = 0;
-		second = 0;
-	}
+	private int first = 0;
+	private int second = 0;
 	
 	/**
 	 * Overloaded Constructor
@@ -58,16 +53,6 @@ public class IntPair implements Writable {
 	 * @param second the second to set
 	 */
 	public void setSecond(int second) {
-		this.second = second;
-	}
-	
-	/**
-	 * Update the values stored in local variables
-	 * @param first Integer
-	 * @param second Integer
-	 */
-	public void set(int first, int second) {
-		this.first = first;
 		this.second = second;
 	}
 

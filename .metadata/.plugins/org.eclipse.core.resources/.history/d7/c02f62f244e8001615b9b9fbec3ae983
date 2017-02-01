@@ -11,7 +11,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.neu.pdp.noCombinerAggregator.IntPairSumReducer;
-import com.neu.pdp.noCombinerAggregator.TokenizerMapper;
 
 /**
  * Hello world!
@@ -28,7 +27,7 @@ public class App
         
     	try {
 	    	Configuration conf = new Configuration();
-	        Job job = Job.getInstance(conf, "Climate Analysis");
+	        Job job = Job.getInstance(conf, "word count");
 	        job.setJarByClass(App.class);
 	        job.setMapperClass(TokenizerMapper.class);
 	        job.setCombinerClass(IntPairSumReducer.class);

@@ -25,8 +25,22 @@
 <fullyQualifiedTypeName name="com.neu.pdp.resources.Accumulator"/>
 <fullyQualifiedTypeName name="com.neu.pdp.calculators.SequentialCalculator"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="com.neu.pdp.resources.Util"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Mapper"/>
+<fullyQualifiedTypeName name="java.lang.Object"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.IntWritable"/>
+<fullyQualifiedTypeName name="java.util.StringTokenizer"/>
+<fullyQualifiedTypeName name="com.sun.jersey.spi.inject.InjectableProviderContext.InjectableScopePair"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.WritableComparable"/>
+<fullyQualifiedTypeName name="java.lang.Override"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.Writable"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Reducer"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.Text"/>
+<fullyQualifiedTypeName name="com.neu.pdp.resources.IntPair"/>
+<fullyQualifiedTypeName name="java.io.IOException"/>
+<fullyQualifiedTypeName name="com.neu.pdp.noCombinerAggregator.IntPairSumReducer"/>
+<fullyQualifiedTypeName name="com.neu.pdp.noCombinerAggregator.TokenizerMapper"/>
 </qualifiedTypeNameHistroy>

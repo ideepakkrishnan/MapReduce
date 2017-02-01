@@ -60,16 +60,6 @@ public class IntPair implements Writable {
 	public void setSecond(int second) {
 		this.second = second;
 	}
-	
-	/**
-	 * Update the values stored in local variables
-	 * @param first Integer
-	 * @param second Integer
-	 */
-	public void set(int first, int second) {
-		this.first = first;
-		this.second = second;
-	}
 
 	public void readFields(DataInput in) throws IOException {
 		first = in.readInt();
