@@ -5,7 +5,6 @@
 <fullyQualifiedTypeName name="java.io.BufferedReader"/>
 <fullyQualifiedTypeName name="java.io.InputStreamReader"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="org.apache.logging.log4j.core.Logger"/>
 <fullyQualifiedTypeName name="org.apache.logging.log4j.Logger"/>
 <fullyQualifiedTypeName name="org.apache.logging.log4j.LogManager"/>
@@ -38,9 +37,10 @@
 <fullyQualifiedTypeName name="org.apache.hadoop.io.Writable"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Reducer"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.io.Text"/>
-<fullyQualifiedTypeName name="com.neu.pdp.resources.IntPair"/>
 <fullyQualifiedTypeName name="java.io.IOException"/>
 <fullyQualifiedTypeName name="com.neu.pdp.noCombinerAggregator.IntPairSumReducer"/>
 <fullyQualifiedTypeName name="com.neu.pdp.noCombinerAggregator.TokenizerMapper"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.Text"/>
+<fullyQualifiedTypeName name="com.neu.pdp.resources.IntPair"/>
 </qualifiedTypeNameHistroy>

@@ -34,7 +34,7 @@ public class App
 	        job.setMapperClass(TokenizerMapper.class);
 	        job.setMapOutputKeyClass(Text.class);
 	        job.setMapOutputValueClass(IntPair.class);
-	        //job.setCombinerClass(IntPairSumReducer.class);
+	        job.setCombinerClass(IntPairSumReducer.class);
 	        job.setReducerClass(IntPairSumReducer.class);
 	        job.setOutputKeyClass(Text.class);
 	        job.setOutputValueClass(Text.class);

@@ -14,9 +14,9 @@ import com.neu.pdp.resources.IntPair;
  * @author ideepakkrishnan
  *
  */
-public class IntPairSumReducer extends Reducer<Text, IntPair, Text, Text> {
+public class IntPairSumReducer extends Reducer<Text, IntPair, Text, IntPair> {
 	
-	private Text result = new Text();
+	private IntPair result = new IntPair();
 	
 	public void reduce(
 			Text key, 
@@ -38,10 +38,9 @@ public class IntPairSumReducer extends Reducer<Text, IntPair, Text, Text> {
 			}
 		}
 		
-		result = new Text(
-				"Avg TMIN: " + String.valueOf((tminCount == 0) ? 0 : tminSum / tminCount) + 
-				", Avg TMAX: " + String.valueOf((tmaxCount == 0) ? 0 : tmaxSum / tmaxCount));
-		
+		result.set(
+				(tminCount == 0) ? 0 : tminSum / tminCount, 
+				(tmaxCount == 0) ? 0 : tmaxSum / tmaxCount);
 		context.write(key, result);
 	}
 

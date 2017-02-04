@@ -34,10 +34,10 @@ public class App
 	        job.setMapperClass(TokenizerMapper.class);
 	        job.setMapOutputKeyClass(Text.class);
 	        job.setMapOutputValueClass(IntPair.class);
-	        //job.setCombinerClass(IntPairSumReducer.class);
+	        job.setCombinerClass(IntPairSumReducer.class);
 	        job.setReducerClass(IntPairSumReducer.class);
 	        job.setOutputKeyClass(Text.class);
-	        job.setOutputValueClass(Text.class);
+	        job.setOutputValueClass(IntWritable.class);
 	        FileInputFormat.addInputPath(job, new Path(args[0]));
 	        FileOutputFormat.setOutputPath(job, new Path(args[1]));
 	        System.exit(job.waitForCompletion(true) ? 0 : 1);

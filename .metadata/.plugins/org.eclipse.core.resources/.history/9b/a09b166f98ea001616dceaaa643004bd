@@ -27,6 +27,7 @@ public class IntPairSumReducer extends Reducer<Text, IntPair, Text, Text> {
 		int tminCount = 0;
 		int tmaxSum = 0;
 		int tmaxCount = 0;
+		Text txtResult;
 		
 		for (IntPair val : values) {
 			if (val.getFirst() == 0) {
@@ -38,8 +39,7 @@ public class IntPairSumReducer extends Reducer<Text, IntPair, Text, Text> {
 			}
 		}
 		
-		result = new Text(
-				"Avg TMIN: " + String.valueOf((tminCount == 0) ? 0 : tminSum / tminCount) + 
+		result = new Text("Avg TMIN: " + String.valueOf((tminCount == 0) ? 0 : tminSum / tminCount) +
 				", Avg TMAX: " + String.valueOf((tmaxCount == 0) ? 0 : tmaxSum / tmaxCount));
 		
 		context.write(key, result);
