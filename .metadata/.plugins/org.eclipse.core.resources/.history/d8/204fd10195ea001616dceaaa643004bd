@@ -30,17 +30,15 @@ public class IntPairSumReducer extends Reducer<Text, IntPair, Text, IntPair> {
 		
 		for (IntPair val : values) {
 			if (val.getFirst() == 0) {
-				tminCount += 1;
+				tminCount++;
 				tminSum += val.getSecond();
 			} else if (val.getFirst() == 1) {
-				tmaxCount += 1;
+				tmaxCount++;
 				tmaxSum += val.getSecond();
 			}
 		}
 		
-		result.set(
-				(tminCount == 0) ? 0 : tminSum / tminCount, 
-				(tmaxCount == 0) ? 0 : tmaxSum / tmaxCount);
+		result.set(tminSum / tminCount, tmaxSum / tmaxCount);
 		context.write(key, result);
 	}
 

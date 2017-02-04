@@ -12,7 +12,6 @@ import org.apache.logging.log4j.Logger;
 
 import com.neu.pdp.noCombinerAggregator.IntPairSumReducer;
 import com.neu.pdp.noCombinerAggregator.TokenizerMapper;
-import com.neu.pdp.resources.IntPair;
 
 /**
  * Hello world!
@@ -32,8 +31,6 @@ public class App
 	        Job job = Job.getInstance(conf, "Climate Analysis");
 	        job.setJarByClass(App.class);
 	        job.setMapperClass(TokenizerMapper.class);
-	        job.setMapOutputKeyClass(Text.class);
-	        job.setMapOutputValueClass(IntPair.class);
 	        job.setCombinerClass(IntPairSumReducer.class);
 	        job.setReducerClass(IntPairSumReducer.class);
 	        job.setOutputKeyClass(Text.class);

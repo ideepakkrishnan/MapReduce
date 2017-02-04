@@ -14,7 +14,7 @@ import com.neu.pdp.resources.IntPair;
  * @author ideepakkrishnan
  *
  */
-public class IntPairSumReducer extends Reducer<Text, IntPair, Text, IntPair> {
+public class IntPairSumReducer extends Reducer<Text, IntPair, Text, Text> {
 	
 	private IntPair result = new IntPair();
 	
