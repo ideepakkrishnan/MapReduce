@@ -9,8 +9,6 @@
 <fullyQualifiedTypeName name="org.apache.logging.log4j.Logger"/>
 <fullyQualifiedTypeName name="org.apache.logging.log4j.LogManager"/>
 <fullyQualifiedTypeName name="java.util.Arrays"/>
-<fullyQualifiedTypeName name="java.util.Map"/>
-<fullyQualifiedTypeName name="java.util.Map.Entry"/>
 <fullyQualifiedTypeName name="com.neu.pdp.AverageCalculator"/>
 <fullyQualifiedTypeName name="java.lang.Thread"/>
 <fullyQualifiedTypeName name="com.neu.pdp.calculators.NoLockCalculator"/>
@@ -26,7 +24,6 @@
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="com.neu.pdp.resources.Util"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Mapper"/>
 <fullyQualifiedTypeName name="java.lang.Object"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.io.IntWritable"/>
@@ -42,5 +39,16 @@
 <fullyQualifiedTypeName name="com.neu.pdp.noCombinerAggregator.TokenizerMapper"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.io.Text"/>
+<fullyQualifiedTypeName name="com.neu.pdp.resources.MinReading"/>
+<fullyQualifiedTypeName name="com.neu.pdp.resources.MaxReading"/>
+<fullyQualifiedTypeName name="com.neu.pdp.withCombiner.ReadingCombiner"/>
+<fullyQualifiedTypeName name="com.neu.pdp.withCombiner.ReadingReducer"/>
 <fullyQualifiedTypeName name="com.neu.pdp.resources.IntPair"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Mapper.Context"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.util.Map.Entry"/>
+<fullyQualifiedTypeName name="com.neu.pdp.inMapperCombiner.ReadingReducer"/>
+<fullyQualifiedTypeName name="com.neu.pdp.resources.IntTriplet"/>
+<fullyQualifiedTypeName name="com.neu.pdp.resources.PairOfTriplets"/>
 </qualifiedTypeNameHistroy>

@@ -8,7 +8,7 @@
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.m2e.launchconfig.classpathProvider"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.neu.pdp.App"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="&quot;/home/ideepakkrishnan/Documents/climateAnalysis/input/&quot; &#10;&quot;/home/ideepakkrishnan/Documents/climateAnalysis/output1/&quot; &#10;&quot;with-combiner&quot;"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="&quot;/home/ideepakkrishnan/Documents/climateAnalysis/input/&quot; &#10;&quot;/home/ideepakkrishnan/Documents/climateAnalysis/output1/&quot; &#10;&quot;in-mapper-combiner&quot;"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="climateAnalysis"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.m2e.launchconfig.sourcepathProvider"/>
 </launchConfiguration>

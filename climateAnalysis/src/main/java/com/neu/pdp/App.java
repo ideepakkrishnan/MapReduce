@@ -42,6 +42,13 @@ public class App
 		        job.setMapOutputValueClass(IntTriplet.class);
 		        job.setCombinerClass(com.neu.pdp.withCombiner.ReadingCombiner.class);
 		        job.setReducerClass(com.neu.pdp.withCombiner.ReadingReducer.class);
+	        } else if (args[2].toString().equals("in-mapper-combiner")) {
+	        	job.setMapperClass(com.neu.pdp.inMapperCombiner.TokenizerMapper.class);
+	        	job.setMapOutputKeyClass(Text.class);
+		        job.setMapOutputValueClass(IntTriplet.class);
+		        job.setReducerClass(com.neu.pdp.inMapperCombiner.ReadingReducer.class);
+	        } else {
+	        	System.exit(1);
 	        }
 	        
 	        // Set the reducer's output key and value types
