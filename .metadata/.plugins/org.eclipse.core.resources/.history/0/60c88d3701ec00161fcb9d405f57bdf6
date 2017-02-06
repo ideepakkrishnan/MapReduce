@@ -1,0 +1,16 @@
+/**
+ * 
+ */
+package com.neu.pdp.resources;
+
+/**
+ * @author ideepakkrishnan
+ *
+ */
+public class MinReading extends IntPair {
+
+	public MinReading() {
+		super();
+	}
+	
+}

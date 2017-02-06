@@ -4,8 +4,6 @@
 package com.neu.pdp.noCombinerAggregator;
 
 import java.io.IOException;
-import java.util.StringTokenizer;
-
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 

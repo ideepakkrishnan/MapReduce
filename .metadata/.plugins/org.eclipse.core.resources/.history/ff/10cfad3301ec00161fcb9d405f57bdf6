@@ -1,0 +1,16 @@
+/**
+ * 
+ */
+package com.neu.pdp.resources;
+
+/**
+ * @author ideepakkrishnan
+ *
+ */
+public class MaxReading extends IntPair {
+	
+	public MaxReading() {
+		super();
+	}
+	
+}

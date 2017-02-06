@@ -1,0 +1,17 @@
+/**
+ * 
+ */
+package com.neu.pdp.withCombiner;
+
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Reducer;
+
+import com.neu.pdp.resources.IntPair;
+
+/**
+ * @author ideepakkrishnan
+ *
+ */
+public class IntPairCombiner extends Reducer<Text, IntPair, Text, IntPair> {
+
+}

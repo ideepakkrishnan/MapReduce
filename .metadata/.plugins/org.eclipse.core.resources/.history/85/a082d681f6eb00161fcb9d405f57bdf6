@@ -1,0 +1,84 @@
+/**
+ * 
+ */
+package com.neu.pdp.resources;
+
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
+
+import org.apache.hadoop.io.Writable;
+
+/**
+ * Define a pair of integer pairs that are writable.
+ * They are serialized in a byte comparable format.
+ * @author ideepakkrishnan
+ */
+public class PairOfPairs implements Writable {
+	private IntPair first;
+	private IntPair second;
+	
+	public PairOfPairs() {
+		first = new IntPair();
+		second = new IntPair();
+	}
+	
+	/**
+	 * Overloaded Constructor
+	 * @param first Integer
+	 * @param second Integer
+	 */
+	public PairOfPairs(IntPair first, IntPair second) {
+		this.first = first;
+		this.second = second;
+	}
+
+	/**
+	 * @return the first
+	 */
+	public IntPair getFirst() {
+		return first;
+	}
+
+	/**
+	 * @param first the first to set
+	 */
+	public void setFirst(IntPair first) {
+		this.first = first;
+	}
+
+	/**
+	 * @return the second
+	 */
+	public IntPair getSecond() {
+		return second;
+	}
+
+	/**
+	 * @param second the second to set
+	 */
+	public void setSecond(IntPair second) {
+		this.second = second;
+	}
+	
+	/**
+	 * Update the values stored in local variables
+	 * @param first Integer
+	 * @param second Integer
+	 */
+	public void set(IntPair first, IntPair second) {
+		this.first = first;
+		this.second = second;
+	}
+
+	public void readFields(DataInput in) throws IOException {
+		first = in.readInt();
+		second = in.readInt();
+	}
+
+	public void write(DataOutput out) throws IOException {
+		out.writeInt(first);
+		out.writeInt(second);
+	}
+	
+}
