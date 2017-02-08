@@ -51,4 +51,6 @@
 <fullyQualifiedTypeName name="com.neu.pdp.inMapperCombiner.ReadingReducer"/>
 <fullyQualifiedTypeName name="com.neu.pdp.resources.IntTriplet"/>
 <fullyQualifiedTypeName name="com.neu.pdp.resources.PairOfTriplets"/>
+<fullyQualifiedTypeName name="com.neu.pdp.core.TokenizerMapper"/>
+<fullyQualifiedTypeName name="com.neu.pdp.core.ReadingReducer"/>
 </qualifiedTypeNameHistroy>
