@@ -13,9 +13,15 @@ hs_err_pid*
 *.zip
 
 # Eclipse IDE common artfacts
-target/
 .DS_Store
 *.classpath
 *.settings
 *.project
 .security/
+.metadata/
+
+# Project specific artifacts
+weatherData/target/
+wordCount/target/
+climateAnalysis/target/
+climateTimeSeries/target/
