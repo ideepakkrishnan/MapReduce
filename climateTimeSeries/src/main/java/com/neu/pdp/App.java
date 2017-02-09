@@ -9,9 +9,13 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.neu.pdp.core.GroupComparator;
+import com.neu.pdp.core.KeyComparator;
 import com.neu.pdp.core.ReadingReducer;
+import com.neu.pdp.core.StationIdPartitioner;
 import com.neu.pdp.core.TokenizerMapper;
 import com.neu.pdp.resources.IntTriplet;
+import com.neu.pdp.resources.KeyPair;
 
 /**
  * Hello world!
@@ -33,10 +37,15 @@ public class App
 	        
 	        // Set the mapper
         	job.setMapperClass(TokenizerMapper.class);
-        	job.setMapOutputKeyClass(Text.class);
+        	job.setMapOutputKeyClass(KeyPair.class);
 	        job.setMapOutputValueClass(IntTriplet.class);
-	        job.setReducerClass(ReadingReducer.class);
 	        
+	        // Set the intermediate classes
+	        job.setPartitionerClass(StationIdPartitioner.class);
+	        job.setSortComparatorClass(KeyComparator.class);
+	        job.setGroupingComparatorClass(GroupComparator.class);	        
+	        
+	        job.setReducerClass(ReadingReducer.class);	        
 	        // Set the reducer's output key and value types
 	        job.setOutputKeyClass(Text.class);
 	        job.setOutputValueClass(Text.class);

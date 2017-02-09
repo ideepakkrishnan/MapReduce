@@ -9,7 +9,6 @@ import java.io.IOException;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.io.WritableComparable;
 
 /**
@@ -24,6 +23,16 @@ public class KeyPair implements WritableComparable<KeyPair> {
 	
 	private Text stationId;
 	private IntWritable year;
+	
+	public KeyPair() {
+		this.stationId = new Text();
+		this.year = new IntWritable();
+	}
+	
+	public KeyPair(Text stationId, IntWritable year) {
+		this.stationId = stationId;
+		this.year = year;
+	}
 
 	/**
 	 * @return the stationId
@@ -83,8 +92,17 @@ public class KeyPair implements WritableComparable<KeyPair> {
 		return this.year.compareTo(pair.getYear());
 	}
 	
-	public int compare(WritableComparable w1, WritableComparable w2) {
-		return w1.compareTo(w2);
+	public int hashCode() {
+		return this.stationId.hashCode() * 163 + this.year.hashCode();
+	}	
+	
+	public boolean equals(Object o) {
+		if (o instanceof KeyPair) {
+			KeyPair arg = (KeyPair) o;
+			return (this.stationId.equals(arg.getStationId())
+					&& this.year.equals(arg.getYear()));
+		}
+		return false;
 	}
 
 }
