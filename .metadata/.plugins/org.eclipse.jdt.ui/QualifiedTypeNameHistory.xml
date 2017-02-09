@@ -26,19 +26,13 @@
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Mapper"/>
 <fullyQualifiedTypeName name="java.lang.Object"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.io.IntWritable"/>
 <fullyQualifiedTypeName name="java.util.StringTokenizer"/>
 <fullyQualifiedTypeName name="com.sun.jersey.spi.inject.InjectableProviderContext.InjectableScopePair"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.io.WritableComparable"/>
 <fullyQualifiedTypeName name="java.lang.Override"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.io.Writable"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Reducer"/>
 <fullyQualifiedTypeName name="java.io.IOException"/>
 <fullyQualifiedTypeName name="com.neu.pdp.noCombinerAggregator.IntPairSumReducer"/>
 <fullyQualifiedTypeName name="com.neu.pdp.noCombinerAggregator.TokenizerMapper"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.io.Text"/>
 <fullyQualifiedTypeName name="com.neu.pdp.resources.MinReading"/>
 <fullyQualifiedTypeName name="com.neu.pdp.resources.MaxReading"/>
 <fullyQualifiedTypeName name="com.neu.pdp.withCombiner.ReadingCombiner"/>
@@ -53,4 +47,17 @@
 <fullyQualifiedTypeName name="com.neu.pdp.resources.PairOfTriplets"/>
 <fullyQualifiedTypeName name="com.neu.pdp.core.TokenizerMapper"/>
 <fullyQualifiedTypeName name="com.neu.pdp.core.ReadingReducer"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="com.neu.pdp.core.KeyComparator"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.Text"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.IntWritable"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.Writable"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.WritableComparator"/>
+<fullyQualifiedTypeName name="com.neu.pdp.core.GroupComparator"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.WritableComparable"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Partitioner"/>
+<fullyQualifiedTypeName name="com.neu.pdp.resources.KeyPair"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.NullWritable"/>
+<fullyQualifiedTypeName name="java.lang.Math"/>
 </qualifiedTypeNameHistroy>
