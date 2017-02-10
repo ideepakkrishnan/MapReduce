@@ -23,7 +23,6 @@ import com.neu.pdp.resources.KeyPair;
  */
 public class ReadingReducer extends Reducer<KeyPair, IntTriplet, Text, Text> {
 	
-	private Text stationId = null;	
 	private HashMap<Text, List<IntTriplet>> map;	
 	
 	public void setup(Context context) 
@@ -44,9 +43,6 @@ public class ReadingReducer extends Reducer<KeyPair, IntTriplet, Text, Text> {
 		boolean avgTminWritten = false;
 		boolean avgTmaxWritten = false;
 				
-		// Switch the current station id in private variable that
-		// manages the state
-		this.stationId = key.getStationId();
 		currentYear = new IntWritable(key.getYear().get());
 		
 		// These are records for the current station being processed.
@@ -69,6 +65,7 @@ public class ReadingReducer extends Reducer<KeyPair, IntTriplet, Text, Text> {
 			
 			if (avgTminWritten && avgTmaxWritten) {
 				updateMap(
+						key.getStationId(),
 						currentYear, 
 						tminSum, tminCount, 
 						tmaxSum, tmaxCount);
@@ -90,23 +87,30 @@ public class ReadingReducer extends Reducer<KeyPair, IntTriplet, Text, Text> {
 		String result = "";
 		for (Map.Entry<Text, List<IntTriplet>> entry: 
 			this.map.entrySet()) {
+			result = "[ ";
 			for (IntTriplet it: entry.getValue()) {
 				 result += 
 						"(" + String.valueOf(it.getFirst()) +
 						", " + String.valueOf(it.getSecond()) + 
 						", " + String.valueOf(it.getThird()) +
-						") ";
+						"), ";
 			}
+			result += "]";
 			context.write(entry.getKey(), new Text(result));
+			
+			result = "";
 		}
 	}
 	
 	private void updateMap(
+			Text stationId,
 			IntWritable currentYear, 
 			int tminSum, int tminCount, 
 			int tmaxSum, int tmaxCount) {
-		if (!this.map.containsKey(this.stationId)) {
-			this.map.put(this.stationId, new ArrayList<IntTriplet>());
+		if (!this.map.containsKey(stationId)) {
+			this.map.put(
+					new Text(stationId.getBytes()), 
+					new ArrayList<IntTriplet>());
 		}
 		
 		this.map.get(stationId).add(
