@@ -13,7 +13,10 @@ import com.neu.pdp.resources.IntPair;
 import com.neu.pdp.resources.IntTriplet;
 
 /**
- * Hello world!
+ * Course: CS6240 - Parallel Data Processing
+ * -----------------------------------------
+ * Homework 2: Question 1 - Climate Analysis
+ * -----------------------------------------
  *
  */
 public class App 
