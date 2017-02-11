@@ -4,19 +4,27 @@
 package com.neu.pdp.resources;
 
 /**
+ * Defines a pair of integer triplets
  * @author ideepakkrishnan
- *
  */
 public class PairOfTriplets {
 	
 	private IntTriplet first;
 	private IntTriplet second;
 	
+	/**
+	 * Default constructor
+	 */
 	public PairOfTriplets() {
 		first = new IntTriplet();
 		second = new IntTriplet();
 	}
 	
+	/**
+	 * Overloaded constructor
+	 * @param first
+	 * @param second
+	 */
 	public PairOfTriplets(IntTriplet first, IntTriplet second) {
 		this.first = first;
 		this.second = second;

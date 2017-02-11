@@ -10,7 +10,7 @@ import java.io.IOException;
 import org.apache.hadoop.io.Writable;
 
 /**
- * Define a pair of integers that are writable.
+ * Define a triplet of integers that are writable.
  * They are serialized in a byte comparable format.
  * @author ideepakkrishnan
  */
@@ -19,6 +19,9 @@ public class IntTriplet implements Writable {
 	private int second;
 	private int third;
 	
+	/**
+	 * Default constructor
+	 */
 	public IntTriplet() {
 		first = 0;
 		second = 0;

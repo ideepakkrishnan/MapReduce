@@ -18,6 +18,9 @@ public class IntPair implements Writable {
 	private int first;
 	private int second;
 	
+	/**
+	 * Default constructor
+	 */
 	public IntPair() {
 		first = 0;
 		second = 0;

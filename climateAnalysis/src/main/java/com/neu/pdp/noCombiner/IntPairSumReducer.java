@@ -1,14 +1,14 @@
 /**
  * 
  */
-package com.neu.pdp.withCombiner;
+package com.neu.pdp.noCombiner;
 
 import java.io.IOException;
 
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
-import com.neu.pdp.resources.IntTriplet;
+import com.neu.pdp.resources.IntPair;
 import com.neu.pdp.resources.ReadingType;
 
 /**
@@ -19,47 +19,48 @@ import com.neu.pdp.resources.ReadingType;
  * by a specific reducer.
  * @author ideepakkrishnan
  */
-public class ReadingReducer extends Reducer<Text, IntTriplet, Text, Text> {
+public class IntPairSumReducer extends Reducer<Text, IntPair, Text, Text> {
+	
+	private Text result = new Text();
 	
 	/**
 	 * Performs the actual aggregation of data during
 	 * a reduce call. All data pertaining to a specific
 	 * station ID is accepted by a reduce call.
 	 * @param key Reducer input key as Text
-	 * @param values Reducer input values as list of IntTriplet-s
+	 * @param values Reducer input values as list of IntPair-s
 	 * @param context Current application context
 	 */
 	public void reduce(
 			Text key, 
-			Iterable<IntTriplet> values, 
+			Iterable<IntPair> values, 
             Context context) throws IOException, InterruptedException {
 		// Local variables
-		Text result = new Text();
 		int tminSum = 0;
 		int tminCount = 0;
 		int tmaxSum = 0;
 		int tmaxCount = 0;
 		
-		// Perform data aggregation
-		// Incoming records follow this format:
+		// Perform local aggregation using local variables.
+		// Incoming records are follow this format:
 		// key - Station ID
-		// value - (MIN/MAX, Temperature, Count)
-		for (IntTriplet val : values) {
-			if (val.getFirst() == ReadingType.MIN.getValue()) {				
+		// value - (TMIN/TMAX, Temperature)
+		for (IntPair val : values) {
+			if (val.getFirst() == ReadingType.MIN.getValue()) {
+				tminCount += 1;
 				tminSum += val.getSecond();
-				tminCount += val.getThird();
-			} else if (val.getFirst() == ReadingType.MAX.getValue()) {				
+			} else if (val.getFirst() == ReadingType.MAX.getValue()) {
+				tmaxCount += 1;
 				tmaxSum += val.getSecond();
-				tmaxCount += val.getThird();
 			}
 		}
 		
-		// Format the text to be written into output file
+		// Create the result string to be written into output file
 		result = new Text(
 				String.valueOf((tminCount == 0) ? 0 : tminSum / tminCount) + 
 				", " + String.valueOf((tmaxCount == 0) ? 0 : tmaxSum / tmaxCount));
 		
-		// Write the data into output file
+		// Output the aggregated value into output file
 		context.write(key, result);
 	}
 
