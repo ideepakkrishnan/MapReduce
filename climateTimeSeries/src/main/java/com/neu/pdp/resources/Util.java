@@ -26,7 +26,6 @@ public class Util {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static int compare(WritableComparable w1, WritableComparable w2) {
-		logger.info("Executing compare method");
 		return w1.compareTo(w2);		
 	}
 	

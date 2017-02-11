@@ -180,8 +180,8 @@ public class ReadingReducer extends Reducer<KeyPair, IntTriplet, Text, Text> {
 		this.map.get(stationId).add(
 				new IntTriplet(
 						currentYear.get(),
-						(tminCount == 0) ? 0 : tminSum / tminCount, 
-						(tmaxCount == 0) ? 0 : tmaxSum / tmaxCount));
+						(tminCount == 0) ? -9999 : tminSum / tminCount, 
+						(tmaxCount == 0) ? -9999 : tmaxSum / tmaxCount));
 	}
 
 }

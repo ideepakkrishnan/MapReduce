@@ -21,8 +21,6 @@ import com.neu.pdp.resources.ReadingType;
  */
 public class IntPairSumReducer extends Reducer<Text, IntPair, Text, Text> {
 	
-	private Text result = new Text();
-	
 	/**
 	 * Performs the actual aggregation of data during
 	 * a reduce call. All data pertaining to a specific
@@ -36,6 +34,8 @@ public class IntPairSumReducer extends Reducer<Text, IntPair, Text, Text> {
 			Iterable<IntPair> values, 
             Context context) throws IOException, InterruptedException {
 		// Local variables
+		String txt = "";
+		Text result = new Text();
 		int tminSum = 0;
 		int tminCount = 0;
 		int tmaxSum = 0;
@@ -56,9 +56,20 @@ public class IntPairSumReducer extends Reducer<Text, IntPair, Text, Text> {
 		}
 		
 		// Create the result string to be written into output file
-		result = new Text(
-				String.valueOf((tminCount == 0) ? 0 : tminSum / tminCount) + 
-				", " + String.valueOf((tmaxCount == 0) ? 0 : tmaxSum / tmaxCount));
+		if (tminCount == 0) {
+			txt += "No Readings";
+		} else {
+			txt += String.valueOf(tminSum / tminCount);
+		}
+		
+		txt += ", ";
+		
+		if (tmaxCount == 0) {
+			txt += "No Readings";
+		} else {
+			txt += String.valueOf(tmaxSum / tmaxCount);
+		}
+		result = new Text(txt);
 		
 		// Output the aggregated value into output file
 		context.write(key, result);

@@ -34,6 +34,7 @@ public class ReadingReducer extends Reducer<Text, IntTriplet, Text, Text> {
 			Iterable<IntTriplet> values, 
             Context context) throws IOException, InterruptedException {
 		// Local variables
+		String txt = "";
 		Text result = new Text();
 		int tminSum = 0;
 		int tminCount = 0;
@@ -55,9 +56,20 @@ public class ReadingReducer extends Reducer<Text, IntTriplet, Text, Text> {
 		}
 		
 		// Format the text to be written into output file
-		result = new Text(
-				String.valueOf((tminCount == 0) ? 0 : tminSum / tminCount) + 
-				", " + String.valueOf((tmaxCount == 0) ? 0 : tmaxSum / tmaxCount));
+		if (tminCount == 0) {
+			txt += "No Readings";
+		} else {
+			txt += String.valueOf(tminSum / tminCount);
+		}
+		
+		txt += ", ";
+		
+		if (tmaxCount == 0) {
+			txt += "No Readings";
+		} else {
+			txt += String.valueOf(tmaxSum / tmaxCount);
+		}
+		result = new Text(txt);
 		
 		// Write the data into output file
 		context.write(key, result);
