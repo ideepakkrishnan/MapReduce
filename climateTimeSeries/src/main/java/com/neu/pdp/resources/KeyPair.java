@@ -24,11 +24,19 @@ public class KeyPair implements WritableComparable<KeyPair> {
 	private Text stationId;
 	private IntWritable year;
 	
+	/**
+	 * Default constructor
+	 */
 	public KeyPair() {
 		this.stationId = new Text();
 		this.year = new IntWritable();
 	}
 	
+	/**
+	 * Overloaded constructor
+	 * @param stationId
+	 * @param year
+	 */
 	public KeyPair(Text stationId, IntWritable year) {
 		this.stationId = stationId;
 		this.year = year;

@@ -16,10 +16,6 @@ public enum ReadingType {
 	
 	private int value;
 	
-	/**
-	 * Overloaded constructor
-	 * @param val
-	 */
 	private ReadingType(int val) {
 		this.value = val;
 	}

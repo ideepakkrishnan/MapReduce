@@ -16,6 +16,7 @@ import org.apache.hadoop.mapreduce.Mapper.Context;
 
 import com.neu.pdp.resources.IntTriplet;
 import com.neu.pdp.resources.KeyPair;
+import com.neu.pdp.resources.ReadingType;
 
 /**
  * Reducer class for temperature time series program.   
@@ -67,8 +68,6 @@ public class ReadingReducer extends Reducer<KeyPair, IntTriplet, Text, Text> {
 		int tminCount = 0;
 		int tmaxSum = 0;
 		int tmaxCount = 0;
-		boolean avgTminWritten = false;
-		boolean avgTmaxWritten = false;
 		
 		// Extracting the year into a new IntWritable object to
 		// prevent memory leaks down the lane
@@ -79,22 +78,6 @@ public class ReadingReducer extends Reducer<KeyPair, IntTriplet, Text, Text> {
 		for (IntTriplet val : values) {
 			
 			if (key.getYear().get() != currentYear.get()) {
-				currentYear = new IntWritable(key.getYear().get());
-			}
-			
-			// Aggregate the readings and record counts to calculate
-			// the mean
-			if (val.getFirst() == 0) {
-				tminSum += val.getSecond();
-				tminCount += val.getThird();
-				avgTminWritten = true;
-			} else if (val.getFirst() == 1) {				
-				tmaxSum += val.getSecond();
-				tmaxCount += val.getThird();
-				avgTmaxWritten = true;
-			}
-			
-			if (avgTminWritten && avgTmaxWritten) {
 				// If we get inside this if statement, it means that
 				// the data for a particular year has been processed.
 				// We need to write this data into the class level
@@ -111,9 +94,30 @@ public class ReadingReducer extends Reducer<KeyPair, IntTriplet, Text, Text> {
 				tminCount = 0;
 				tmaxSum = 0;
 				tmaxCount = 0;
-				avgTminWritten = false;
-				avgTmaxWritten = false;
+				
+				currentYear = new IntWritable(key.getYear().get());
 			}
+			
+			// Aggregate the readings and record counts to calculate
+			// the mean
+			if (val.getFirst() == ReadingType.MIN.getValue()) {
+				tminSum += val.getSecond();
+				tminCount += val.getThird();
+			} else if (val.getFirst() == ReadingType.MAX.getValue()) {				
+				tmaxSum += val.getSecond();
+				tmaxCount += val.getThird();
+			}
+		}
+		
+		// To write the very last record from values. The previous
+		// loop does not write it into the hash map since the
+		// program exits the loop right after the aggregation phase.
+		if (tminCount > 0 || tmaxCount > 0) {
+			updateMap(
+					key.getStationId(),
+					currentYear, 
+					tminSum, tminCount, 
+					tmaxSum, tmaxCount);
 		}
 		
 	}

@@ -16,6 +16,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 import com.neu.pdp.resources.IntTriplet;
 import com.neu.pdp.resources.KeyPair;
 import com.neu.pdp.resources.PairOfTriplets;
+import com.neu.pdp.resources.ReadingType;
 
 /**
  * Mapper class for the temperature time series program.
@@ -66,7 +67,7 @@ public class TokenizerMapper extends Mapper<Object, Text, KeyPair, IntTriplet> {
     	KeyPair keyPair;
     	IntTriplet reading = null;
     	PairOfTriplets tripletPair = null;
-    	int type = -1;
+    	ReadingType type = ReadingType.INVALID;
     	
     	// Extract the file name since the year needs to be
     	// extracted from this information
@@ -90,20 +91,20 @@ public class TokenizerMapper extends Mapper<Object, Text, KeyPair, IntTriplet> {
 	        // Internally, the program uses 0 to denote a
 	        // TMIN reading and 1 to denote TMAX reading
 		    if (values[2].equals("TMIN")) {
-			    type = 0;
+			    type = ReadingType.MIN;
 		    } else if (values[2].equals("TMAX")) {
-			    type = 1;
+			    type = ReadingType.MAX;
 		    }
 		  
-		    if (type != -1) {
+		    if (type != ReadingType.INVALID) {
 		    	// We need to record the reading in a class
 		    	// level variable to perform in-mapper
 		    	// combining
 		    	if (!this.map.containsKey(keyPair)) {
 		    		this.map.put(keyPair,
 		    				new PairOfTriplets(
-		    					new IntTriplet(0, 0, 0),
-		    					new IntTriplet(1, 0, 0)));
+		    					new IntTriplet(ReadingType.MIN.getValue(), 0, 0),
+		    					new IntTriplet(ReadingType.MAX.getValue(), 0, 0)));
 		    	}
 		    	
 		    	// tripletPair which is a PairOfTriplets
@@ -113,9 +114,9 @@ public class TokenizerMapper extends Mapper<Object, Text, KeyPair, IntTriplet> {
 		    	// stores the data for TMAX readings
 	    		tripletPair = this.map.get(keyPair);
 	    		
-	    		if (type == 0) {
+	    		if (type == ReadingType.MIN) {
 	    			reading = tripletPair.getFirst();
-	    		} else if (type == 1) {
+	    		} else if (type == ReadingType.MAX) {
 	    			reading = tripletPair.getSecond();
 	    		}
 	    		
@@ -128,7 +129,7 @@ public class TokenizerMapper extends Mapper<Object, Text, KeyPair, IntTriplet> {
 		    }
 		    
 		    // Clear out the local variables for further use
-		    type = -1;
+		    type = null;
 		    reading = null;
 		    tripletPair = null;
 		}
