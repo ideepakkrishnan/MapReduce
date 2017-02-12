@@ -1,0 +1,48 @@
+-----------------------------------------------
+CS 6240 - Parallel Data Processing
+Homework 2 > Problem 2: Temperature Time Series
+Author: Deepak Krishnan
+-----------------------------------------------
+Execution Instructions
+-----------------------------------------------
+
+-------------
+Local Machine
+------------- 
+(Pre-requisites: 
+   - You have configured hadoop in your machine
+   - You must have a HDFS file system running in your machine)
+
+1. Create the required directory structure inside HDFS through the following commands
+   - hdfs dfs -mkdir /climateTimeSeries
+   - hdfs dfs -mkdir /climateTimeSeries/input
+2. Go to your local folder where you have stored the input files
+3. Copy the input files from your local file system into HDFS file system
+   - hdfs fs -put some-file-name /climateTimeSeries/input
+4. Execute the temperature time series program using following commands (without the quotes):
+   - make alone
+5. To see the generated files, run:
+   - hdfs fs -ls /climateAnalysis/output
+6. To see the contents of a generated file, run:
+   - hdfs fs -cat /climateAnalysis/output/part-r-00000
+
+-----
+ AWS
+-----
+1. Open AWS S3 web UI and create a bucket with the following folder structure:
+   - your-bucket-name/input
+   - your-bucket-name/logs
+2. Upload your input files into AWS using the following command:
+   - aws s3 cp input-file-path s3://my-bucket/input/
+3. Update your bucket name, input and output folder paths in the MakeFile for this project
+4. Assuming that you have configured AWS CLI in your machine, use the following command to execute your program in AWS:
+   - make cloud
+5. After successfull termination of your EMR instance, you may copy the generated output to your local machine using:
+   - mkdir output
+   - aws s3 sync s3://your-bucket-name/output output
+   - mkdir logs
+   - aws s3 sync s3://your-bucket-name/logs logs
+6. To delete your files from S3, use the following command:
+   - aws s3 rm s3://your-bucket-name/output/ --recursive
+   - aws s3 rm s3://your-bucket-name/input/ --recursive
+   - aws s3 rm s3://your-bucket-name/logs/ --recursive

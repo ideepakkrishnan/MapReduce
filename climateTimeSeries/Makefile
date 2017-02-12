@@ -6,8 +6,8 @@ hadoop.root=/usr/lib/hadoop
 jar.name=climateTimeSeries-1.0-SNAPSHOT.jar
 jar.path=target/${jar.name}
 job.name=climateTimeSeries
-local.input=/home/ideepakkrishnan/Documents/climateTimeSeries/input
-local.output=/home/ideepakkrishnan/Documents/climateTimeSeries/output
+local.input=/climateTimeSeries/input
+local.output=/climateTimeSeries/output
 # AWS EMR Execution
 aws.emr.release=emr-5.2.1
 aws.region=us-east-1
