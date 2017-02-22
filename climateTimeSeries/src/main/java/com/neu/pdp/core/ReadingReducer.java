@@ -35,7 +35,7 @@ import com.neu.pdp.resources.ReadingType;
 public class ReadingReducer extends Reducer<KeyPair, IntTriplet, Text, Text> {
 	
 	// Class level private variables
-	private HashMap<Text, List<IntTriplet>> map;	
+	private HashMap<Text, List<IntTriplet>> map;
 	
 	/**
 	 * Initialize the class level variables for in-
