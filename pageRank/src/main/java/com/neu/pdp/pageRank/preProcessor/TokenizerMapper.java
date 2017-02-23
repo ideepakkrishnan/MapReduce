@@ -14,6 +14,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Mapper.Context;
@@ -23,6 +24,7 @@ import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
 import org.xml.sax.XMLReader;
 
+import com.neu.pdp.resources.KeyPair;
 import com.neu.pdp.resources.WikiParser;
 
 /**
@@ -31,7 +33,7 @@ import com.neu.pdp.resources.WikiParser;
  * it on to the reducer.
  * @author ideepakkrishnan
  */
-public class TokenizerMapper extends Mapper<Object, Text, Text, Text> {
+public class TokenizerMapper extends Mapper<Object, Text, KeyPair, Text> {
 	
 	// Class level variables
 	private Pattern namePattern;
@@ -40,6 +42,7 @@ public class TokenizerMapper extends Mapper<Object, Text, Text, Text> {
 	private SAXParser saxParser;
 	private XMLReader xmlReader;
 	private HashSet<String> linkPageNames;
+	private HashSet<String> allPageNames;
 	
 	/**
 	 * Initializes the XML parser which will be used by the mappers
@@ -50,6 +53,8 @@ public class TokenizerMapper extends Mapper<Object, Text, Text, Text> {
 	 */
 	public void setup(Context context) 
 			throws IOException, InterruptedException {
+		
+		allPageNames = new HashSet<String>();
 		
 		// Configure the regex patterns:
 		// To keep only html pages not containing tilde (~)
@@ -131,21 +136,48 @@ public class TokenizerMapper extends Mapper<Object, Text, Text, Text> {
 				// transferred, we convert the list into CSV and
 				// pass it on as a string.
 				for (String s : linkPageNames) {
-					strEmitVal += s;
-					strEmitVal += ",";
-					
-					// Emit each adjacent node as well to keep
-					// track of any dangling nodes
-					context.write(new Text(s), new Text(""));
+					// Remove self-links since we do not want a
+					// page bragging to us that it is important
+					if (!s.equals(strPageName)) {
+						strEmitVal += s;
+						strEmitVal += ",";
+						
+						// Emit each adjacent node as well to keep
+						// track of any dangling nodes
+						context.write(
+								new KeyPair(
+										new Text(s), 
+										new Text("ADJ")), 
+								new Text(""));
+						
+						allPageNames.add(s);
+					}
 				}
 				
 				context.write(
-						new Text(strPageName), 
+						new KeyPair(
+								new Text(strPageName), 
+								new Text("ADJ")),
 						new Text(strEmitVal));
+				
+				allPageNames.add(strPageName);
 			} catch (Exception e) {
 				// Discard ill-formatted pages.
 			}
 		}
 		
+	}
+	
+	public void cleanup(Context context) 
+			throws IOException, InterruptedException {
+		// Emit all the pages once again to find the number
+		// of pages in the reducer
+		for (String s : allPageNames) {
+			context.write(
+					new KeyPair(
+							new Text("COUNT"), 
+							new Text()), 
+					new Text(s));
+		}
 	}
 }

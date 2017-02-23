@@ -19,7 +19,7 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class WikiParser extends DefaultHandler {
 	
-	// Class level variables	
+	// Class level variables
 	private HashSet<String> linkPageNames; // Stores out-links in this page
 	private int count = 0; // Nesting depth inside bodyContent
 	private Pattern linkPattern; // Valid link pattern

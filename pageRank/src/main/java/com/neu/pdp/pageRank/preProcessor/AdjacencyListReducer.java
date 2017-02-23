@@ -11,14 +11,17 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.Reducer.Context;
 
+import com.neu.pdp.resources.KeyPair;
+
 /**
  * @author ideepakkrishnan
  *
  */
-public class AdjacencyListReducer extends Reducer<Text, Text, Text, Text> {
+public class AdjacencyListReducer extends Reducer<KeyPair, Text, Text, Text> {
 	
 	// Class level private variables
 	private HashMap<Text, HashSet<String>> map;
+	private HashSet<Text> pageNames;	
 	
 	/**
 	 * Initialize the class level variables for in-
@@ -28,25 +31,43 @@ public class AdjacencyListReducer extends Reducer<Text, Text, Text, Text> {
 	public void setup(Context context) 
     		throws IOException, InterruptedException {
 		map = new HashMap<Text, HashSet<String>>();
+		pageNames = new HashSet<Text>();
 	}
 	
 	/**
 	 * 
 	 */
-	public void reduce(Text key, Iterable<Text> values,
+	public void reduce(KeyPair key, Iterable<Text> values,
             Context context
             ) throws IOException, InterruptedException {
 		
 		// Local variables
 		String strAdjacencyList = "";
 		
-		for (Text t : values) {
-			if (t.getLength() > 0) {
-				strAdjacencyList += t.toString();
+		if (key.getFirst().toString().equals("COUNT") && 
+				!key.getSecond().toString().equals("ADJ")) {
+			for (Text t : values) {
+				pageNames.add(t);
 			}
+		} else {		
+			for (Text t : values) {
+				if (t.getLength() > 0) {
+					strAdjacencyList += t.toString();
+				}
+			}
+			
+			context.write(key.getFirst(), new Text(strAdjacencyList));
+		}
+	}
+	
+	public void cleanup(Context context) throws IOException, InterruptedException {
+		int count = 0;
+		
+		for (Text t : pageNames) {
+			count++;
 		}
 		
-		context.write(key, new Text(strAdjacencyList));
+		context.getCounter("pageCount", "pageCount").setValue(count);
 	}
 
 }
