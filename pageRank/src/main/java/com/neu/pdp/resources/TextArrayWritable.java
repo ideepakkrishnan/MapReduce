@@ -5,6 +5,7 @@ package com.neu.pdp.resources;
 
 import java.io.DataInput;
 import java.io.DataOutput;
+import java.io.EOFException;
 import java.io.IOException;
 
 import org.apache.hadoop.io.ArrayWritable;
@@ -36,12 +37,24 @@ public class TextArrayWritable extends ArrayWritable {
     
     @Override
     public void readFields(DataInput in) throws IOException {
-    	super.readFields(in);
+    	//Text[] values = new Writable(in.read);
+    	try {
+    		super.readFields(in);
+    	} catch (EOFException e) {
+    		// Skip
+    	}
     }
     
     @Override
-    public void write(DataOutput out) throws IOException {      
-      super.write(out);
+    public void write(DataOutput out) throws IOException {
+    	Text[] values = get();
+    	if (values != null) {
+	    	for (int i = 0; i < values.length; i++) {
+	    		if (values[i] != null) {
+	    			values[i].write(out);
+	    		}
+	    	}
+    	}
     }
 
 }

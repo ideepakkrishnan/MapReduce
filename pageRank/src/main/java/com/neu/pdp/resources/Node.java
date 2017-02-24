@@ -19,15 +19,14 @@ public class Node implements Writable {
 	
 	// Class level attributes
 	private DoubleWritable pageRank;
-	private TextArrayWritable adjacencyList;
+	private Text adjacencyList;
 	
 	/**
 	 * Default Constructor
 	 */
 	public Node() {
 		this.pageRank = new DoubleWritable();
-		this.adjacencyList = new TextArrayWritable(
-				new Text[0]);
+		this.adjacencyList = new Text();
 	}
 	
 	/**
@@ -37,7 +36,7 @@ public class Node implements Writable {
 	 */
 	public Node(
 			DoubleWritable pageRank, 
-			TextArrayWritable adjacencyList) {
+			Text adjacencyList) {
 		this.pageRank = pageRank;
 		this.adjacencyList = adjacencyList;
 	}	
@@ -59,20 +58,20 @@ public class Node implements Writable {
 	/**
 	 * @return the adjacencyList
 	 */
-	public TextArrayWritable getAdjacencyList() {
+	public Text getAdjacencyList() {
 		return adjacencyList;
 	}
 
 	/**
 	 * @param adjacencyList the adjacencyList to set
 	 */
-	public void setAdjacencyList(TextArrayWritable adjacencyList) {
+	public void setAdjacencyList(Text adjacencyList) {
 		this.adjacencyList = adjacencyList;
 	}
 	
 	public void set( 
 			DoubleWritable pageRank, 
-			TextArrayWritable adjacencyList) {
+			Text adjacencyList) {
 		this.pageRank = pageRank;
 		this.adjacencyList = adjacencyList;
 	}

@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Mapper.Context"/>
-<fullyQualifiedTypeName name="java.util.Map"/>
-<fullyQualifiedTypeName name="java.util.Map.Entry"/>
-<fullyQualifiedTypeName name="com.neu.pdp.inMapperCombiner.ReadingReducer"/>
 <fullyQualifiedTypeName name="com.neu.pdp.core.TokenizerMapper"/>
 <fullyQualifiedTypeName name="com.neu.pdp.core.ReadingReducer"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.io.WritableComparator"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.io.WritableComparable"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Partitioner"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.io.NullWritable"/>
 <fullyQualifiedTypeName name="java.lang.Math"/>
 <fullyQualifiedTypeName name="com.neu.pdp.core.StationIdPartitioner"/>
 <fullyQualifiedTypeName name="com.neu.pdp.core.GroupComparator"/>
@@ -23,7 +18,6 @@
 <fullyQualifiedTypeName name="java.nio.MappedByteBuffer"/>
 <fullyQualifiedTypeName name="org.apache.log4j.spi.ThrowableRendererSupport"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Reducer"/>
 <fullyQualifiedTypeName name="com.neu.pdp.pageRank.preProcessor.TokenizerMapper"/>
 <fullyQualifiedTypeName name="org.xml.sax.helpers.DefaultHandler"/>
 <fullyQualifiedTypeName name="org.xml.sax.Attributes"/>
@@ -48,16 +42,22 @@
 <fullyQualifiedTypeName name="com.neu.pdp.pageRank.preProcessor.GroupComparator"/>
 <fullyQualifiedTypeName name="com.neu.pdp.pageRank.preProcessor.AdjacencyListReducer"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Mapper"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.io.Writable"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.io.ArrayWritable"/>
 <fullyQualifiedTypeName name="java.io.DataOutput"/>
 <fullyQualifiedTypeName name="java.io.IOException"/>
 <fullyQualifiedTypeName name="java.lang.Override"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.io.Text"/>
-<fullyQualifiedTypeName name="com.neu.pdp.resources.Node"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.io.FloatWritable"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.neu.pdp.resources.TextArrayWritable"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Reducer"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.Text"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.filecache.DistributedCache"/>
+<fullyQualifiedTypeName name="com.neu.pdp.resources.Node"/>
+<fullyQualifiedTypeName name="com.neu.pdp.pageRank.core.NeighborRankMapper"/>
+<fullyQualifiedTypeName name="com.neu.pdp.pageRank.core.NodeRankReducer"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.io.DoubleWritable"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.NullWritable"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.Writable"/>
+<fullyQualifiedTypeName name="java.io.EOFException"/>
 </qualifiedTypeNameHistroy>
