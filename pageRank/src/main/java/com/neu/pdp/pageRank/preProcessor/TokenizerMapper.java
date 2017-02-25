@@ -67,9 +67,15 @@ public class TokenizerMapper extends Mapper<Object, Text, KeyPair, Text> {
 			
 			// Configure the XML parser
 			spf = SAXParserFactory.newInstance();
+			
 			spf.setFeature(
 					"http://apache.org/xml/features/nonvalidating/load-external-dtd", 
 					false);
+			
+			spf.setFeature(
+					"http://apache.org/xml/features/continue-after-fatal-error", 
+					true);
+			
 			saxParser = spf.newSAXParser();
 			xmlReader = saxParser.getXMLReader();
 			

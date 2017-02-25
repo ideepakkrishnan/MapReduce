@@ -2,7 +2,9 @@ package com.neu.pdp;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.filecache.DistributedCache;
@@ -15,6 +17,9 @@ import com.neu.pdp.pageRank.preProcessor.AdjacencyListReducer;
 import com.neu.pdp.pageRank.preProcessor.GroupComparator;
 import com.neu.pdp.pageRank.preProcessor.TokenizerMapper;
 import com.neu.pdp.pageRank.preProcessor.ValuePartitioner;
+import com.neu.pdp.pageRank.topK.NodeRankMapper;
+import com.neu.pdp.pageRank.topK.TopKReducer;
+import com.neu.pdp.resources.CondensedNode;
 import com.neu.pdp.resources.KeyPair;
 import com.neu.pdp.resources.Node;;
 
@@ -26,9 +31,11 @@ public class App
 {
     public static void main( String[] args )
     {
+    	int i = 0;
+    	
     	try {
     		
-    		if (args.length != 2) {
+    		if (args.length != 3) {
     			System.out.println("Invalid argument list found. Please retry.");
     			System.exit(-1);
     		} else {
@@ -65,7 +72,8 @@ public class App
 		        rankerConf.setDouble("alpha", 0.85);
 		        
 		        // Execute the page rank algorithm 10 times
-		        for (int i = 0; i < 2; i++) {
+		        
+		        for (; i < 2; i++) {
 		        	System.out.println("Execution " + i);
 			        Job rankerJob = Job.getInstance(rankerConf, "Page Rank Core");
 			        rankerJob.setJarByClass(App.class);
@@ -92,6 +100,33 @@ public class App
 			        rankerJob.waitForCompletion(true);
 			        
 		        }
+		        
+		        // Execute Top-K job to find the top 100 pages
+		        Configuration topKConf = new Configuration();
+		        Job topKJob = Job.getInstance(topKConf, "Page Rank Top-100");
+		        topKJob.setJarByClass(App.class);
+		        
+		        // Set the mapper
+		        topKJob.setMapperClass(NodeRankMapper.class);
+		        topKJob.setMapOutputKeyClass(NullWritable.class);
+		        topKJob.setMapOutputValueClass(CondensedNode.class);	        
+		        
+		        // Set the reducer
+		        topKJob.setReducerClass(TopKReducer.class);
+		        topKJob.setOutputKeyClass(Text.class);
+		        topKJob.setOutputValueClass(DoubleWritable.class);
+		        topKJob.setNumReduceTasks(1);
+	        		        
+	        	// Specify input folder for this iteration
+        		FileInputFormat.addInputPath(
+        				topKJob, new Path(args[1] + String.valueOf(i)));
+	        	
+	        	// Specify output folder for this iteration
+		        FileOutputFormat.setOutputPath(
+		        		topKJob, new Path(args[2]));
+		        
+		        // Execute the job
+		        topKJob.waitForCompletion(true);
     		}
     	} catch (Exception e) {
     		e.printStackTrace();
