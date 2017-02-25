@@ -19,6 +19,7 @@ public class Node implements Writable {
 	
 	// Class level attributes
 	private DoubleWritable pageRank;
+	private Text type;
 	private Text adjacencyList;
 	
 	/**
@@ -26,6 +27,7 @@ public class Node implements Writable {
 	 */
 	public Node() {
 		this.pageRank = new DoubleWritable();
+		this.setType(new Text());
 		this.adjacencyList = new Text();
 	}
 	
@@ -35,9 +37,11 @@ public class Node implements Writable {
 	 * @param adjacencyList
 	 */
 	public Node(
-			DoubleWritable pageRank, 
+			DoubleWritable pageRank,
+			Text type,
 			Text adjacencyList) {
 		this.pageRank = pageRank;
+		this.setType(type);
 		this.adjacencyList = adjacencyList;
 	}	
 
@@ -53,6 +57,20 @@ public class Node implements Writable {
 	 */
 	public void setPageRank(DoubleWritable pageRank) {
 		this.pageRank = pageRank;
+	}
+	
+	/**
+	 * @return the type
+	 */
+	public Text getType() {
+		return type;
+	}
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(Text type) {
+		this.type = type;
 	}
 
 	/**
@@ -71,18 +89,22 @@ public class Node implements Writable {
 	
 	public void set( 
 			DoubleWritable pageRank, 
+			Text type,
 			Text adjacencyList) {
 		this.pageRank = pageRank;
+		this.type = type;
 		this.adjacencyList = adjacencyList;
 	}
 
 	public void readFields(DataInput in) throws IOException {
 		this.pageRank.readFields(in);
+		this.type.readFields(in);
 		this.adjacencyList.readFields(in);
 	}
 
 	public void write(DataOutput out) throws IOException {
 		this.pageRank.write(out);
+		this.type.write(out);
 		this.adjacencyList.write(out);
 	}
 

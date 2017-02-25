@@ -111,7 +111,7 @@ public class TokenizerMapper extends Mapper<Object, Text, KeyPair, Text> {
 		String strLine, strPageName, strHtml, strEmitVal = "";
 		int iDelimLoc;
 		Matcher matcher;
-				
+		
 		strLine = value.toString();
 		
 		// Each line is formatted as (Wiki-page-name:Wiki-page-html)
@@ -120,6 +120,19 @@ public class TokenizerMapper extends Mapper<Object, Text, KeyPair, Text> {
 		// Split and get the page name and corresponding html
 		strPageName = strLine.substring(0, iDelimLoc);
 		strHtml = strLine.substring(iDelimLoc + 1);
+		
+		// Fix system identifier in <!DOCTYPE .. > if the tag is
+		// malformed.
+		// Since this doesn't affect our computation, do a blind
+		// rewrite of <!DOCTYPE .. >
+		if (strHtml.substring(0, 9).equals("<!DOCTYPE")) {
+			int index = strHtml.indexOf('>');
+			strHtml = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
+					+ strHtml.substring(index + 1);
+		}
+		
+		// Encode '&' with '&amp;'
+		strHtml = strHtml.replaceAll("&", "&amp;");
 		
 		// Extract external links from bodyContent of HTML			
 		matcher = namePattern.matcher(strPageName);

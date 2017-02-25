@@ -28,7 +28,7 @@ public class App
     {
     	try {
     		
-    		if (args.length != 3) {
+    		if (args.length != 2) {
     			System.out.println("Invalid argument list found. Please retry.");
     			System.exit(-1);
     		} else {
@@ -51,7 +51,8 @@ public class App
 		        parserJob.setOutputValueClass(Text.class);
 		        
 		        FileInputFormat.addInputPath(parserJob, new Path(args[0]));
-		        FileOutputFormat.setOutputPath(parserJob, new Path(args[1]));
+		        FileOutputFormat.setOutputPath(
+		        		parserJob, new Path(args[1] + String.valueOf(0)));
 		        parserJob.waitForCompletion(true);
 		        
 		        long pageCount = parserJob.getCounters()
@@ -61,24 +62,36 @@ public class App
 		        
 		        Configuration rankerConf = new Configuration();
 		        rankerConf.setDouble("totalPages", pageCount);
-		        rankerConf.setDouble("alpha", 0.73);
+		        rankerConf.setDouble("alpha", 0.85);
 		        
-		        Job rankerJob = Job.getInstance(rankerConf, "Page Rank Core");
-		        rankerJob.setJarByClass(App.class);
-		        
-		        // Set the mapper
-		        rankerJob.setMapperClass(NeighborRankMapper.class);
-		        rankerJob.setMapOutputKeyClass(Text.class);
-		        rankerJob.setMapOutputValueClass(Node.class);	        
-		        
-		        // Set the reducer
-		        rankerJob.setReducerClass(NodeRankReducer.class);
-		        rankerJob.setOutputKeyClass(Text.class);
-		        rankerJob.setOutputValueClass(Text.class);
-		        
-		        FileInputFormat.addInputPath(rankerJob, new Path(args[1]));
-		        FileOutputFormat.setOutputPath(rankerJob, new Path(args[2]));
-		        System.exit(rankerJob.waitForCompletion(true) ? 0 : 1);
+		        // Execute the page rank algorithm 10 times
+		        for (int i = 0; i < 2; i++) {
+		        	System.out.println("Execution " + i);
+			        Job rankerJob = Job.getInstance(rankerConf, "Page Rank Core");
+			        rankerJob.setJarByClass(App.class);
+			        
+			        // Set the mapper
+			        rankerJob.setMapperClass(NeighborRankMapper.class);
+			        rankerJob.setMapOutputKeyClass(Text.class);
+			        rankerJob.setMapOutputValueClass(Node.class);	        
+			        
+			        // Set the reducer
+			        rankerJob.setReducerClass(NodeRankReducer.class);
+			        rankerJob.setOutputKeyClass(Text.class);
+			        rankerJob.setOutputValueClass(Text.class);
+		        		        
+		        	// Specify input folder for this iteration
+	        		FileInputFormat.addInputPath(
+	        				rankerJob, new Path(args[1] + String.valueOf(i)));
+		        	
+		        	// Specify output folder for this iteration
+			        FileOutputFormat.setOutputPath(
+			        		rankerJob, new Path(args[1] + String.valueOf(i + 1)));
+			        
+			        // Execute the job
+			        rankerJob.waitForCompletion(true);
+			        
+		        }
     		}
     	} catch (Exception e) {
     		e.printStackTrace();
