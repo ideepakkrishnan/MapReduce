@@ -45,7 +45,7 @@ public class NodeRankReducer extends Reducer<Text, Node, Text, Text> {
 			
 			// New page rank
 			double dNewPageRank = (dAlpha / dPageCount) + 
-					(1 - dAlpha) * (dDelta + dIncomingRanks);
+					(1 - dAlpha) * ((dDelta / dPageCount) + dIncomingRanks);
 			
 			// Update this new page rank inside the node
 			currNode.setPageRank(new DoubleWritable(dNewPageRank));
@@ -54,9 +54,13 @@ public class NodeRankReducer extends Reducer<Text, Node, Text, Text> {
 			// this new page rank to the global counter
 			String adjList = currNode.getAdjacencyList().toString();
 			if (adjList == null || adjList.length() == 0) {
+				double val = Double.longBitsToDouble(context.getCounter(
+						DANGLING_NODES.TOTAL_PAGE_RANK).getValue());
+				val += dNewPageRank;
+				
 				context.getCounter(
-						DANGLING_NODES.TOTAL_PAGE_RANK).increment(
-								Double.doubleToLongBits(dNewPageRank));
+						DANGLING_NODES.TOTAL_PAGE_RANK).setValue(
+								Double.doubleToLongBits(val));
 			}
 			
 			// Write this out into the output file

@@ -20,7 +20,6 @@ import com.neu.pdp.resources.KeyPair;
 public class AdjacencyListReducer extends Reducer<KeyPair, Text, Text, Text> {
 	
 	// Class level private variables
-	private HashMap<Text, HashSet<String>> map;
 	private HashSet<Text> pageNames;	
 	
 	/**
@@ -30,7 +29,6 @@ public class AdjacencyListReducer extends Reducer<KeyPair, Text, Text, Text> {
 	 */
 	public void setup(Context context) 
     		throws IOException, InterruptedException {
-		map = new HashMap<Text, HashSet<String>>();
 		pageNames = new HashSet<Text>();
 	}
 	

@@ -76,7 +76,7 @@ public class App
 		        
 		        // Execute the page rank algorithm 10 times
 		        
-		        for (; i < 2; i++) {
+		        for (; i < 10; i++) {
 		        	System.out.println("Execution " + i);
 		        	rankerConf.setDouble("delta", currDelta);
 			        Job rankerJob = Job.getInstance(rankerConf, "Page Rank Core");
@@ -107,7 +107,6 @@ public class App
 			        // for next run
 			        Counters counters = rankerJob.getCounters();
 			        Counter danglingCounter = counters.findCounter(DANGLING_NODES.TOTAL_PAGE_RANK);
-			        System.out.println("Delta: " + danglingCounter.getValue());
 			        currDelta = Double.longBitsToDouble(danglingCounter.getValue());
 		        }
 		        
