@@ -6,8 +6,9 @@ import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Counter;
+import org.apache.hadoop.mapreduce.Counters;
 import org.apache.hadoop.mapreduce.Job;
-import org.apache.hadoop.mapreduce.filecache.DistributedCache;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
@@ -29,9 +30,11 @@ import com.neu.pdp.resources.Node;;
  */
 public class App 
 {
+	
     public static void main( String[] args )
     {
     	int i = 0;
+    	double currDelta = 0;
     	
     	try {
     		
@@ -75,6 +78,7 @@ public class App
 		        
 		        for (; i < 2; i++) {
 		        	System.out.println("Execution " + i);
+		        	rankerConf.setDouble("delta", currDelta);
 			        Job rankerJob = Job.getInstance(rankerConf, "Page Rank Core");
 			        rankerJob.setJarByClass(App.class);
 			        
@@ -99,6 +103,12 @@ public class App
 			        // Execute the job
 			        rankerJob.waitForCompletion(true);
 			        
+			        // Update the delta value in the config
+			        // for next run
+			        Counters counters = rankerJob.getCounters();
+			        Counter danglingCounter = counters.findCounter(DANGLING_NODES.TOTAL_PAGE_RANK);
+			        System.out.println("Delta: " + danglingCounter.getValue());
+			        currDelta = Double.longBitsToDouble(danglingCounter.getValue());
 		        }
 		        
 		        // Execute Top-K job to find the top 100 pages

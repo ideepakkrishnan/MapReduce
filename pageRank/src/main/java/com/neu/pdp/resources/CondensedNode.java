@@ -109,6 +109,13 @@ public class CondensedNode implements Writable {
 	    }
 	    
 	    return true;
-	}	
+	}
+	
+	@Override
+	public String toString() {		
+		return "{" + this.name.toString() + 
+				" : " + this.rank.toString() + 
+				"} @ " + this.hashCode();
+	}
 
 }

@@ -33,10 +33,10 @@ public class NodeRankMapper extends Mapper<Object, Text, NullWritable, Condensed
 		pqNodes = new PriorityQueue<CondensedNode>(
 				new Comparator<CondensedNode>() {
 					public int compare(CondensedNode o1, CondensedNode o2) {
-						if (o1.getRank().get() > o2.getRank().get()) {
-							return 1;
-						} else if (o1.getRank().get() < o2.getRank().get()) {
+						if (o1.getRank().get() < o2.getRank().get()) {
 							return -1;
+						} else if (o1.getRank().get() > o2.getRank().get()) {
+							return 1;
 						} else {
 							return 0;
 						}
