@@ -4,8 +4,8 @@
 package com.neu.pdp.pageRank.topK;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.NullWritable;
@@ -22,7 +22,7 @@ import com.neu.pdp.resources.CondensedNode;
 public class NodeRankMapper extends Mapper<Object, Text, NullWritable, CondensedNode> {
 	
 	// Class level variables
-	private TreeMap<DoubleWritable, Text> tmRankToNode;
+	private PriorityQueue<CondensedNode> pqNodes;
 	
 	public void setup(Context context) 
 			throws IOException, InterruptedException {
@@ -30,7 +30,18 @@ public class NodeRankMapper extends Mapper<Object, Text, NullWritable, Condensed
 		// having highest page ranks. This in-mapper
 		// aggregation will reduce the data being passed
 		// down into the reducer.
-		tmRankToNode = new TreeMap<DoubleWritable, Text>();
+		pqNodes = new PriorityQueue<CondensedNode>(
+				new Comparator<CondensedNode>() {
+					public int compare(CondensedNode o1, CondensedNode o2) {
+						if (o1.getRank().get() > o2.getRank().get()) {
+							return 1;
+						} else if (o1.getRank().get() < o2.getRank().get()) {
+							return -1;
+						} else {
+							return 0;
+						}
+					}
+				});
 	}
 	
 	public void map(Object key, Text value, Context context
@@ -48,22 +59,19 @@ public class NodeRankMapper extends Mapper<Object, Text, NullWritable, Condensed
 					Double.parseDouble(
 							strLineSplit[1].split(":")[0]));
 			
-			tmRankToNode.put(dwPageRank, txtPageName);
+			pqNodes.add(new CondensedNode(txtPageName, dwPageRank));
 			
-			if (tmRankToNode.size() > 100) {
-				tmRankToNode.remove(tmRankToNode.firstKey());
+			if (pqNodes.size() > 100) {
+				pqNodes.poll();
 			}
 		}
 	}
 	
 	public void cleanup(Context context) 
 			throws IOException, InterruptedException {
-		for (Map.Entry<DoubleWritable, Text> entry 
-				: tmRankToNode.entrySet()) {
-			context.write(
-					NullWritable.get(), 
-					new CondensedNode(
-							entry.getValue(), entry.getKey()));
+		CondensedNode cn;
+		while ((cn = pqNodes.poll()) != null) {
+			context.write(NullWritable.get(), cn);
 		}
 	}
 

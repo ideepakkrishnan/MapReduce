@@ -85,5 +85,30 @@ public class CondensedNode implements Writable {
 		this.name.write(out);
 		this.rank.write(out);
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+	    if (obj == null) {
+	        return false;
+	    }
+	    
+	    if (!CondensedNode.class.isAssignableFrom(
+	    		obj.getClass())) {
+	        return false;
+	    }
+	    
+	    CondensedNode other = (CondensedNode) obj;
+	    if ((this.name == null) 
+	    		? (other.name != null) : 
+	    			!this.name.equals(other.name)) {
+	        return false;
+	    }
+	    
+	    if (this.rank != other.rank) {
+	        return false;
+	    }
+	    
+	    return true;
+	}	
 
 }
