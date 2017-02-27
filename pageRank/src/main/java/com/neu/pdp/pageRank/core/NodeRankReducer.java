@@ -14,8 +14,8 @@ import com.neu.pdp.DANGLING_NODES;
 import com.neu.pdp.resources.Node;
 
 /**
+ * The reducer class for Page Rank algorithm
  * @author ideepakkrishnan
- *
  */
 public class NodeRankReducer extends Reducer<Text, Node, Text, Text> {
 	

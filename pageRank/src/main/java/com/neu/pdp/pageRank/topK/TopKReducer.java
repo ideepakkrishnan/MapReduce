@@ -18,8 +18,10 @@ import org.apache.hadoop.mapreduce.Mapper.Context;
 import com.neu.pdp.resources.CondensedNode;
 
 /**
+ * Reducer class for Top-K
+ * Collects local winners from all map tasks and generates
+ * the final list of 100 pages with highest page ranks. 
  * @author ideepakkrishnan
- *
  */
 public class TopKReducer extends Reducer<NullWritable, CondensedNode, Text, DoubleWritable> {
 
@@ -28,7 +30,7 @@ public class TopKReducer extends Reducer<NullWritable, CondensedNode, Text, Doub
 	
 	public void setup(Context context) 
 			throws IOException, InterruptedException {
-		// Initialize a TreeMap to store the top 100 pages
+		// Initialize a priority queue to store the top 100 pages
 		// having highest page ranks.
 		pqNodes = new PriorityQueue<CondensedNode>(
 				new Comparator<CondensedNode>() {
@@ -46,24 +48,33 @@ public class TopKReducer extends Reducer<NullWritable, CondensedNode, Text, Doub
 	 
 	public void reduce(NullWritable key, Iterable<CondensedNode> values,
             Context context
-            ) throws IOException, InterruptedException {		
-		for (CondensedNode cn : values) {			
+            ) throws IOException, InterruptedException {
+		
+		for (CondensedNode cn : values) {
+			// Add this page into priority queue
 			pqNodes.add(
 					new CondensedNode(
 							new Text(cn.getName()),
 							new DoubleWritable(cn.getRank().get())));
 			
 			if (pqNodes.size() > 100) {
+				// Means that we need to remove the page
+				// with lowest rank in the priority queue
 				pqNodes.poll();
 			}			
 		}
 		
+		// Array to store the final list in descending
+		// order of page ranks
 		List<CondensedNode> pages = new ArrayList<CondensedNode>();
 		
+		// Add the pages from the priority queue into
+		// the above list
 		while (!pqNodes.isEmpty()) {
 			pages.add(pqNodes.poll());
 		}
 		
+		// Write each page in the list into output file
 		for (int i = pages.size() - 1; i >= 0 ; i--) {
 			CondensedNode node = pages.get(i);
 			context.write(node.getName(), node.getRank());

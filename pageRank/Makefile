@@ -18,7 +18,7 @@ aws.input=input
 aws.output=output
 aws.topKoutput=topKOutput
 aws.log.dir=logs
-aws.num.nodes=2
+aws.num.nodes=10
 aws.instance.type=m4.large
 # -----------------------------------------------------------
 

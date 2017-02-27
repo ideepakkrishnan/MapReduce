@@ -16,8 +16,12 @@ import org.apache.hadoop.mapreduce.Mapper.Context;
 import com.neu.pdp.resources.CondensedNode;
 
 /**
+ * Mapper class for Top-K
+ * The methods in this class finds the local winners for
+ * each map task and forwards it into a single reducer
+ * (specified during job initialization) so that this
+ * reducer can find the global winners.
  * @author ideepakkrishnan
- *
  */
 public class NodeRankMapper extends Mapper<Object, Text, NullWritable, CondensedNode> {
 	
@@ -26,7 +30,7 @@ public class NodeRankMapper extends Mapper<Object, Text, NullWritable, Condensed
 	
 	public void setup(Context context) 
 			throws IOException, InterruptedException {
-		// Initialize a TreeMap to store the top 100 pages
+		// Initialize a priority queue to store the top 100 pages
 		// having highest page ranks. This in-mapper
 		// aggregation will reduce the data being passed
 		// down into the reducer.
@@ -51,7 +55,8 @@ public class NodeRankMapper extends Mapper<Object, Text, NullWritable, Condensed
 		String strLine = value.toString();
 		
 		if (strLine != null && strLine.length() > 0) {
-			// Split the record and fetch page name
+			// Split the record and fetch page name and
+			// page rank
 			String strLineSplit[] = strLine.split("\t");
 			Text txtPageName = new Text(strLineSplit[0]);
 				
@@ -59,9 +64,12 @@ public class NodeRankMapper extends Mapper<Object, Text, NullWritable, Condensed
 					Double.parseDouble(
 							strLineSplit[1].split(":")[0]));
 			
+			// Add the entry into priority queue
 			pqNodes.add(new CondensedNode(txtPageName, dwPageRank));
 			
 			if (pqNodes.size() > 100) {
+				// Means that we need to remove the
+				// page with smallest rank
 				pqNodes.poll();
 			}
 		}
@@ -69,6 +77,7 @@ public class NodeRankMapper extends Mapper<Object, Text, NullWritable, Condensed
 	
 	public void cleanup(Context context) 
 			throws IOException, InterruptedException {
+		// Pass on the local winners to reducer
 		CondensedNode cn;
 		while ((cn = pqNodes.poll()) != null) {
 			context.write(NullWritable.get(), cn);

@@ -14,8 +14,10 @@ import org.apache.hadoop.mapreduce.Reducer.Context;
 import com.neu.pdp.resources.KeyPair;
 
 /**
+ * Reducer class for pre-processor which generates
+ * the actual adjacency lists and the total number
+ * of pages in the data-set for the next phase. 
  * @author ideepakkrishnan
- *
  */
 public class AdjacencyListReducer extends Reducer<KeyPair, Text, Text, Text> {
 	
@@ -44,10 +46,15 @@ public class AdjacencyListReducer extends Reducer<KeyPair, Text, Text, Text> {
 		
 		if (key.getFirst().toString().equals("COUNT") && 
 				!key.getSecond().toString().equals("ADJ")) {
+			// Dummy nodes being passed in to find the
+			// number of pages
 			for (Text t : values) {
 				pageNames.add(t);
 			}
-		} else {		
+		} else {
+			// Actual pages and their adjacency lists
+			// which needs to be passed on to the next
+			// phase.
 			for (Text t : values) {
 				if (t.getLength() > 0) {
 					strAdjacencyList += t.toString();
@@ -59,6 +66,9 @@ public class AdjacencyListReducer extends Reducer<KeyPair, Text, Text, Text> {
 	}
 	
 	public void cleanup(Context context) throws IOException, InterruptedException {
+		// Calculate the total number of pages and 
+		// save it in a global counter so that it
+		// can be used in the next phase.
 		int count = 0;
 		
 		for (Text t : pageNames) {

@@ -15,8 +15,8 @@ import com.neu.pdp.resources.Node;
 import com.neu.pdp.resources.TextArrayWritable;
 
 /**
+ * The mapper class for Page Rank algorithm.
  * @author ideepakkrishnan
- *
  */
 public class NeighborRankMapper extends Mapper<Object, Text, Text, Node> {
 

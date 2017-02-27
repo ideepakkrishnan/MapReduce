@@ -25,8 +25,14 @@ import com.neu.pdp.resources.KeyPair;
 import com.neu.pdp.resources.Node;;
 
 /**
- * Hello world!
- *
+ * Driver program the page rank program. It calls the
+ * pre-processing step at first which then generates
+ * an adjacency list for all pages. This data is
+ * consumed by the second job which is the main page
+ * rank job and it is processed 10 times such that
+ * the page ranks converge over those iterations. This
+ * calculation is then used by the last job in the
+ * series to find the top-100 pages with maximum ranks.
  */
 public class App 
 {
@@ -42,6 +48,10 @@ public class App
     			System.out.println("Invalid argument list found. Please retry.");
     			System.exit(-1);
     		} else {
+    			
+    			/**
+    			 * Pre-processor (To generate the adjacency lists)
+    			 */
 		    	Configuration parserConf = new Configuration();
 		        Job parserJob = Job.getInstance(parserConf, "Page Rank pre-processor");
 		        parserJob.setJarByClass(App.class);
@@ -70,6 +80,9 @@ public class App
 		        		.getValue();
 		        System.out.println("Number of records: " + pageCount);
 		        
+		        /**
+		         * Page Rank calculator
+		         */
 		        Configuration rankerConf = new Configuration();
 		        rankerConf.setDouble("totalPages", pageCount);
 		        rankerConf.setDouble("alpha", 0.85);
@@ -109,6 +122,10 @@ public class App
 			        Counter danglingCounter = counters.findCounter(DANGLING_NODES.TOTAL_PAGE_RANK);
 			        currDelta = Double.longBitsToDouble(danglingCounter.getValue());
 		        }
+		        
+		        /**
+		         * Top-K
+		         */
 		        
 		        // Execute Top-K job to find the top 100 pages
 		        Configuration topKConf = new Configuration();
