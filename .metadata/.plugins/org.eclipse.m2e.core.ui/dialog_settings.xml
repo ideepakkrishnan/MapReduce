@@ -14,6 +14,7 @@
 	</section>
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="/home/ideepakkrishnan/workspace/sparkPageRank"/>
 			<item value="/home/ideepakkrishnan/workspace/pageRank"/>
 			<item value="/home/ideepakkrishnan/workspace/parserDemo"/>
 			<item value="/home/ideepakkrishnan/workspace/climateTimeSeries"/>
