@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.nio.MappedByteBuffer"/>
-<fullyQualifiedTypeName name="org.apache.log4j.spi.ThrowableRendererSupport"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="com.neu.pdp.pageRank.preProcessor.TokenizerMapper"/>
 <fullyQualifiedTypeName name="org.xml.sax.helpers.DefaultHandler"/>
@@ -60,4 +58,6 @@
 <fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Counters"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.mapred.Counters.Counter"/>
 <fullyQualifiedTypeName name="com.neu.pdp.DANGLING_NODES"/>
+<fullyQualifiedTypeName name="org.apache.spark.api.java.JavaRDD"/>
+<fullyQualifiedTypeName name="org.apache.spark.api.java.JavaPairRDD"/>
 </qualifiedTypeNameHistroy>
