@@ -54,7 +54,7 @@
 		</list>
 	</section>
 	<section name="MavenProjectWizardArchetypePage">
-		<item value="http://repo1.maven.org/maven2/archetype-catalog.xml" key="catalog"/>
+		<item value="All Catalogs" key="catalog"/>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
 			<item value="[artifactId]-TRUNK"/>
@@ -73,6 +73,7 @@
 	</section>
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
+			<item value="/home/ideepakkrishnan/workspace"/>
 			<item value="/home/ideepakkrishnan/spark-scala"/>
 			<item value="/home/ideepakkrishnan/spark-scala/spark-scala-test2/pom.xml"/>
 			<item value="/home/ideepakkrishnan/workspace/sparkPageRank/pom.xml"/>
@@ -89,20 +90,12 @@
 	<section name="Maven2ProjectWizardArchifactPage">
 		<list key="package">
 			<item value="com.neu.pdp"/>
-			<item value="com.neu.pdp.scalaPageRank"/>
-			<item value="com.neu.test"/>
-			<item value="com.neu.test.sparkTempAvg"/>
 		</list>
 		<list key="groupId">
 			<item value="com.neu.pdp"/>
-			<item value="com.neu.test"/>
 		</list>
 		<list key="artifactId">
 			<item value="matrixPageRank"/>
-			<item value="scalaPageRank"/>
-			<item value="sparkPageRank"/>
-			<item value="sparkTempAvgForEachStation"/>
-			<item value="sparkTempAvg"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>

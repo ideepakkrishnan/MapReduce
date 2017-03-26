@@ -1,15 +1,16 @@
 /**
  * 
  */
-package com.neu.pdp.pageRank.preProcessor;
+package com.neu.pdp.pageRank.preProcessor.adjacencyListBuilder;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.HashSet;
 
+import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.Reducer.Context;
+import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
 
 import com.neu.pdp.pageRank.resources.KeyPair;
 
@@ -22,7 +23,8 @@ import com.neu.pdp.pageRank.resources.KeyPair;
 public class AdjacencyListReducer extends Reducer<KeyPair, Text, Text, Text> {
 	
 	// Class level private variables
-	private HashSet<Text> pageNames;	
+	private HashSet<String> pageNames;
+	private MultipleOutputs<Text, Text> mos;
 	
 	/**
 	 * Initialize the class level variables for in-
@@ -31,7 +33,8 @@ public class AdjacencyListReducer extends Reducer<KeyPair, Text, Text, Text> {
 	 */
 	public void setup(Context context) 
     		throws IOException, InterruptedException {
-		pageNames = new HashSet<Text>();
+		pageNames = new HashSet<String>();
+		mos = new MultipleOutputs(context);
 	}
 	
 	/**
@@ -49,7 +52,7 @@ public class AdjacencyListReducer extends Reducer<KeyPair, Text, Text, Text> {
 			// Dummy nodes being passed in to find the
 			// number of pages
 			for (Text t : values) {
-				pageNames.add(t);
+				pageNames.add(t.toString());
 			}
 		} else {
 			// Actual pages and their adjacency lists
@@ -71,10 +74,12 @@ public class AdjacencyListReducer extends Reducer<KeyPair, Text, Text, Text> {
 		// can be used in the next phase.
 		int count = 0;
 		
-		for (Text t : pageNames) {
+		for (String s : pageNames) {
 			count++;
+			mos.write(new Text(s), new Text("/" + count), "/home/ideepakkrishnan/Documents/pageRank/mapping/map");
 		}
 		
+		mos.close();
 		context.getCounter("pageCount", "pageCount").setValue(count);
 	}
 
