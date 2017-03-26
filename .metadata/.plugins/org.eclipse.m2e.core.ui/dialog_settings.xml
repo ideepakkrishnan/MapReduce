@@ -2,6 +2,25 @@
 <section name="Workbench">
 	<section name="org.eclipse.m2e.core.pom.dependencies">
 	</section>
+	<section name="MavenProjectWizardArtifactPage">
+		<list key="groupId">
+		</list>
+		<list key="name">
+		</list>
+		<list key="artifactId">
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
 	<section name="org.eclipse.m2e.core.pom.overview">
 		<list key="ciManagementUrl">
 		</list>
@@ -12,8 +31,13 @@
 		<list key="issueManagementUrl">
 		</list>
 	</section>
+	<section name="org.eclipse.m2e.core.ui.internal.preferences.LocalArchetypeCatalogDialog">
+	</section>
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="/home/ideepakkrishnan/spark-scala/sparkTempAvgForEachStation"/>
+			<item value="/home/ideepakkrishnan/spark-scala/spark-scala-test1"/>
+			<item value="/home/ideepakkrishnan/workspace/sparkTest1"/>
 			<item value="/home/ideepakkrishnan/workspace/sparkPageRank"/>
 			<item value="/home/ideepakkrishnan/workspace/pageRank"/>
 			<item value="/home/ideepakkrishnan/workspace/parserDemo"/>
@@ -27,6 +51,69 @@
 			<item value="[groupId].[artifactId]"/>
 			<item value="[groupId].[artifactId]-[version]"/>
 			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardArchetypePage">
+		<item value="http://repo1.maven.org/maven2/archetype-catalog.xml" key="catalog"/>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.ui.internal.wizards.CustomArchetypeDialog">
+	</section>
+	<section name="org.eclipse.m2e.core.ui.internal.preferences.RemoteArchetypeCatalogDialog">
+		<list key="catalogUrl">
+			<item value="http://repo1.maven.org/maven2/archetype-catalog.xml"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardLocationPage">
+		<list key="location">
+			<item value="/home/ideepakkrishnan/spark-scala"/>
+			<item value="/home/ideepakkrishnan/spark-scala/spark-scala-test2/pom.xml"/>
+			<item value="/home/ideepakkrishnan/workspace/sparkPageRank/pom.xml"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="Maven2ProjectWizardArchifactPage">
+		<list key="package">
+			<item value="com.neu.pdp"/>
+			<item value="com.neu.pdp.scalaPageRank"/>
+			<item value="com.neu.test"/>
+			<item value="com.neu.test.sparkTempAvg"/>
+		</list>
+		<list key="groupId">
+			<item value="com.neu.pdp"/>
+			<item value="com.neu.test"/>
+		</list>
+		<list key="artifactId">
+			<item value="matrixPageRank"/>
+			<item value="scalaPageRank"/>
+			<item value="sparkPageRank"/>
+			<item value="sparkTempAvgForEachStation"/>
+			<item value="sparkTempAvg"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
 		</list>
 	</section>
 </section>

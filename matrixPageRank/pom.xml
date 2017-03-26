@@ -1,17 +1,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <groupId>com.neu.pdp</groupId>
-  <artifactId>sparkPageRank</artifactId>
+  <artifactId>matrixPageRank</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>sparkPageRank</name>
+
+  <name>Matrix-based Page Rank</name>
   <url>http://maven.apache.org</url>
+
   <properties>
     <jUnitVersion>3.8.1</jUnitVersion>
     <compressVersion>1.13</compressVersion>
+    <hadoopVersion>2.7.3</hadoopVersion>
     <shadeVersion>2.4.3</shadeVersion>
-    <sparkVersion>2.1.0</sparkVersion>
   </properties>
   <build>
     <plugins>
@@ -48,11 +51,11 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-compress</artifactId>
       <version>${compressVersion}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.spark</groupId>
-      <artifactId>spark-core_2.11</artifactId>
-      <version>${sparkVersion}</version>
-    </dependency>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.hadoop</groupId>
+		<artifactId>hadoop-client</artifactId>
+		<version>${hadoopVersion}</version>
+	</dependency>
   </dependencies>
 </project>
