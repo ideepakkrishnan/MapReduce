@@ -21,6 +21,8 @@ import com.neu.pdp.pageRank.preProcessor.matrixBuilder.FirstLetterGoupingCompara
 import com.neu.pdp.pageRank.preProcessor.matrixBuilder.FirstLetterPartitioner;
 import com.neu.pdp.pageRank.preProcessor.matrixBuilder.PageNameIdReducer;
 import com.neu.pdp.pageRank.preProcessor.matrixBuilder.PageNameMapper;
+import com.neu.pdp.pageRank.preProcessor.sparseMatrixBuilder.DestinationMapper;
+import com.neu.pdp.pageRank.preProcessor.sparseMatrixBuilder.DestinationReducer;
 import com.neu.pdp.pageRank.resources.CondensedNode;
 import com.neu.pdp.pageRank.resources.KeyPair;
 import com.neu.pdp.pageRank.resources.SourceRankPair;
@@ -38,16 +40,25 @@ public class App
     	
     	try {
     		
-    		if (args.length != 6) {
+    		if (args.length != 8) {
     			System.out.println("Invalid argument list found. Please retry.");
     			System.exit(-1);
     		} else {
+    			
+    			String wikiDataPath = args[0];
+    			String adjListPath = args[1];
+    			String pageIdMapPath = args[2];
+    			String sourceIdReplacedPath = args[3];
+    			String outlinkIdReplacedPath = args[4];
+    			String defaultRankPath = args[5];
+    			String sparseMatrixPath = args[6];
+    			String topKPath = args[7];
     			
     			/**
     			 * Pre-processor (To generate the adjacency lists)
     			 */
 		    	Configuration parserConf = new Configuration();
-		    	parserConf.set("mappingOutput", args[2]);
+		    	parserConf.set("mappingOutput", pageIdMapPath);
 		    	
 		        Job parserJob = Job.getInstance(parserConf, "Page Rank pre-processor");
 		        parserJob.setJarByClass(App.class);
@@ -66,9 +77,9 @@ public class App
 		        parserJob.setOutputKeyClass(Text.class);
 		        parserJob.setOutputValueClass(Text.class);
 		        
-		        FileInputFormat.addInputPath(parserJob, new Path(args[0]));
+		        FileInputFormat.addInputPath(parserJob, new Path(wikiDataPath));
 		        FileOutputFormat.setOutputPath(
-		        		parserJob, new Path(args[1]));
+		        		parserJob, new Path(adjListPath));
 		        
 		        // Add output file to store the mapping between
 		        // page names and counters
@@ -90,6 +101,8 @@ public class App
 		         */
 		        
 		        Configuration sourceIdMapperConf = new Configuration();
+		        sourceIdMapperConf.setLong("totalPageCount", pageCount);
+		        sourceIdMapperConf.set("defaultRankPath", defaultRankPath);
 		        Job sourceIdMapperJob = Job.getInstance(
 		        		sourceIdMapperConf, "Page Rank Source - ID Mapper");
 		        sourceIdMapperJob.setJarByClass(App.class);
@@ -105,12 +118,20 @@ public class App
 		        sourceIdMapperJob.setOutputValueClass(Text.class);
 		        
 		        FileInputFormat.addInputPath(
-		        		sourceIdMapperJob, new Path(args[1]));
+		        		sourceIdMapperJob, new Path(adjListPath));
 		        FileInputFormat.addInputPath(
-		        		sourceIdMapperJob, new Path(args[2]));
+		        		sourceIdMapperJob, new Path(pageIdMapPath));
 		        
 		        FileOutputFormat.setOutputPath(
-		        		sourceIdMapperJob, new Path(args[3]));
+		        		sourceIdMapperJob, new Path(sourceIdReplacedPath));
+		        
+		        // Add output file to store the mapping between
+		        // page names and counters
+		        MultipleOutputs.addNamedOutput(
+		        		sourceIdMapperJob, 
+		        		"ranks0", 
+		        		TextOutputFormat.class, 
+		        		Text.class, Text.class);
 		        
 		        sourceIdMapperJob.waitForCompletion(true);
 		        
@@ -134,12 +155,35 @@ public class App
 		        matrixGeneratorJob.setOutputKeyClass(LongWritable.class);
 		        matrixGeneratorJob.setOutputValueClass(Text.class);
 		        
-		        FileInputFormat.addInputPath(matrixGeneratorJob, new Path(args[2]));
-		        FileInputFormat.addInputPath(matrixGeneratorJob, new Path(args[3]));
+		        FileInputFormat.addInputPath(matrixGeneratorJob, new Path(pageIdMapPath));
+		        FileInputFormat.addInputPath(matrixGeneratorJob, new Path(sourceIdReplacedPath));
 		        FileOutputFormat.setOutputPath(
-		        		matrixGeneratorJob, new Path(args[4]));
+		        		matrixGeneratorJob, new Path(outlinkIdReplacedPath));
 		        
 		        matrixGeneratorJob.waitForCompletion(true);
+		        
+		        Configuration matrixBuilderConf = new Configuration();
+		        Job matrixBuilderJob = Job.getInstance(
+		        		sourceIdMapperConf, "Sparse Matrix Builder");
+		        matrixBuilderJob.setJarByClass(App.class);
+		        
+		        // Set the mapper
+		        matrixBuilderJob.setMapperClass(DestinationMapper.class);
+		        matrixBuilderJob.setMapOutputKeyClass(Text.class);
+		        matrixBuilderJob.setMapOutputValueClass(Text.class);
+		        
+		        // Set the reducer
+		        matrixBuilderJob.setReducerClass(DestinationReducer.class);
+		        matrixBuilderJob.setOutputKeyClass(Text.class);
+		        matrixBuilderJob.setOutputValueClass(Text.class);
+		        
+		        FileInputFormat.addInputPath(
+		        		matrixBuilderJob, new Path(outlinkIdReplacedPath));
+		        
+		        FileOutputFormat.setOutputPath(
+		        		matrixBuilderJob, new Path(sparseMatrixPath));
+		        
+		        matrixBuilderJob.waitForCompletion(true);
     		}
     	} catch (Exception e) {
     		e.printStackTrace();

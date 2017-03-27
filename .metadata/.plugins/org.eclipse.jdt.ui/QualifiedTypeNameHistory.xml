@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.neu.pdp.pageRank.core.NeighborRankMapper"/>
-<fullyQualifiedTypeName name="com.neu.pdp.pageRank.core.NodeRankReducer"/>
 <fullyQualifiedTypeName name="java.io.EOFException"/>
 <fullyQualifiedTypeName name="com.neu.pdp.resources.Node"/>
 <fullyQualifiedTypeName name="java.util.TreeMap"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.io.Writable"/>
-<fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="com.neu.pdp.pageRank.topK.NodeRankMapper"/>
 <fullyQualifiedTypeName name="com.neu.pdp.pageRank.topK.TopKReducer"/>
 <fullyQualifiedTypeName name="com.neu.pdp.resources.CondensedNodeComparator"/>
-<fullyQualifiedTypeName name="java.util.Map.Entry"/>
 <fullyQualifiedTypeName name="java.util.SortedSet"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.io.NullWritable"/>
 <fullyQualifiedTypeName name="java.util.PriorityQueue"/>
@@ -38,7 +34,6 @@
 <fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.lib.output.TextOutputFormat"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.io.IntWritable"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.lib.output.MultipleOutputs"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Mapper"/>
 <fullyQualifiedTypeName name="java.io.IOException"/>
 <fullyQualifiedTypeName name="java.lang.InterruptedException"/>
 <fullyQualifiedTypeName name="com.neu.pdp.pageRank.preProcessor.SourceIdJoiner.SourceMapper"/>
@@ -49,15 +44,20 @@
 <fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Partitioner"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.io.WritableComparator"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.io.WritableComparable"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Reducer"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.io.Text"/>
 <fullyQualifiedTypeName name="com.neu.pdp.pageRank.preProcessor.matrixBuilder.PageNameMapper"/>
 <fullyQualifiedTypeName name="com.neu.pdp.pageRank.resources.CondensedNode"/>
 <fullyQualifiedTypeName name="com.neu.pdp.pageRank.preProcessor.matrixBuilder.FirstLetterPartitioner"/>
 <fullyQualifiedTypeName name="com.neu.pdp.pageRank.preProcessor.matrixBuilder.FirstLetterGoupingComparator"/>
 <fullyQualifiedTypeName name="com.neu.pdp.pageRank.preProcessor.matrixBuilder.PageNameIdReducer"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.io.LongWritable"/>
 <fullyQualifiedTypeName name="com.neu.pdp.pageRank.resources.SourceRankPair"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Mapper"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.util.Map.Entry"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Reducer"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.Text"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.LongWritable"/>
+<fullyQualifiedTypeName name="com.neu.pdp.pageRank.preProcessor.sparseMatrixBuilder.DestinationMapper"/>
+<fullyQualifiedTypeName name="com.neu.pdp.pageRank.preProcessor.sparseMatrixBuilder.DestinationReducer"/>
 </qualifiedTypeNameHistroy>

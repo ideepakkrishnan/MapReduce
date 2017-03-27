@@ -6,7 +6,6 @@ package com.neu.pdp.pageRank.preProcessor.adjacencyListBuilder;
 import java.io.IOException;
 import java.util.HashSet;
 
-import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.Reducer.Context;
@@ -76,12 +75,17 @@ public class AdjacencyListReducer extends Reducer<KeyPair, Text, Text, Text> {
 		// can be used in the next phase.
 		int count = 0;
 		
-		for (String s : pageNames) {
-			count++;
-			mos.write(new Text(s), new Text("/" + count), outputFolder + "/map");
+		if (outputFolder != null) {
+			for (String s : pageNames) {
+				count++;			
+				mos.write(new Text(s), new Text("/" + count), outputFolder + "/map");
+			}
+			
+			mos.close();
+		} else {
+			throw new IOException("Mapping output folder not found!");
 		}
 		
-		mos.close();
 		context.getCounter("pageCount", "pageCount").setValue(count);
 	}
 
