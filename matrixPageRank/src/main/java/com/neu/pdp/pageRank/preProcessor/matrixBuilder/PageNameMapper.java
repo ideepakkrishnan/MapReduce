@@ -11,13 +11,15 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Mapper.Context;
 
+import com.neu.pdp.pageRank.resources.CondensedNode;
+import com.neu.pdp.pageRank.resources.KeyPair;
 import com.neu.pdp.pageRank.resources.SourceRankPair;
 
 /**
  * @author ideepakkrishnan
  *
  */
-public class PageNameMapper extends Mapper<Object, Text, Text, SourceRankPair> {
+public class PageNameMapper extends Mapper<Object, Text, CondensedNode, SourceRankPair> {
 	
 	public void map(Object key, Text value, Context context
             ) throws IOException, InterruptedException {
@@ -33,28 +35,46 @@ public class PageNameMapper extends Mapper<Object, Text, Text, SourceRankPair> {
 			source = strLineSplit[0];
 			
 			if (strLineSplit.length > 1) {
+				val = strLineSplit[1];
+				
 				if (val.startsWith("/")) {
-					// This records is a page name - ID map
+					// This records is a page name - ID map. We
+					// need to generate the following record:
+					// Key - (E, 1)
+					// Value - (England, 15, NegativeInfinity)
+					// In the value, second element represents
+					// the ID for England.
 					context.write(
-							new Text(source), 
+							new CondensedNode(
+									new Text(String.valueOf(source.charAt(0))), 
+									new DoubleWritable(1)), // 1 -> Page name - ID map
 							new SourceRankPair(
+									new Text(source),
 									new LongWritable(
 											Long.parseLong(val.substring(1))),
 									new DoubleWritable(
 											Double.NEGATIVE_INFINITY)));
 				} else {
-					val = strLineSplit[1];
+					// This record is an adjacency list. We
+					// need to generate the following record:
+					// Key: (I, 2)
+					// Value: (India, 5, 0.74635)
+					// In the value, the second element represents
+					// the source page's ID.
 					String[] outlinks = val.split(",");
 					Long pageCount = context.getConfiguration().getLong("pageCount", 0);
 					Double defaultPageRank = 1 / (double) pageCount;
 					for (String s : outlinks) {
 						context.write(
-								new Text(s), 
+								new CondensedNode(
+										new Text(String.valueOf(s.charAt(0))),
+										new DoubleWritable(2)), // 2 -> Outlink representation
 								new SourceRankPair(
+										new Text(s),
 										new LongWritable(Long.parseLong(source)), 
 										new DoubleWritable(defaultPageRank)));
 					}
-				}				
+				}
 			}
 		}
 		

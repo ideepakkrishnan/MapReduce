@@ -17,7 +17,13 @@ import com.neu.pdp.pageRank.preProcessor.adjacencyListBuilder.AdjacencyListReduc
 import com.neu.pdp.pageRank.preProcessor.adjacencyListBuilder.GroupComparator;
 import com.neu.pdp.pageRank.preProcessor.adjacencyListBuilder.TokenizerMapper;
 import com.neu.pdp.pageRank.preProcessor.adjacencyListBuilder.ValuePartitioner;
+import com.neu.pdp.pageRank.preProcessor.matrixBuilder.FirstLetterGoupingComparator;
+import com.neu.pdp.pageRank.preProcessor.matrixBuilder.FirstLetterPartitioner;
+import com.neu.pdp.pageRank.preProcessor.matrixBuilder.PageNameIdReducer;
+import com.neu.pdp.pageRank.preProcessor.matrixBuilder.PageNameMapper;
+import com.neu.pdp.pageRank.resources.CondensedNode;
 import com.neu.pdp.pageRank.resources.KeyPair;
+import com.neu.pdp.pageRank.resources.SourceRankPair;
 
 /**
  * Hello world!
@@ -32,7 +38,7 @@ public class App
     	
     	try {
     		
-    		if (args.length != 5) {
+    		if (args.length != 6) {
     			System.out.println("Invalid argument list found. Please retry.");
     			System.exit(-1);
     		} else {
@@ -41,6 +47,8 @@ public class App
     			 * Pre-processor (To generate the adjacency lists)
     			 */
 		    	Configuration parserConf = new Configuration();
+		    	parserConf.set("mappingOutput", args[2]);
+		    	
 		        Job parserJob = Job.getInstance(parserConf, "Page Rank pre-processor");
 		        parserJob.setJarByClass(App.class);
 		        
@@ -111,6 +119,27 @@ public class App
 		        
 		        Job matrixGeneratorJob = Job.getInstance(
 		        		matrixGeneratorConfig, "Matrix Generator");
+		        
+		        // Set the mapper
+		        matrixGeneratorJob.setMapperClass(PageNameMapper.class);
+		        matrixGeneratorJob.setMapOutputKeyClass(CondensedNode.class);
+		        matrixGeneratorJob.setMapOutputValueClass(SourceRankPair.class);
+		        
+		        // Set the intermediate classes
+		        matrixGeneratorJob.setPartitionerClass(FirstLetterPartitioner.class);
+		        matrixGeneratorJob.setGroupingComparatorClass(FirstLetterGoupingComparator.class);	        
+		        
+		        matrixGeneratorJob.setReducerClass(PageNameIdReducer.class);
+		        // Set the reducer's output key and value types
+		        matrixGeneratorJob.setOutputKeyClass(LongWritable.class);
+		        matrixGeneratorJob.setOutputValueClass(Text.class);
+		        
+		        FileInputFormat.addInputPath(matrixGeneratorJob, new Path(args[2]));
+		        FileInputFormat.addInputPath(matrixGeneratorJob, new Path(args[3]));
+		        FileOutputFormat.setOutputPath(
+		        		matrixGeneratorJob, new Path(args[4]));
+		        
+		        matrixGeneratorJob.waitForCompletion(true);
     		}
     	} catch (Exception e) {
     		e.printStackTrace();

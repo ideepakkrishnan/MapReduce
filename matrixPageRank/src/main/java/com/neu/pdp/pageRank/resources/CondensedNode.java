@@ -10,12 +10,13 @@ import java.io.IOException;
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
+import org.apache.hadoop.io.WritableComparable;
 
 /**
  * @author ideepakkrishnan
  *
  */
-public class CondensedNode implements Writable {
+public class CondensedNode implements WritableComparable<CondensedNode> {
 
 	// Class level attributes
 	private Text name;
@@ -116,6 +117,16 @@ public class CondensedNode implements Writable {
 		return "{" + this.name.toString() + 
 				" : " + this.rank.toString() + 
 				"} @ " + this.hashCode();
+	}
+
+	public int compareTo(CondensedNode o) {
+		int cmp = this.name.compareTo(o.getName());
+		
+		if (cmp != 0) {
+			return cmp;
+		}
+		
+		return this.rank.compareTo(o.getRank());
 	}
 
 }

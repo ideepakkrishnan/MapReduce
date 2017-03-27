@@ -9,7 +9,7 @@
 		<item value="false" key="updateTextualMatches"/>
 	</section>
 	<section name="SelfEncapsulateFieldWizard">
-		<item value="false" key="GenerateJavadoc"/>
+		<item value="true" key="GenerateJavadoc"/>
 	</section>
 	<section name="GenerateConstructorUsingFieldsSelectionDialog">
 		<item value="false" key="OmitCallToSuper"/>

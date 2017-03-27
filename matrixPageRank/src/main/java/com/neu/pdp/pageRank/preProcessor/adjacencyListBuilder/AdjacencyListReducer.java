@@ -25,6 +25,7 @@ public class AdjacencyListReducer extends Reducer<KeyPair, Text, Text, Text> {
 	// Class level private variables
 	private HashSet<String> pageNames;
 	private MultipleOutputs<Text, Text> mos;
+	private String outputFolder;
 	
 	/**
 	 * Initialize the class level variables for in-
@@ -35,6 +36,7 @@ public class AdjacencyListReducer extends Reducer<KeyPair, Text, Text, Text> {
     		throws IOException, InterruptedException {
 		pageNames = new HashSet<String>();
 		mos = new MultipleOutputs(context);
+		outputFolder = context.getConfiguration().get("mappingOutput");
 	}
 	
 	/**
@@ -76,7 +78,7 @@ public class AdjacencyListReducer extends Reducer<KeyPair, Text, Text, Text> {
 		
 		for (String s : pageNames) {
 			count++;
-			mos.write(new Text(s), new Text("/" + count), "/home/ideepakkrishnan/Documents/pageRank/mapping/map");
+			mos.write(new Text(s), new Text("/" + count), outputFolder + "/map");
 		}
 		
 		mos.close();
