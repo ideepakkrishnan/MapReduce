@@ -1,11 +1,15 @@
 package com.neu.pdp;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.FileUtil;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.filecache.DistributedCache;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
@@ -17,6 +21,8 @@ import com.neu.pdp.pageRank.preProcessor.adjacencyListBuilder.AdjacencyListReduc
 import com.neu.pdp.pageRank.preProcessor.adjacencyListBuilder.GroupComparator;
 import com.neu.pdp.pageRank.preProcessor.adjacencyListBuilder.TokenizerMapper;
 import com.neu.pdp.pageRank.preProcessor.adjacencyListBuilder.ValuePartitioner;
+import com.neu.pdp.pageRank.preProcessor.core.RowColumnMapper;
+import com.neu.pdp.pageRank.preProcessor.core.RowColumnReducer;
 import com.neu.pdp.pageRank.preProcessor.matrixBuilder.FirstLetterGoupingComparator;
 import com.neu.pdp.pageRank.preProcessor.matrixBuilder.FirstLetterPartitioner;
 import com.neu.pdp.pageRank.preProcessor.matrixBuilder.PageNameIdReducer;
@@ -40,7 +46,7 @@ public class App
     	
     	try {
     		
-    		if (args.length != 8) {
+    		if (args.length != 10) {
     			System.out.println("Invalid argument list found. Please retry.");
     			System.exit(-1);
     		} else {
@@ -51,8 +57,12 @@ public class App
     			String sourceIdReplacedPath = args[3];
     			String outlinkIdReplacedPath = args[4];
     			String defaultRankPath = args[5];
-    			String sparseMatrixPath = args[6];
-    			String topKPath = args[7];
+    			String mergedRankPath = args[6];
+    			String sparseMatrixPath = args[7];
+    			String pageRankPath = args[8];
+    			//String topKPath = args[9];
+    			
+    			boolean deleteSplitRank = true;
     			
     			/**
     			 * Pre-processor (To generate the adjacency lists)
@@ -103,6 +113,7 @@ public class App
 		        Configuration sourceIdMapperConf = new Configuration();
 		        sourceIdMapperConf.setLong("totalPageCount", pageCount);
 		        sourceIdMapperConf.set("defaultRankPath", defaultRankPath);
+		        
 		        Job sourceIdMapperJob = Job.getInstance(
 		        		sourceIdMapperConf, "Page Rank Source - ID Mapper");
 		        sourceIdMapperJob.setJarByClass(App.class);
@@ -135,11 +146,34 @@ public class App
 		        
 		        sourceIdMapperJob.waitForCompletion(true);
 		        
+		        /**
+		         *  Merge the page rank files into a single file
+		         */
+		        
+		        Configuration fileMergeConf = new Configuration();
+		        FileSystem fs = null;
+		        
+		        try {
+		        	fs = FileSystem.get(fileMergeConf);
+		        	FileUtil.copyMerge(
+		        			fs, new Path(defaultRankPath), 
+		        			fs, new Path(mergedRankPath + "/ranks"), 
+		        			deleteSplitRank, fileMergeConf, null);
+		        } catch (Exception e) {
+		        	System.out.println("Error while merging rank files");
+		        	e.printStackTrace();
+		        }
+		        
+		        /**
+		         * Initialize matrix
+		         */
+		        
 		        Configuration matrixGeneratorConfig = new Configuration();
 		        matrixGeneratorConfig.setLong("pageCount", pageCount);
 		        
 		        Job matrixGeneratorJob = Job.getInstance(
 		        		matrixGeneratorConfig, "Matrix Generator");
+		        matrixGeneratorJob.setJarByClass(App.class);
 		        
 		        // Set the mapper
 		        matrixGeneratorJob.setMapperClass(PageNameMapper.class);
@@ -161,6 +195,10 @@ public class App
 		        		matrixGeneratorJob, new Path(outlinkIdReplacedPath));
 		        
 		        matrixGeneratorJob.waitForCompletion(true);
+		        
+		        /**
+		         * Build the sparse matrix
+		         */
 		        
 		        Configuration matrixBuilderConf = new Configuration();
 		        Job matrixBuilderJob = Job.getInstance(
@@ -184,6 +222,56 @@ public class App
 		        		matrixBuilderJob, new Path(sparseMatrixPath));
 		        
 		        matrixBuilderJob.waitForCompletion(true);
+		        
+		        /**
+		         * Page rank calculation
+		         */		        
+		        for (; i < 2; i++) {
+		        	System.out.println("Iteration: " + i);
+			        Configuration rankCalculatorConfig = new Configuration();
+			        rankCalculatorConfig.setDouble("alpha", 0.85);
+			        
+			        Job rankCalculatorJob = Job.getInstance(
+			        		matrixGeneratorConfig, "Matrix Generator");		        
+			        rankCalculatorJob.addCacheFile(
+			        		new Path(mergedRankPath + "/ranks").toUri());
+			        rankCalculatorJob.setJarByClass(App.class);
+			        
+			        // Set the mapper
+			        rankCalculatorJob.setMapperClass(RowColumnMapper.class);
+			        rankCalculatorJob.setMapOutputKeyClass(LongWritable.class);
+			        rankCalculatorJob.setMapOutputValueClass(SourceRankPair.class);
+			        
+			        // Set the reducer
+			        rankCalculatorJob.setReducerClass(RowColumnReducer.class);
+			        rankCalculatorJob.setOutputKeyClass(LongWritable.class);
+			        rankCalculatorJob.setOutputValueClass(DoubleWritable.class);
+			        
+			        FileInputFormat.addInputPath(
+			        		rankCalculatorJob, new Path(sparseMatrixPath));
+			        
+			        Path currIterationOutputPath = new Path(pageRankPath);
+			        
+			        FileOutputFormat.setOutputPath(
+			        		rankCalculatorJob, 
+			        		currIterationOutputPath);
+			        
+			        rankCalculatorJob.waitForCompletion(true);
+			        
+			        if (fs != null) {
+				        try {
+				        	System.out.println("Job input path: " + mergedRankPath + "/ranks");
+				        	FileUtil.fullyDelete(fs, new Path(mergedRankPath));
+				        	FileUtil.copyMerge(
+				        			fs, currIterationOutputPath, 
+				        			fs, new Path(mergedRankPath + "/ranks"), 
+				        			deleteSplitRank, fileMergeConf, null);
+				        } catch (Exception e) {
+				        	System.out.println("Error while merging rank files");
+				        	e.printStackTrace();
+				        }
+			        }			        
+		        }
     		}
     	} catch (Exception e) {
     		e.printStackTrace();
