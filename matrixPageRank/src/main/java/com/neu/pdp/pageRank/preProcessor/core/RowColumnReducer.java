@@ -26,16 +26,22 @@ import com.neu.pdp.pageRank.resources.SourceRankPair;
  */
 public class RowColumnReducer extends Reducer<LongWritable, SourceRankPair, LongWritable, DoubleWritable> {
 	
-	HashMap<Long, Double> hmPrevRanks; 
+	private HashMap<Long, Double> hmPrevRanks;
+	private double dAlpha;
+	private Long lPageCount;
+	private String strRankFilePath;
 	
 	public void setup(Context context) 
 			throws IOException, InterruptedException {
 		
 		if (context.getCacheFiles() != null &&
 				context.getCacheFiles().length > 0) {
+			dAlpha = context.getConfiguration().getDouble("alpha", 0.85);
+			lPageCount = context.getConfiguration().getLong("pageCount", -1);
+			strRankFilePath = context.getConfiguration().get("rankFilePath", "/home/ideepakkrishnan/Documents/pageRank/mergedRank/ranks");
+			
 			FileSystem fs = FileSystem.get(context.getConfiguration());
-			Path rankFilePath = new Path("/home/ideepakkrishnan/Documents/pageRank/mergedRank/ranks");
-			System.out.println("Reduce cache path: " + rankFilePath.toString());
+			Path rankFilePath = new Path(strRankFilePath);
 			
 			try {
 				FSDataInputStream in = fs.open(rankFilePath);
@@ -63,22 +69,33 @@ public class RowColumnReducer extends Reducer<LongWritable, SourceRankPair, Long
             Context context
             ) throws IOException, InterruptedException {
 		
+		double dIncomingContributions = 0;
 		double newRank = 0;
 		
 		for (SourceRankPair p : values) {
-			newRank += (p.getRank().get() * hmPrevRanks.get(p.getSource().get()));
+			dIncomingContributions += (p.getRank().get() * 
+					hmPrevRanks.get(p.getSource().get()));
 		}
+		
+		// Calculate the final row value using the following
+		// formula: (alpha / page-count) + (1 - alpha) * incoming-contributions
+		newRank = (dAlpha / lPageCount) + ((1 - dAlpha) * dIncomingContributions);
 		
 		hmPrevRanks.remove(key.get());
 		
 		context.write(key, new DoubleWritable(newRank));
 	}
 	
-	public void cleanup(Context context) throws IOException, InterruptedException {
+	public void cleanup(Context context) 
+			throws IOException, InterruptedException {
+		// Safety mechanism for pages with no in-links. Being added
+		// as a temporary measure since the dangling nodes are yet
+		// to be handled.
+		// TODO Remove this once dangling nodes are handled
 		for (Map.Entry<Long, Double> entry : hmPrevRanks.entrySet()) {
 			context.write(
 					new LongWritable(entry.getKey()), 
-					new DoubleWritable(entry.getValue()));
+					new DoubleWritable((dAlpha / lPageCount)));
 		}
 	}
 
