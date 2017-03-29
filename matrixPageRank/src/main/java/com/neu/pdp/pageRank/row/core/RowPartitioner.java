@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.neu.pdp.pageRank.core;
+package com.neu.pdp.pageRank.row.core;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.mapreduce.Partitioner;

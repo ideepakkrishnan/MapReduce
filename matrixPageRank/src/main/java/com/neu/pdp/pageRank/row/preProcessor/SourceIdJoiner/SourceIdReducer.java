@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.neu.pdp.pageRank.preProcessor.SourceIdJoiner;
+package com.neu.pdp.pageRank.row.preProcessor.SourceIdJoiner;
 
 import java.io.IOException;
 
