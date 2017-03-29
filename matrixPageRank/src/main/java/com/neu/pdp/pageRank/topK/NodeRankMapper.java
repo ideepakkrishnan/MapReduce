@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.neu.pdp.pageRank.preProcessor.topK;
+package com.neu.pdp.pageRank.topK;
 
 import java.io.IOException;
 import java.util.Comparator;

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.neu.pdp.pageRank.preProcessor.topK;
+package com.neu.pdp.pageRank.topK;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -68,6 +68,10 @@ public class TopKReducer extends Reducer<NullWritable, SourceRankPair, Text, Dou
 		fs = FileSystem.get(context.getConfiguration());
 		rankFilePath = new Path(strMapFilePath);
 		
+		// Array to store the final list in descending
+		// order of page ranks
+		pages = new ArrayList<SourceRankPair>();
+		
 	}
 	
 	public void reduce(NullWritable key, Iterable<SourceRankPair> values,
@@ -87,10 +91,6 @@ public class TopKReducer extends Reducer<NullWritable, SourceRankPair, Text, Dou
 				pqNodes.poll();
 			}
 		}
-		
-		// Array to store the final list in descending
-		// order of page ranks
-		pages = new ArrayList<SourceRankPair>();
 		
 		// Add the pages from the priority queue into
 		// the above list

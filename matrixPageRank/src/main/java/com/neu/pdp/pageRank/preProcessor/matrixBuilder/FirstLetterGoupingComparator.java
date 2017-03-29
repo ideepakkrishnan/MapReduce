@@ -42,7 +42,7 @@ public class FirstLetterGoupingComparator extends WritableComparator {
 		CondensedNode cn1 = (CondensedNode) wc1;
 		CondensedNode cn2 = (CondensedNode) wc2;
 		
-		return cn1.compareTo(cn2);
+		return cn1.getName().compareTo(cn2.getName());
 	}
 
 }

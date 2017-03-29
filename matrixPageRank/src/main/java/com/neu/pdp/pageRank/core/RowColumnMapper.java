@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.neu.pdp.pageRank.preProcessor.core;
+package com.neu.pdp.pageRank.core;
 
 import java.io.IOException;
 

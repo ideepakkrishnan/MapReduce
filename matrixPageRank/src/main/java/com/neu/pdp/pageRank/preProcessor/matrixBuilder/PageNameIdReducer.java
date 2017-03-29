@@ -21,11 +21,13 @@ import com.neu.pdp.pageRank.resources.SourceRankPair;
 public class PageNameIdReducer extends Reducer<CondensedNode, SourceRankPair, LongWritable, Text> {
 	
 	private HashMap<String, Long> pageIdMap;
+	private Long pageCount;
 	
 	public void setup(Context context) 
     		throws IOException, InterruptedException {
 		
 		pageIdMap = new HashMap<String, Long>();
+		pageCount = context.getConfiguration().getLong("pageCount", -1);
 		
 	}
 	
@@ -33,21 +35,25 @@ public class PageNameIdReducer extends Reducer<CondensedNode, SourceRankPair, Lo
             Context context
             ) throws IOException, InterruptedException {
 		
+		int outlinkCount = 0;
+		Long val = -1L;
+		
 		for (SourceRankPair p : values) {
 			if (key.getRank().get() == 1) {
 				// This record is a page name - ID map.
 				// Store it in the hashmap for lookup.
 				String temp = new String(p.getDest().toString());
-				Long val = new Long(p.getSource().get());
+				val = new Long(p.getSource().get());
 				pageIdMap.put(temp, val);
 			} else {
 				try {
-				context.write(
-						new LongWritable(pageIdMap.get(p.getDest().toString())), 
-						new Text(p.getSource().get() + ":" + p.getRank().get()));
+					outlinkCount += 1;
+					context.write(
+							new LongWritable(pageIdMap.get(p.getDest().toString())), 
+							new Text(p.getSource().get() + ":" + p.getRank().get()));
 				} catch (Exception e) {
-					System.out.println("Cause: dest - " + p.getDest() + ", rank - " + p.getRank() + ", source - " + p.getSource());
-					e.printStackTrace();
+					//System.out.println("Cause: dest - " + p.getDest() + ", rank - " + p.getRank() + ", source - " + p.getSource());
+					//e.printStackTrace();
 				}
 			}
 		}

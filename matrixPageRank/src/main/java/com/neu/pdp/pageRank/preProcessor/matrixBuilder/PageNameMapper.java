@@ -62,7 +62,7 @@ public class PageNameMapper extends Mapper<Object, Text, CondensedNode, SourceRa
 					// In the value, the second element represents
 					// the source page's ID.
 					String[] outlinks = val.split(",");
-					double outlinkCount = outlinks.length;
+					double outlinkCount = outlinks.length;					
 					double cj = 1 / outlinkCount;
 					for (String s : outlinks) {
 						context.write(
@@ -72,8 +72,8 @@ public class PageNameMapper extends Mapper<Object, Text, CondensedNode, SourceRa
 								new SourceRankPair(
 										new Text(s),
 										new LongWritable(Long.parseLong(source)), 
-										new DoubleWritable(cj))); // cj = 1 / [source outlink count]
-					}
+										new DoubleWritable(cj))); // cj = 1 / [source outlink count]					
+					} 
 				}
 			}
 		}

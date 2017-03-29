@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.neu.pdp.pageRank.preProcessor.core;
+package com.neu.pdp.pageRank.core;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -73,8 +73,12 @@ public class RowColumnReducer extends Reducer<LongWritable, SourceRankPair, Long
 		double newRank = 0;
 		
 		for (SourceRankPair p : values) {
-			dIncomingContributions += (p.getRank().get() * 
-					hmPrevRanks.get(p.getSource().get()));
+			try {
+				dIncomingContributions += (p.getRank().get() * 
+						hmPrevRanks.get(p.getSource().get()));
+			} catch (Exception e) {
+				// Do nothing
+			}
 		}
 		
 		// Calculate the final row value using the following

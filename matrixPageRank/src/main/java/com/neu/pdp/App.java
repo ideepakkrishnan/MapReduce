@@ -16,25 +16,27 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
+import com.neu.pdp.pageRank.core.RowColumnMapper;
+import com.neu.pdp.pageRank.core.RowColumnReducer;
+import com.neu.pdp.pageRank.core.RowPartitioner;
 import com.neu.pdp.pageRank.preProcessor.SourceIdJoiner.SourceIdReducer;
 import com.neu.pdp.pageRank.preProcessor.SourceIdJoiner.SourceMapper;
 import com.neu.pdp.pageRank.preProcessor.adjacencyListBuilder.AdjacencyListReducer;
 import com.neu.pdp.pageRank.preProcessor.adjacencyListBuilder.GroupComparator;
 import com.neu.pdp.pageRank.preProcessor.adjacencyListBuilder.TokenizerMapper;
 import com.neu.pdp.pageRank.preProcessor.adjacencyListBuilder.ValuePartitioner;
-import com.neu.pdp.pageRank.preProcessor.core.RowColumnMapper;
-import com.neu.pdp.pageRank.preProcessor.core.RowColumnReducer;
 import com.neu.pdp.pageRank.preProcessor.matrixBuilder.FirstLetterGoupingComparator;
 import com.neu.pdp.pageRank.preProcessor.matrixBuilder.FirstLetterPartitioner;
 import com.neu.pdp.pageRank.preProcessor.matrixBuilder.PageNameIdReducer;
 import com.neu.pdp.pageRank.preProcessor.matrixBuilder.PageNameMapper;
+import com.neu.pdp.pageRank.preProcessor.matrixBuilder.RecordTypeSortingComparator;
 import com.neu.pdp.pageRank.preProcessor.sparseMatrixBuilder.DestinationMapper;
 import com.neu.pdp.pageRank.preProcessor.sparseMatrixBuilder.DestinationReducer;
-import com.neu.pdp.pageRank.preProcessor.topK.NodeRankMapper;
-import com.neu.pdp.pageRank.preProcessor.topK.TopKReducer;
 import com.neu.pdp.pageRank.resources.CondensedNode;
 import com.neu.pdp.pageRank.resources.KeyPair;
 import com.neu.pdp.pageRank.resources.SourceRankPair;
+import com.neu.pdp.pageRank.topK.NodeRankMapper;
+import com.neu.pdp.pageRank.topK.TopKReducer;
 
 /**
  * Hello world!
@@ -188,10 +190,11 @@ public class App
 		        
 		        // Set the intermediate classes
 		        matrixGeneratorJob.setPartitionerClass(FirstLetterPartitioner.class);
-		        matrixGeneratorJob.setGroupingComparatorClass(FirstLetterGoupingComparator.class);	        
-		        
-		        matrixGeneratorJob.setReducerClass(PageNameIdReducer.class);
+		        matrixGeneratorJob.setSortComparatorClass(RecordTypeSortingComparator.class);
+		        matrixGeneratorJob.setGroupingComparatorClass(FirstLetterGoupingComparator.class);
+		        		        
 		        // Set the reducer's output key and value types
+		        matrixGeneratorJob.setReducerClass(PageNameIdReducer.class);
 		        matrixGeneratorJob.setOutputKeyClass(LongWritable.class);
 		        matrixGeneratorJob.setOutputValueClass(Text.class);
 		        
@@ -232,11 +235,11 @@ public class App
 		        /**
 		         * Page rank calculation
 		         */		        
-		        for (; i < 2; i++) {
+		        for (; i < 10; i++) {
 		        	System.out.println("Iteration: " + i);
 			        Configuration rankCalculatorConfig = new Configuration();
-			        rankCalculatorConfig.setDouble("alpha", 0.85);
-			        rankCalculatorConfig.setLong("pageCount", pageCount);
+			        //rankCalculatorConfig.setDouble("alpha", 0.85);
+			        //rankCalculatorConfig.setLong("pageCount", pageCount);
 			        rankCalculatorConfig.set("rankFilePath", mergedRankFile);
 			        
 			        Job rankCalculatorJob = Job.getInstance(
@@ -249,6 +252,9 @@ public class App
 			        rankCalculatorJob.setMapperClass(RowColumnMapper.class);
 			        rankCalculatorJob.setMapOutputKeyClass(LongWritable.class);
 			        rankCalculatorJob.setMapOutputValueClass(SourceRankPair.class);
+			        
+			        // Set intermediate classes
+			        rankCalculatorJob.setPartitionerClass(RowPartitioner.class);
 			        
 			        // Set the reducer
 			        rankCalculatorJob.setReducerClass(RowColumnReducer.class);

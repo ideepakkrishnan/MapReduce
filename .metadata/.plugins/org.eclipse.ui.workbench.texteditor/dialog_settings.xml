@@ -2,18 +2,18 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="splitRankFilesPath" key="selection"/>
+		<item value="mergedRankFile" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="true" key="wholeword"/>
 		<list key="findhistory">
+			<item value="mergedRankFile"/>
+			<item value="rankFilePath"/>
 			<item value="splitRankFilesPath"/>
 			<item value="defaultRankPath"/>
-			<item value="mergedRankFile"/>
 			<item value="mergedRankPath"/>
 			<item value="/rank"/>
-			<item value="rankFilePath"/>
 			<item value="sparseMatrixPath"/>
 			<item value="hadoop"/>
 		</list>
