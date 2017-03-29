@@ -16,25 +16,22 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
+import com.neu.pdp.pageRank.core.RowPartitioner;
+import com.neu.pdp.pageRank.preProcessor.SourceIdJoiner.SourceIdReducer;
+import com.neu.pdp.pageRank.preProcessor.SourceIdJoiner.SourceMapper;
 import com.neu.pdp.pageRank.preProcessor.adjacencyListBuilder.AdjacencyListReducer;
 import com.neu.pdp.pageRank.preProcessor.adjacencyListBuilder.GroupComparator;
 import com.neu.pdp.pageRank.preProcessor.adjacencyListBuilder.TokenizerMapper;
 import com.neu.pdp.pageRank.preProcessor.adjacencyListBuilder.ValuePartitioner;
+import com.neu.pdp.pageRank.preProcessor.matrixBuilder.FirstLetterGoupingComparator;
+import com.neu.pdp.pageRank.preProcessor.matrixBuilder.FirstLetterPartitioner;
+import com.neu.pdp.pageRank.preProcessor.matrixBuilder.PageNameMapper;
+import com.neu.pdp.pageRank.preProcessor.matrixBuilder.RecordTypeSortingComparator;
 import com.neu.pdp.pageRank.preProcessor.sparseMatrixBuilder.DestinationMapper;
 import com.neu.pdp.pageRank.preProcessor.sparseMatrixBuilder.DestinationReducer;
 import com.neu.pdp.pageRank.resources.CondensedNode;
 import com.neu.pdp.pageRank.resources.KeyPair;
 import com.neu.pdp.pageRank.resources.SourceRankPair;
-import com.neu.pdp.pageRank.row.core.RowColumnMapper;
-import com.neu.pdp.pageRank.row.core.RowColumnReducer;
-import com.neu.pdp.pageRank.row.core.RowPartitioner;
-import com.neu.pdp.pageRank.row.preProcessor.SourceIdJoiner.SourceIdReducer;
-import com.neu.pdp.pageRank.row.preProcessor.SourceIdJoiner.SourceMapper;
-import com.neu.pdp.pageRank.row.preProcessor.matrixBuilder.FirstLetterGoupingComparator;
-import com.neu.pdp.pageRank.row.preProcessor.matrixBuilder.FirstLetterPartitioner;
-import com.neu.pdp.pageRank.row.preProcessor.matrixBuilder.PageNameIdReducer;
-import com.neu.pdp.pageRank.row.preProcessor.matrixBuilder.PageNameMapper;
-import com.neu.pdp.pageRank.row.preProcessor.matrixBuilder.RecordTypeSortingComparator;
 import com.neu.pdp.pageRank.topK.NodeRankMapper;
 import com.neu.pdp.pageRank.topK.TopKReducer;
 
@@ -68,6 +65,7 @@ public class App
     			String mergedPageIdMapPath = args[8];
     			String mergedPageIdMapFile = mergedPageIdMapPath + "/pageIdMapping";
     			String top100Path = args[9];
+    			String partitionType = "col";
     			
     			boolean deleteSplitRank = true;
     			boolean deletePageIdMapPathFiles = false;
@@ -194,7 +192,13 @@ public class App
 		        matrixGeneratorJob.setGroupingComparatorClass(FirstLetterGoupingComparator.class);
 		        		        
 		        // Set the reducer's output key and value types
-		        matrixGeneratorJob.setReducerClass(PageNameIdReducer.class);
+		        if (partitionType.equalsIgnoreCase("row")) {
+		        	matrixGeneratorJob.setReducerClass(
+		        			com.neu.pdp.pageRank.preProcessor.matrixBuilder.rowVersion.PageNameIdReducer.class);
+		        } else {
+		        	matrixGeneratorJob.setReducerClass(
+		        			com.neu.pdp.pageRank.preProcessor.matrixBuilder.colVersion.PageNameIdReducer.class);
+		        }
 		        matrixGeneratorJob.setOutputKeyClass(LongWritable.class);
 		        matrixGeneratorJob.setOutputValueClass(Text.class);
 		        
@@ -249,7 +253,13 @@ public class App
 			        rankCalculatorJob.setJarByClass(App.class);
 			        
 			        // Set the mapper
-			        rankCalculatorJob.setMapperClass(RowColumnMapper.class);
+			        if (partitionType.equals("row")) {
+			        	rankCalculatorJob.setMapperClass(
+			        			com.neu.pdp.pageRank.core.rowVersion.RowColumnMapper.class);
+			        } else {
+			        	rankCalculatorJob.setMapperClass(
+			        			com.neu.pdp.pageRank.core.colVersion.RowColumnMapper.class);
+			        }
 			        rankCalculatorJob.setMapOutputKeyClass(LongWritable.class);
 			        rankCalculatorJob.setMapOutputValueClass(SourceRankPair.class);
 			        
@@ -257,7 +267,13 @@ public class App
 			        rankCalculatorJob.setPartitionerClass(RowPartitioner.class);
 			        
 			        // Set the reducer
-			        rankCalculatorJob.setReducerClass(RowColumnReducer.class);
+			        if (partitionType.equals("row")) {
+			        	rankCalculatorJob.setReducerClass(
+			        			com.neu.pdp.pageRank.core.rowVersion.RowColumnReducer.class);
+			        } else {
+			        	rankCalculatorJob.setReducerClass(
+			        			com.neu.pdp.pageRank.core.colVersion.RowColumnReducer.class);
+			        }
 			        rankCalculatorJob.setOutputKeyClass(LongWritable.class);
 			        rankCalculatorJob.setOutputValueClass(DoubleWritable.class);
 			        

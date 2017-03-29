@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.neu.pdp.pageRank.row.preProcessor.matrixBuilder;
+package com.neu.pdp.pageRank.preProcessor.matrixBuilder.rowVersion;
 
 import java.io.IOException;
 import java.util.HashMap;

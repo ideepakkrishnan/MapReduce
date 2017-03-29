@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.neu.pdp.pageRank.row.core;
+package com.neu.pdp.pageRank.core.rowVersion;
 
 import java.io.IOException;
 
