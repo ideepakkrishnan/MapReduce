@@ -28,6 +28,7 @@ public class RowColumnReducer extends Reducer<LongWritable, SourceRankPair, Long
 	
 	private HashMap<Long, Double> hmPrevRanks;
 	private double dAlpha;
+	private double dDelta;
 	private Long lPageCount;
 	private String strRankFilePath;
 	
@@ -37,6 +38,7 @@ public class RowColumnReducer extends Reducer<LongWritable, SourceRankPair, Long
 		if (context.getCacheFiles() != null &&
 				context.getCacheFiles().length > 0) {
 			dAlpha = context.getConfiguration().getDouble("alpha", 0.85);
+			dDelta = context.getConfiguration().getDouble("delta", 0);
 			lPageCount = context.getConfiguration().getLong("pageCount", -1);
 			strRankFilePath = context.getConfiguration().get("rankFilePath", "/home/ideepakkrishnan/Documents/pageRank/mergedRank/ranks");
 			
@@ -83,7 +85,8 @@ public class RowColumnReducer extends Reducer<LongWritable, SourceRankPair, Long
 		
 		// Calculate the final row value using the following
 		// formula: (alpha / page-count) + (1 - alpha) * incoming-contributions
-		newRank = (dAlpha / lPageCount) + ((1 - dAlpha) * dIncomingContributions);
+		newRank = (dAlpha / lPageCount) + 
+				((1 - dAlpha) * ((dDelta / lPageCount) + dIncomingContributions));
 		
 		hmPrevRanks.remove(key.get());
 		

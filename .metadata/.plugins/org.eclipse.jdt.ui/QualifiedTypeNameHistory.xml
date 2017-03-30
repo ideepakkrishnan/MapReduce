@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.lang.String"/>
-<fullyQualifiedTypeName name="java.util.Arrays"/>
-<fullyQualifiedTypeName name="java.util.HashSet"/>
-<fullyQualifiedTypeName name="org.apache.commons.lang.ArrayUtils"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.lib.output.TextOutputFormat"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.io.IntWritable"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.lib.output.MultipleOutputs"/>
 <fullyQualifiedTypeName name="com.neu.pdp.pageRank.preProcessor.SourceIdJoiner.SourceMapper"/>
 <fullyQualifiedTypeName name="com.neu.pdp.pageRank.preProcessor.SourceIdJoiner.SourceIdReducer"/>
 <fullyQualifiedTypeName name="com.neu.pdp.pageRank.resources.KeyPair"/>
@@ -35,22 +28,13 @@
 <fullyQualifiedTypeName name="org.apache.hadoop.fs.FileUtil"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="java.util.Map.Entry"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Mapper"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.io.Text"/>
 <fullyQualifiedTypeName name="java.util.PriorityQueue"/>
 <fullyQualifiedTypeName name="java.util.Comparator"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Reducer"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.io.NullWritable"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.io.DoubleWritable"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="java.io.IOException"/>
 <fullyQualifiedTypeName name="java.lang.InterruptedException"/>
 <fullyQualifiedTypeName name="com.neu.pdp.pageRank.preProcessor.topK.NodeRankMapper"/>
 <fullyQualifiedTypeName name="com.neu.pdp.pageRank.preProcessor.topK.TopKReducer"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.io.WritableComparator"/>
-<fullyQualifiedTypeName name="com.neu.pdp.pageRank.resources.CondensedNode"/>
 <fullyQualifiedTypeName name="com.neu.pdp.pageRank.preProcessor.matrixBuilder.RecordTypeSortingComparator"/>
-<fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Partitioner"/>
 <fullyQualifiedTypeName name="org.apache.hadoop.io.LongWritable"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="java.lang.Math"/>
@@ -60,4 +44,20 @@
 <fullyQualifiedTypeName name="com.neu.pdp.pageRank.preProcessor.matrixBuilder.rowVersion.PageNameIdReducer"/>
 <fullyQualifiedTypeName name="com.neu.pdp.pageRank.core.colVersion.RowColumnMapper"/>
 <fullyQualifiedTypeName name="com.neu.pdp.pageRank.core.colVersion.RowColumnReducer"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Mapper"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.Text"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.DoubleWritable"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Partitioner"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.WritableComparator"/>
+<fullyQualifiedTypeName name="com.neu.pdp.pageRank.core.danglerHandler.DanglerIdGroupingComparator"/>
+<fullyQualifiedTypeName name="com.neu.pdp.pageRank.preProcessor.matrixBuilder.PageIdGoupingComparator"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Reducer"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="com.neu.pdp.pageRank.resources.CondensedNode"/>
+<fullyQualifiedTypeName name="com.neu.pdp.pageRank.core.danglerHandler.DanglerNameMapper"/>
+<fullyQualifiedTypeName name="com.neu.pdp.pageRank.core.danglerHandler.DanglerIdFirstLetterPartitioner"/>
+<fullyQualifiedTypeName name="com.neu.pdp.pageRank.core.danglerHandler.DanglerRankReducer"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.io.NullWritable"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.Counters"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
 </qualifiedTypeNameHistroy>

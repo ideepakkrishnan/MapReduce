@@ -19,6 +19,7 @@ public class SourceIdReducer extends Reducer<Text, Text, Text, Text> {
 	private MultipleOutputs<Text, Text> mos;
 	private double defaultPageRank;
 	private String rankOutputPath;
+	private String danglingNodesPath;
 	
 	public void setup(Context context) 
 			throws IOException, InterruptedException {
@@ -26,6 +27,7 @@ public class SourceIdReducer extends Reducer<Text, Text, Text, Text> {
 		defaultPageRank = 1 / (double) context.getConfiguration()
 											  .getLong("totalPageCount", -1);
 		rankOutputPath = context.getConfiguration().get("defaultRankPath");
+		danglingNodesPath = context.getConfiguration().get("danglingNodesPath");
 	}
 	
 	public void reduce(Text key, Iterable<Text> values,
@@ -56,6 +58,11 @@ public class SourceIdReducer extends Reducer<Text, Text, Text, Text> {
 		// Write the default page rank for all pages so that it
 		// can be used for first iteration of page rank algorithm
 		mos.write(tSource, new Text(String.valueOf(defaultPageRank)), rankOutputPath + "/ranks");
+		
+		// Write dangling nodes into a file
+		if (outlinks == null || outlinks.length() == 0 || outlinks.equals("")) {
+			mos.write(tSource, new Text(""), danglingNodesPath + "/danglingNodes");
+		}
 	}
 	
 	public void cleanup(Context context)

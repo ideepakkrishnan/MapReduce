@@ -18,12 +18,12 @@ import com.neu.pdp.pageRank.resources.Util;
  * particular letter end up in the same reducer call.
  * @author ideepakkrishnan
  */
-public class FirstLetterGoupingComparator extends WritableComparator {
+public class PageIdGoupingComparator extends WritableComparator {
 	
 	/**
 	 * The default constructor
 	 */
-	public FirstLetterGoupingComparator() {
+	public PageIdGoupingComparator() {
 		super(CondensedNode.class, true);
 	}
 	

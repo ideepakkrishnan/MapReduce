@@ -9,6 +9,8 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Counter;
+import org.apache.hadoop.mapreduce.Counters;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.filecache.DistributedCache;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -17,14 +19,17 @@ import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
 import com.neu.pdp.pageRank.core.RowPartitioner;
+import com.neu.pdp.pageRank.core.danglerHandler.DanglerIdFirstLetterPartitioner;
+import com.neu.pdp.pageRank.core.danglerHandler.DanglerNameMapper;
+import com.neu.pdp.pageRank.core.danglerHandler.DanglerRankReducer;
 import com.neu.pdp.pageRank.preProcessor.SourceIdJoiner.SourceIdReducer;
 import com.neu.pdp.pageRank.preProcessor.SourceIdJoiner.SourceMapper;
 import com.neu.pdp.pageRank.preProcessor.adjacencyListBuilder.AdjacencyListReducer;
 import com.neu.pdp.pageRank.preProcessor.adjacencyListBuilder.GroupComparator;
 import com.neu.pdp.pageRank.preProcessor.adjacencyListBuilder.TokenizerMapper;
 import com.neu.pdp.pageRank.preProcessor.adjacencyListBuilder.ValuePartitioner;
-import com.neu.pdp.pageRank.preProcessor.matrixBuilder.FirstLetterGoupingComparator;
 import com.neu.pdp.pageRank.preProcessor.matrixBuilder.FirstLetterPartitioner;
+import com.neu.pdp.pageRank.preProcessor.matrixBuilder.PageIdGoupingComparator;
 import com.neu.pdp.pageRank.preProcessor.matrixBuilder.PageNameMapper;
 import com.neu.pdp.pageRank.preProcessor.matrixBuilder.RecordTypeSortingComparator;
 import com.neu.pdp.pageRank.preProcessor.sparseMatrixBuilder.DestinationMapper;
@@ -48,7 +53,7 @@ public class App
     	
     	try {
     		
-    		if (args.length != 10) {
+    		if (args.length != 12) {
     			System.out.println("Invalid argument list found. Please retry.");
     			System.exit(-1);
     		} else {
@@ -61,14 +66,16 @@ public class App
     			String splitRankFilesPath = args[5];
     			String mergedRankPath = args[6];
     			String mergedRankFile = mergedRankPath + "/ranks";
-    			String sparseMatrixPath = args[7];
-    			String mergedPageIdMapPath = args[8];
+    			String danglingNodesPath = args[7];
+    			String sparseMatrixPath = args[8];
+    			String mergedPageIdMapPath = args[9];
     			String mergedPageIdMapFile = mergedPageIdMapPath + "/pageIdMapping";
-    			String top100Path = args[9];
+    			String top100Path = args[10];
+    			String tempPath = args[11];
     			String partitionType = "col";
     			
     			boolean deleteSplitRank = true;
-    			boolean deletePageIdMapPathFiles = false;
+    			boolean deletePageIdMapPathFiles = true;
     			
     			/**
     			 * Pre-processor (To generate the adjacency lists)
@@ -86,7 +93,7 @@ public class App
 		        
 		        // Set the intermediate classes
 		        parserJob.setPartitionerClass(ValuePartitioner.class);
-		        parserJob.setGroupingComparatorClass(GroupComparator.class);	        
+		        parserJob.setGroupingComparatorClass(GroupComparator.class);
 		        
 		        parserJob.setReducerClass(AdjacencyListReducer.class);
 		        // Set the reducer's output key and value types
@@ -119,6 +126,7 @@ public class App
 		        Configuration sourceIdMapperConf = new Configuration();
 		        sourceIdMapperConf.setLong("totalPageCount", pageCount);
 		        sourceIdMapperConf.set("defaultRankPath", splitRankFilesPath);
+		        sourceIdMapperConf.set("danglingNodesPath", danglingNodesPath);
 		        
 		        Job sourceIdMapperJob = Job.getInstance(
 		        		sourceIdMapperConf, "Page Rank Source - ID Mapper");
@@ -189,7 +197,7 @@ public class App
 		        // Set the intermediate classes
 		        matrixGeneratorJob.setPartitionerClass(FirstLetterPartitioner.class);
 		        matrixGeneratorJob.setSortComparatorClass(RecordTypeSortingComparator.class);
-		        matrixGeneratorJob.setGroupingComparatorClass(FirstLetterGoupingComparator.class);
+		        matrixGeneratorJob.setGroupingComparatorClass(PageIdGoupingComparator.class);
 		        		        
 		        // Set the reducer's output key and value types
 		        if (partitionType.equalsIgnoreCase("row")) {
@@ -239,11 +247,17 @@ public class App
 		        /**
 		         * Page rank calculation
 		         */		        
-		        for (; i < 2; i++) {
+		        for (; i < 10; i++) {
 		        	System.out.println("Iteration: " + i);
+		        	
+		        	/**
+		        	 * Calculate page rank for this iteration
+		        	 */
+		        	
 			        Configuration rankCalculatorConfig = new Configuration();
-			        //rankCalculatorConfig.setDouble("alpha", 0.85);
-			        //rankCalculatorConfig.setLong("pageCount", pageCount);
+			        rankCalculatorConfig.setDouble("alpha", 0.85);
+			        rankCalculatorConfig.setDouble("delta", currDelta);
+			        rankCalculatorConfig.setLong("pageCount", pageCount);
 			        rankCalculatorConfig.set("rankFilePath", mergedRankFile);
 			        
 			        Job rankCalculatorJob = Job.getInstance(
@@ -309,7 +323,48 @@ public class App
 				        	System.out.println("Error while merging rank files");
 				        	e.printStackTrace();
 				        }
-			        }			        
+			        }
+			        
+			        /**
+			         * Calculate delta for next iteration
+			         */
+			        
+			        Configuration deltaCalculatorConfig = new Configuration();
+			        
+			        Job deltaCalculatorJob = Job.getInstance(
+			        		deltaCalculatorConfig, "Delta Calculator");
+			        deltaCalculatorJob.setJarByClass(App.class);
+			        
+			        // Set the mapper
+			        deltaCalculatorJob.setMapperClass(DanglerNameMapper.class);
+			        deltaCalculatorJob.setMapOutputKeyClass(CondensedNode.class);
+			        deltaCalculatorJob.setMapOutputValueClass(CondensedNode.class);
+			        
+			        // Set the intermediate classes
+			        deltaCalculatorJob.setPartitionerClass(DanglerIdFirstLetterPartitioner.class);
+			        deltaCalculatorJob.setSortComparatorClass(RecordTypeSortingComparator.class);
+			        deltaCalculatorJob.setGroupingComparatorClass(PageIdGoupingComparator.class);
+			        
+			        deltaCalculatorJob.setReducerClass(DanglerRankReducer.class);
+		        
+			        deltaCalculatorJob.setOutputKeyClass(NullWritable.class);
+			        deltaCalculatorJob.setOutputValueClass(NullWritable.class);
+			        
+			        FileInputFormat.addInputPath(deltaCalculatorJob, new Path(mergedRankPath));
+			        FileInputFormat.addInputPath(deltaCalculatorJob, new Path(danglingNodesPath));
+			        System.out.println(danglingNodesPath);
+			        FileOutputFormat.setOutputPath(
+			        		deltaCalculatorJob, new Path(tempPath + i));
+			        
+			        deltaCalculatorJob.waitForCompletion(true);
+			        
+			        // Update the delta value in the config
+			        // for next run
+			        Counters counters = deltaCalculatorJob.getCounters();
+			        Counter danglingCounter = counters.findCounter(DANGLING_NODES.TOTAL_PAGE_RANK);
+			        currDelta = Double.longBitsToDouble(danglingCounter.getValue());
+			        
+			        System.out.println("Delta: " + String.valueOf(currDelta));
 		        }
 		        
 		        /**

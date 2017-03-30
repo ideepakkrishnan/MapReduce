@@ -40,15 +40,19 @@ public class RowColumnMapper extends Mapper<Object, Text, LongWritable, SourceRa
 				
 				for (String element : rowAndVals) {
 					String[] rowAndVal = element.split(":");
-					Long row = Long.parseLong(rowAndVal[0]);
-					double cj = Double.parseDouble(rowAndVal[1]);
-					
-					SourceRankPair p = new SourceRankPair(
-							new Text(""), 
-							new LongWritable(col), 
-							new DoubleWritable(cj));
-					
-					context.write(new LongWritable(row), p);
+					try {
+						Long row = Long.parseLong(rowAndVal[0]);
+						double cj = Double.parseDouble(rowAndVal[1]);
+						
+						SourceRankPair p = new SourceRankPair(
+								new Text(""), 
+								new LongWritable(col), 
+								new DoubleWritable(cj));
+						
+						context.write(new LongWritable(row), p);
+					} catch (Exception e) {
+						// Do nothing
+					}
 				}
 			}
 		}
