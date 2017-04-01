@@ -40,7 +40,7 @@ public class RowColumnReducer extends Reducer<LongWritable, SourceRankPair, Long
 			dAlpha = context.getConfiguration().getDouble("alpha", 0.85);
 			dDelta = context.getConfiguration().getDouble("delta", 0);
 			lPageCount = context.getConfiguration().getLong("pageCount", -1);
-			strRankFilePath = context.getConfiguration().get("rankFilePath", "/home/ideepakkrishnan/Documents/pageRank/mergedRank/ranks");
+			strRankFilePath = context.getConfiguration().get("rankFilePath", "/mergedRank/ranks");
 			
 			FileSystem fs = FileSystem.get(context.getConfiguration());
 			Path rankFilePath = new Path(strRankFilePath);

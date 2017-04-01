@@ -53,7 +53,7 @@ public class App
     	
     	try {
     		
-    		if (args.length != 12) {
+    		if (args.length != 13) {
     			System.out.println("Invalid argument list found. Please retry.");
     			System.exit(-1);
     		} else {
@@ -72,7 +72,7 @@ public class App
     			String mergedPageIdMapFile = mergedPageIdMapPath + "/pageIdMapping";
     			String top100Path = args[10];
     			String tempPath = args[11];
-    			String partitionType = "col";
+    			String partitionType = args[12];
     			
     			boolean deleteSplitRank = true;
     			boolean deletePageIdMapPathFiles = true;
@@ -261,7 +261,7 @@ public class App
 			        rankCalculatorConfig.set("rankFilePath", mergedRankFile);
 			        
 			        Job rankCalculatorJob = Job.getInstance(
-			        		matrixGeneratorConfig, "Matrix Generator");		        
+			        		rankCalculatorConfig, "Page Rank Calculator");		        
 			        rankCalculatorJob.addCacheFile(
 			        		new Path(mergedRankFile).toUri());
 			        rankCalculatorJob.setJarByClass(App.class);
